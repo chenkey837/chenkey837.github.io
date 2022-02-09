@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>leetcode刷题之框架思维</title>
+      <link href="/2022/02/09/leetcode-shua-ti-zhi-kuang-jia-si-wei/"/>
+      <url>/2022/02/09/leetcode-shua-ti-zhi-kuang-jia-si-wei/</url>
+      
+        <content type="html"><![CDATA[<h3 id="所谓框架思维"><a href="#所谓框架思维" class="headerlink" title="所谓框架思维"></a>所谓框架思维</h3><h4 id="一、存储方式"><a href="#一、存储方式" class="headerlink" title="一、存储方式"></a>一、存储方式</h4><p>数据结构的存储方式只有两种：<strong>数组（顺序存储）</strong>、<strong>链表（链式存储）</strong></p><p>散列表、栈、队列、堆、树、图等等各种数据结构都属于「上层建筑」，而数组和链表才是「结构基础」。这些多样化的数据结构，究其源头，都是在链表或者数组上的特殊操作。</p><ol><li><p><strong>「队列」</strong>、<strong>「栈」</strong>这两种数据结构既可以使用链表也可以使用数组实现。用数组实现，就要处理扩容缩容的问题；用链表实现，没有这个问题，但需要更多的内存空间存储节点指针。</p></li><li><p><strong>「图」</strong>的两种表示方法，邻接表就是链表，邻接矩阵就是二维数组。邻接矩阵判断连通性迅速，并可以进行矩阵运算解决一些问题，但是如果图比较稀疏的话很耗费空间。邻接表比较节省空间，但是很多操作的效率上肯定比不过邻接矩阵。</p></li><li><p><strong>「散列表」</strong>就是通过散列函数把键映射到一个大数组里。而且对于解决散列冲突的方法，拉链法需要链表特性，操作简单，但需要额外的空间存储指针；线性探查法就需要数组特性，以便连续寻址，不需要指针的存储空间，但操作稍微复杂些。</p></li><li><p><strong>「树」</strong>，用数组实现就是<strong>「堆」</strong>，因为「堆」是一个完全二叉树，用数组存储不需要节点指针，操作也比较简单；用链表实现就是很常见的那种「树」，因为不一定是完全二叉树，所以不适合用数组存储。为此，在这种链表「树」结构之上，又衍生出各种巧妙的设计，比如二叉搜索树、AVL 树、红黑树、区间树、B 树等等，以应对不同的问题。</p></li><li><p><strong>二者的优缺点如下</strong>：</p><p><strong>数组</strong>由于是紧凑连续存储,可以随机访问，通过索引快速找到对应元素，而且相对节约存储空间。但正因为连续存储，内存空间必须一次性分配够，如果要扩容，需要重新分配一块更大的空间，再把数据全部复制过去，时间复杂度 O(N)；而且你如果想在数组中间进行插入和删除，每次必须搬移后面的所有数据以保持连续，时间复杂度 O(N)。</p><p><strong>链表</strong>因为元素不连续，而是靠指针指向下一个元素的位置，所以不存在数组的扩容问题；如果知道某一元素的前驱和后驱，操作指针即可删除该元素或者插入新元素，时间复杂度 O(1)。但是正因为存储空间不连续，你无法根据一个索引算出对应元素的地址，所以<strong>不能随机访问</strong>；而且由于每个元素必须存储指向前后元素位置的指针，会消耗相对更多的储存空间。</p></li></ol><h4 id="二、数据结构的基本操作"><a href="#二、数据结构的基本操作" class="headerlink" title="二、数据结构的基本操作"></a>二、数据结构的基本操作</h4><p>数据结构种类很多，但其基本操作无非就是遍历+访问，也就是：<strong>增删查改</strong></p><p>形式分两种：<strong>线性和非线性</strong></p><p><strong>线性就是 for/while 迭代为代表，非线性就是递归为代表。</strong></p><p><strong>数据遍历框架，典型的线性迭代结构</strong>：</p><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void traverse(int[] arr)&#123;for(int i &#x3D; 0; i &lt; arr.length; i++)&#123;&#x2F;&#x2F;迭代访问arr[i]&#125;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong>链表遍历框架，兼具迭代和递归结构：</strong></p><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;* 基本的单链表节点 *&#x2F;class ListNode &#123;    int val;    ListNode next;&#125;void traverse(ListNode head) &#123;    for (ListNode p &#x3D; head; p !&#x3D; null; p &#x3D; p.next) &#123;        &#x2F;&#x2F; 迭代访问 p.val    &#125;&#125;void traverse(ListNode head) &#123;    &#x2F;&#x2F; 递归访问 head.val    traverse(head.next);&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong>二叉树遍历框架，典型的非线性递归遍历结构：</strong></p><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;* 基本的二叉树节点 *&#x2F;class TreeNode &#123;    int val;    TreeNode left, right;&#125;void traverse(TreeNode root) &#123;    &#x2F;&#x2F; 前序遍历代码位置    traverse(root.left);    &#x2F;&#x2F; 中序遍历代码位置    traverse(root.right);    &#x2F;&#x2F; 后序遍历代码位置&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong>二叉树框架可以扩展为 N 叉树的遍历框架：</strong></p><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;* 基本的 N 叉树节点 *&#x2F;class TreeNode &#123;    int val;    TreeNode[] children;&#125;void traverse(TreeNode root) &#123;    for (TreeNode child : root.children)        traverse(child);&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><code>N</code>叉树的遍历又可以扩展为图的遍历，因为图就是好几 <code>N</code> 叉棵树的结合体。但图是可能出现环的，用个布尔数组 <code>visited</code> 做标记来解决。</p><h4 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h4><p>学会利用框架思维，<strong>涉及到递归问题，学着使用树的遍历框架</strong>，若二叉树框架不行，扩展到N叉树遍历框架，将思路转化为代码，这是个任重道远的问题，<strong>但只要有心，谁都可以学好。</strong></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> leetcode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>hexo搭建博客</title>
       <link href="/2022/02/07/hexo-da-jian-bo-ke/"/>
       <url>/2022/02/07/hexo-da-jian-bo-ke/</url>
