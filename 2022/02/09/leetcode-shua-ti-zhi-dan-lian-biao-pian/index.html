@@ -4,8 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Patient">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="Patient">
+    <meta name="description" content="一、六大解题套路1.1 合并两个有序链表（双指针技巧）
+结构：
+&amp;#x2F;* c++
+ * Definition for singly-linked list.
+ * struct ListNode &amp;#123;
+ *     int v">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +22,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | Patient</title>
+    <title>Patient</title>
     <link rel="icon" type="image/jpeg" href="/person.jpg">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -265,12 +270,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title"></h1>
                 </div>
             </div>
         </div>
@@ -398,7 +403,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-01-29
+                    2022-02-09
                 </div>
                 
 
@@ -407,7 +412,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    73
+                    579
                 </div>
                 
 
@@ -427,19 +432,95 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h4 id="一、六大解题套路"><a href="#一、六大解题套路" class="headerlink" title="一、六大解题套路"></a>一、六大解题套路</h4><h5 id="1-1-合并两个有序链表（双指针技巧）"><a href="#1-1-合并两个有序链表（双指针技巧）" class="headerlink" title="1.1 合并两个有序链表（双指针技巧）"></a>1.1 合并两个有序链表（双指针技巧）</h5><p><img src="/2022/02/09/leetcode-shua-ti-zhi-dan-lian-biao-pian/title.jpg"></p>
+<p><strong>结构：</strong></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;* c++
+ * Definition for singly-linked list.
+ * struct ListNode &#123;
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) &#123;&#125;
+ *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;
+ *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;
+ * &#125;;
+ *&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>代码1：</strong></p>
+<p>思路：使用<strong>双指针技巧</strong>和<strong>虚拟头结点技巧</strong>，算法的逻辑类似于「拉拉链」，<code>l1, l2</code> 类似于拉链两侧的锯齿，指针 <code>p</code> 就好像拉链的拉索，将两个有序链表合并。 <code>dummy</code> 节点这个占位符，可以避免处理空指针的情况，降低代码的复杂性。</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) &#123;
+    ListNode dummy(-1);
+    ListNode *p &#x3D; &amp;dummy;
+    ListNode *p1 &#x3D; l1, *p2 &#x3D; l2;
+    
+    while (p1 &amp;&amp; p2 ) &#123;
+        &#x2F;&#x2F; 比较 p1 和 p2 两个指针
+        &#x2F;&#x2F; 将值较小的的节点接到 p 指针
+        if (p1-&gt;val &gt; p2-&gt;val) &#123;
+            p-&gt;next &#x3D; p2;
+            p2 &#x3D; p2-&gt;next;
+        &#125; else &#123;
+            p-&gt;next &#x3D; p1;
+            p1 &#x3D; p1-&gt;next;
+        &#125;
+        &#x2F;&#x2F; p 指针不断前进
+        p &#x3D; p-&gt;next;
+    &#125;
+    
+    if (p1) &#123;
+        p-&gt;next &#x3D; p1;
+    &#125;
+    
+    if (p2) &#123;
+        p-&gt;next &#x3D; p2;
+    &#125;
+    
+    return dummy.next;
+    &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>代码2：</strong></p>
+<p>思路：新建一个链表，然后对比两个链表结点对应的值，进行交换，将值小的点放入新建的链表中</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;c++语言
+class Solution &#123;
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) &#123;
+        &#x2F;&#x2F; 使用「虚拟头结点」技巧
+        ListNode newHead(0);
+        &#x2F;&#x2F; 也可以 ListNode *p &#x3D; new ListNode(0); 但后续要delete
+        
+        ListNode *pi &#x3D; &amp;newHead;
+        &#x2F;&#x2F;pi指向newHead
+        
+        while(l1 &amp;&amp; l2) &#123;
+            if(l1-&gt;val &gt; l2-&gt;val) swap(l1, l2); 
+            &#x2F;&#x2F; 当结点l1的值大于结点l2的值就替换
+            
+            pi-&gt;next &#x3D; l1;
+            l1 &#x3D; l1-&gt;next;
+            pi &#x3D; pi-&gt;next;
+        &#125;
+        pi-&gt;next &#x3D; l1 ? l1 : l2;
+        return newHead.next;
+        &#x2F;&#x2F; 此处newHead.next指的是头结点0的下一个ListNode *，即需要的链表；
+        &#x2F;&#x2F; 而pi此时已经是最后一个节点了，pi-&gt;next就没有意义，所以返回newHead.next
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>代码3：</strong>（不做使用，但可以参考）</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;很新颖的递归使用，c语言
+struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2) &#123;
+    if(l1&#x3D;&#x3D;NULL)
+        return l2;
+    if(l2&#x3D;&#x3D;NULL)
+        return l1;
+    if(l1-&gt;val &lt; l2-&gt;val)&#123;
+        l1-&gt;next &#x3D; mergeTwoLists(l1-&gt;next,l2);
+        return l1;
+    &#125;else&#123;
+        l2-&gt;next &#x3D; mergeTwoLists(l1,l2-&gt;next);
+        return l2;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
                 
             </div>
@@ -466,7 +547,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2022/01/29/hello-world/">http://example.com/2022/01/29/hello-world/</a>
+                    <a href="http://example.com/2022/02/09/leetcode-shua-ti-zhi-dan-lian-biao-pian/">http://example.com/2022/02/09/leetcode-shua-ti-zhi-dan-lian-biao-pian/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -549,17 +630,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/02/07/hexo-da-jian-bo-ke/">
+                <a href="/2022/02/09/leetcode-shua-ti-zhi-dan-lian-biao-pian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="hexo搭建博客">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">hexo搭建博客</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -569,9 +651,47 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-07
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Chen
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/02/09/leetcode-shua-ti-zhi-kuang-jia-si-wei/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="leetcode刷题之框架思维">
+                        
+                        <span class="card-title">leetcode刷题之框架思维</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-09
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -583,57 +703,11 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
-                    </a>
-                    
-                    <a href="/tags/hexo/">
-                        <span class="chip bg-color">hexo</span>
-                    </a>
-                    
-                    <a href="/tags/git/">
-                        <span class="chip bg-color">git</span>
+                    <a href="/tags/leetcode/">
+                        <span class="chip bg-color">leetcode</span>
                     </a>
                     
                 </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/01/29/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-29
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            Chen
-                            
-                        </span>
-                    </div>
-                </div>
-
                 
             </div>
         </div>
