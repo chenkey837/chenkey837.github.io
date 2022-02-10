@@ -6,10 +6,7 @@
     <meta charset="utf-8">
     <meta name="keywords" content="优先队列用法, Patient">
     <meta name="description" content="在leetcode刷题过程中，接触到优先队列(priority_queue)的使用，因此作为学习加以补充
-优先队列具有队列的所有特性，包括基本操作，只是在这基础上添加了内部的一个排序，本质是一个堆实现的
-和队列基本操作相同:
-
-top 访问">
+一、总体介绍优先队列的作用是能保证每次取出的元素都是队列中权值最小的（Java的优先队列每次取最小元素，C++的优先队列每次取最大元素">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -390,8 +387,12 @@ top 访问">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/c/">
-                                <span class="chip bg-color">c++</span>
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                                <span class="chip bg-color">数据结构</span>
                             </a>
                         
                     </div>
@@ -415,7 +416,7 @@ top 访问">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    362
+                    1.5k
                 </div>
                 
 
@@ -436,26 +437,101 @@ top 访问">
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>在leetcode刷题过程中，接触到优先队列(priority_queue)的使用，因此作为学习加以补充</p>
-<p><strong>优先队列</strong>具有队列的所有特性，包括基本操作，只是在这基础上添加了内部的一个排序，本质是一个堆实现的</p>
-<p>和队列基本操作相同:</p>
-<ul>
-<li>top 访问队头元素</li>
-<li>empty 队列是否为空</li>
-<li>size 返回队列内元素个数</li>
-<li>push 插入元素到队尾 (并排序)</li>
-<li>emplace 原地构造一个元素并插入队列</li>
-<li>pop 弹出队头元素</li>
-<li>swap 交换内容</li>
-</ul>
-<p>定义：<code>priority_queue&lt;Type, Container, Functional&gt;</code><br>Type 就是数据类型，Container 就是容器类型（Container必须是用数组实现的容器，比如vector,deque等等，但不能用 list。STL里面默认用的是vector），Functional 就是比较的方式，当需要用自定义的数据类型时才需要传入这三个参数，使用基本数据类型时，只需要传入数据类型，默认是大顶堆</p>
-<p>一般是：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;升序队列，小顶堆
-priority_queue &lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; q;
-&#x2F;&#x2F;降序队列，大顶堆
-priority_queue &lt;int,vector&lt;int&gt;,less&lt;int&gt; &gt;q;
+<h3 id="一、总体介绍"><a href="#一、总体介绍" class="headerlink" title="一、总体介绍"></a>一、总体介绍</h3><p><strong>优先队列的作用是能保证每次取出的元素都是队列中权值最小的</strong>（Java的优先队列每次取最小元素，C++的优先队列每次取最大元素）。这里牵涉到了大小关系，<strong>元素大小的评判可以通过元素本身的自然顺序（*natural ordering*），也可以通过构造时传入的比较器</strong></p>
+<p>Java中_PriorityQueue_实现了_Queue_接口，不允许放入<code>null</code>元素；其通过堆实现，具体说是通过完全二叉树（<em>complete binary tree</em>）实现的<strong>小顶堆</strong>（任意一个非叶子节点的权值，都不大于其左右子节点的权值），也就意味着可以通过数组来作为_PriorityQueue_的底层实现。</p>
+<p><img src="/2022/02/09/you-xian-dui-lie-yong-fa/1569984356698-e2e7136f-d853-4aeb-b175-9954fa10b9bd-16444605756207.png#align=left&display=inline&height=1088&originHeight=1088&originWidth=1200&search=&size=0&status=done&width=1200"></p>
+<h3 id="二、方法剖析"><a href="#二、方法剖析" class="headerlink" title="二、方法剖析"></a>二、方法剖析</h3><h4 id="2-1-add-和offer"><a href="#2-1-add-和offer" class="headerlink" title="2.1 add()和offer()"></a>2.1 add()和offer()</h4><p><code>add(E e)</code>和<code>offer(E e)</code>的语义相同，都是向优先队列中插入元素，只是<code>Queue</code>接口规定二者对插入失败时的处理不同，前者在插入失败时抛出异常，后则则会返回<code>false</code>。对于_PriorityQueue_这两个方法其实没什么差别。<br><a target="_blank" rel="noopener" href="https://cdn.nlark.com/yuque/0/2019/png/323949/1569984356715-f9cab0b9-df74-4ee9-ba2c-f0ee93a1db40.png#align=left&display=inline&height=1177&originHeight=1177&originWidth=1400&search=&size=0&status=done&width=1400"><img src="/2022/02/09/you-xian-dui-lie-yong-fa/1569984356715-f9cab0b9-df74-4ee9-ba2c-f0ee93a1db40.png#align=left&display=inline&height=1177&originHeight=1177&originWidth=1400&search=&size=0&status=done&width=1400"></a><br>新加入的元素可能会破坏小顶堆的性质，因此需要进行必要的调整。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//offer(E e)</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">offer</span><span class="token punctuation">(</span><span class="token class-name">E</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>e <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token comment">//不允许放入null元素</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NullPointerException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    modCount<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> size<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">>=</span> queue<span class="token punctuation">.</span>length<span class="token punctuation">)</span>
+        <span class="token function">grow</span><span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//自动扩容</span>
+    size <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token comment">//队列原来为空，这是插入的第一个元素</span>
+        queue<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> e<span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        <span class="token function">siftUp</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//调整</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-&#x2F;&#x2F;greater和less是std实现的两个仿函数（就是使一个类的使用看上去像一个函数。其实现就是类中实现一个operator()，这个类就有了类似函数的行为，就是一个仿函数类了）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上述代码中，扩容函数<code>grow()</code>类似于<code>ArrayList</code>里的<code>grow()</code>函数，就是再申请一个更大的数组，并将原数组的元素复制过去，这里不再赘述。需要注意的是<code>siftUp(int k, E x)</code>方法，该方法用于插入元素<code>x</code>并维持堆的特性。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//siftUp()</span>
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">siftUp</span><span class="token punctuation">(</span><span class="token keyword">int</span> k<span class="token punctuation">,</span> <span class="token class-name">E</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>k <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> parent <span class="token operator">=</span> <span class="token punctuation">(</span>k <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">>>></span> <span class="token number">1</span><span class="token punctuation">;</span><span class="token comment">//parentNo = (nodeNo-1)/2</span>
+        <span class="token class-name">Object</span> e <span class="token operator">=</span> queue<span class="token punctuation">[</span>parent<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>comparator<span class="token punctuation">.</span><span class="token function">compare</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token class-name">E</span><span class="token punctuation">)</span> e<span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token comment">//调用比较器的比较方法</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        queue<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> e<span class="token punctuation">;</span>
+        k <span class="token operator">=</span> parent<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    queue<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> x<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>新加入的元素<code>x</code>可能会破坏小顶堆的性质，因此需要进行调整。调整的过程为：<strong>从<code>k</code>指定的位置开始，将<code>x</code>逐层与当前点的<code>parent</code>进行比较并交换，直到满足<code>x &gt;= queue[parent]</code>为止</strong>。注意这里的比较可以是元素的自然顺序，也可以是依靠比较器的顺序。</p>
+<h4 id="2-2-element-和peek"><a href="#2-2-element-和peek" class="headerlink" title="2.2 element()和peek()"></a>2.2 element()和peek()</h4><p><code>element()</code>和<code>peek()</code>的语义完全相同，都是获取但不删除队首元素，也就是队列中权值最小的那个元素，二者唯一的区别是当方法失败时前者抛出异常，后者返回<code>null</code>。根据小顶堆的性质，堆顶那个元素就是全局最小的那个；由于堆用数组表示，根据下标关系，<code>0</code>下标处的那个元素既是堆顶元素。所以<strong>直接返回数组<code>0</code>下标处的那个元素即可</strong>。<br><a target="_blank" rel="noopener" href="https://cdn.nlark.com/yuque/0/2019/png/323949/1569984356733-f81ec7d5-d4a7-40bd-8fb9-db52f3bbc181.png#align=left&display=inline&height=672&originHeight=672&originWidth=800&search=&size=0&status=done&width=800"><img src="/2022/02/09/you-xian-dui-lie-yong-fa/1569984356733-f81ec7d5-d4a7-40bd-8fb9-db52f3bbc181.png#align=left&display=inline&height=672&originHeight=672&originWidth=800&search=&size=0&status=done&width=800"></a><br>代码也就非常简洁：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//peek()</span>
+<span class="token keyword">public</span> <span class="token class-name">E</span> <span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>size <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token class-name">E</span><span class="token punctuation">)</span> queue<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//0下标处的那个元素就是最小的那个</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-3-remove-和poll"><a href="#2-3-remove-和poll" class="headerlink" title="2.3 remove()和poll()"></a>2.3 remove()和poll()</h4><p><code>remove()</code>和<code>poll()</code>方法的语义也完全相同，都是获取并删除队首元素，区别是当方法失败时前者抛出异常，后者返回<code>null</code>。由于删除操作会改变队列的结构，为维护小顶堆的性质，需要进行必要的调整。<br><a target="_blank" rel="noopener" href="https://cdn.nlark.com/yuque/0/2019/png/323949/1569984356444-73789616-ac87-43b4-9931-2848ceb82c59.png#align=left&display=inline&height=1221&originHeight=1221&originWidth=1400&search=&size=0&status=done&width=1400"><img src="/2022/02/09/you-xian-dui-lie-yong-fa/1569984356444-73789616-ac87-43b4-9931-2848ceb82c59.png#align=left&display=inline&height=1221&originHeight=1221&originWidth=1400&search=&size=0&status=done&width=1400"></a><br>代码如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">E</span> <span class="token function">poll</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>size <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> s <span class="token operator">=</span> <span class="token operator">--</span>size<span class="token punctuation">;</span>
+    modCount<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token class-name">E</span> result <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">E</span><span class="token punctuation">)</span> queue<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//0下标处的那个元素就是最小的那个</span>
+    <span class="token class-name">E</span> x <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">E</span><span class="token punctuation">)</span> queue<span class="token punctuation">[</span>s<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    queue<span class="token punctuation">[</span>s<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>s <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token function">siftDown</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//调整</span>
+    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>上述代码首先记录<code>0</code>下标处的元素，并用最后一个元素替换<code>0</code>下标位置的元素，之后调用<code>siftDown()</code>方法对堆进行调整，最后返回原来<code>0</code>下标处的那个元素（也就是最小的那个元素）。重点是<code>siftDown(int k, E x)</code>方法，该方法的作用是<strong>从<code>k</code>指定的位置开始，将<code>x</code>逐层向下与当前点的左右孩子中较小的那个交换，直到<code>x</code>小于或等于左右孩子中的任何一个为止</strong>。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//siftDown()</span>
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">siftDown</span><span class="token punctuation">(</span><span class="token keyword">int</span> k<span class="token punctuation">,</span> <span class="token class-name">E</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> half <span class="token operator">=</span> size <span class="token operator">>>></span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>k <span class="token operator">&lt;</span> half<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//首先找到左右孩子中较小的那个，记录到c里，并用child记录其下标</span>
+        <span class="token keyword">int</span> child <span class="token operator">=</span> <span class="token punctuation">(</span>k <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span><span class="token comment">//leftNo = parentNo*2+1</span>
+        <span class="token class-name">Object</span> c <span class="token operator">=</span> queue<span class="token punctuation">[</span>child<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> right <span class="token operator">=</span> child <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">&lt;</span> size <span class="token operator">&amp;&amp;</span>
+            comparator<span class="token punctuation">.</span><span class="token function">compare</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">E</span><span class="token punctuation">)</span> c<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token class-name">E</span><span class="token punctuation">)</span> queue<span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+            c <span class="token operator">=</span> queue<span class="token punctuation">[</span>child <span class="token operator">=</span> right<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>comparator<span class="token punctuation">.</span><span class="token function">compare</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token class-name">E</span><span class="token punctuation">)</span> c<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        queue<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> c<span class="token punctuation">;</span><span class="token comment">//然后用c取代原来的值</span>
+        k <span class="token operator">=</span> child<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    queue<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> x<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-4-remove-Object-o"><a href="#2-4-remove-Object-o" class="headerlink" title="2.4 remove(Object o)"></a>2.4 remove(Object o)</h4><p><code>remove(Object o)</code>方法用于删除队列中跟<code>o</code>相等的某一个元素（如果有多个相等，只删除一个），该方法不是_Queue_接口内的方法，而是_Collection_接口的方法。由于删除操作会改变队列结构，所以要进行调整；又由于删除元素的位置可能是任意的，所以调整过程比其它函数稍加繁琐。具体来说，<code>remove(Object o)</code>可以分为2种情况：1. 删除的是最后一个元素。直接删除即可，不需要调整。2. 删除的不是最后一个元素，从删除点开始以最后一个元素为参照调用一次<code>siftDown()</code>即可。此处不再赘述。<br><a target="_blank" rel="noopener" href="https://cdn.nlark.com/yuque/0/2019/png/323949/1569984356721-fd3a99c0-3fae-4e73-b665-d1e29fc6da09.png#align=left&display=inline&height=597&originHeight=597&originWidth=1200&search=&size=0&status=done&width=1200"><img src="/2022/02/09/you-xian-dui-lie-yong-fa/1569984356721-fd3a99c0-3fae-4e73-b665-d1e29fc6da09.png#align=left&display=inline&height=597&originHeight=597&originWidth=1200&search=&size=0&status=done&width=1200"></a><br>具体代码如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//remove(Object o)</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">remove</span><span class="token punctuation">(</span><span class="token class-name">Object</span> o<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//通过遍历数组的方式找到第一个满足o.equals(queue[i])元素的下标</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token function">indexOf</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> s <span class="token operator">=</span> <span class="token operator">--</span>size<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>s <span class="token operator">==</span> i<span class="token punctuation">)</span> <span class="token comment">//情况1</span>
+        queue<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">E</span> moved <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">E</span><span class="token punctuation">)</span> queue<span class="token punctuation">[</span>s<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        queue<span class="token punctuation">[</span>s<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token function">siftDown</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> moved<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//情况2</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -520,8 +596,12 @@ priority_queue &lt;int,vector&lt;int&gt;,less&lt;int&gt; &gt;q;
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/c/">
-                                    <span class="chip bg-color">c++</span>
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                                    <span class="chip bg-color">数据结构</span>
                                 </a>
                             
                         </div>
@@ -605,8 +685,12 @@ priority_queue &lt;int,vector&lt;int&gt;,less&lt;int&gt; &gt;q;
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/c/">
-                        <span class="chip bg-color">c++</span>
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="chip bg-color">数据结构</span>
                     </a>
                     
                 </div>
@@ -650,16 +734,12 @@ priority_queue &lt;int,vector&lt;int&gt;,less&lt;int&gt; &gt;q;
                 
                 <div class="card-action article-tags">
                     
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
                     <a href="/tags/leetcode/">
                         <span class="chip bg-color">leetcode</span>
-                    </a>
-                    
-                    <a href="/tags/c/">
-                        <span class="chip bg-color">c++</span>
-                    </a>
-                    
-                    <a href="/tags/c/">
-                        <span class="chip bg-color">c</span>
                     </a>
                     
                 </div>
@@ -809,7 +889,7 @@ priority_queue &lt;int,vector&lt;int&gt;,less&lt;int&gt; &gt;q;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">4.7k</span>
+                        class="white-color">5.6k</span>
             
             
             
