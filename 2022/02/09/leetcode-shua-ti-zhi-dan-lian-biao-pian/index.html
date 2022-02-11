@@ -424,7 +424,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.2k
+                    2.4k
                 </div>
                 
 
@@ -693,7 +693,61 @@
 
 <span class="token comment">// 空间复杂度为 O(1)，时间复杂度为 O(N)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h5 id="1-6-反转链表"><a href="#1-6-反转链表" class="headerlink" title="1.6 反转链表"></a>1.6 反转链表</h5><h6 id="①-反转整个链表"><a href="#①-反转整个链表" class="headerlink" title="① 反转整个链表"></a>① 反转整个链表</h6><p><img src="/2022/02/09/leetcode-shua-ti-zhi-dan-lian-biao-pian/image-20220211150152221.png"></p>
+<p><strong>代码1：</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 常规双指针</span>
+<span class="token keyword">public</span> <span class="token class-name">ListNode</span> <span class="token function">reverseList</span><span class="token punctuation">(</span><span class="token class-name">ListNode</span> head<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">ListNode</span> p <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>      <span class="token comment">//用保存结果</span>
+        <span class="token class-name">ListNode</span> cur <span class="token operator">=</span> head<span class="token punctuation">;</span>
+        <span class="token class-name">ListNode</span> temp <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>cur <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            temp <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>    <span class="token comment">//保存下个结点</span>
+            cur<span class="token punctuation">.</span>next <span class="token operator">=</span> p<span class="token punctuation">;</span>       <span class="token comment">//头结点接p链表后续</span>
+            p <span class="token operator">=</span> cur<span class="token punctuation">;</span>            <span class="token comment">//每轮将一个结点反转</span>
+            cur <span class="token operator">=</span> temp<span class="token punctuation">;</span>         <span class="token comment">//cur指针下移</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> p<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
+<span class="token comment">/* 
+	如，输入[1,2,3,4,5]
+	第一轮while运行完：
+				cur:2->3->4->5->null
+				p:1->null
+				temp:2->3->4->5->null
+	第二轮完：
+				cur:3->4->5->null
+				p:2->1->null
+	.......
+*/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>代码2：</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 递归</span>
+<span class="token class-name">ListNode</span> <span class="token function">reverse</span><span class="token punctuation">(</span><span class="token class-name">ListNode</span> head<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    
+    <span class="token comment">// 链表只有一个节点的时候反转也是它自己，直接返回即可</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>head <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> head<span class="token punctuation">.</span>next <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> head<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token comment">// 输入一个节点 head，将「以 head 为起点」的链表反转，并返回反转之后的头结点</span>
+    <span class="token class-name">ListNode</span> last <span class="token operator">=</span> <span class="token function">reverse</span><span class="token punctuation">(</span>head<span class="token punctuation">.</span>next<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    
+    head<span class="token punctuation">.</span>next<span class="token punctuation">.</span>next <span class="token operator">=</span> head<span class="token punctuation">;</span>
+    head<span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> last<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>reverse(head.next)</code>运行后</p>
+<p><img src="/2022/02/09/leetcode-shua-ti-zhi-dan-lian-biao-pian/image-20220211151955422.png"></p>
+<p><img src="/2022/02/09/leetcode-shua-ti-zhi-dan-lian-biao-pian/image-20220211151904100.png"></p>
+<h6 id="②-反转链表的一部分"><a href="#②-反转链表的一部分" class="headerlink" title="② 反转链表的一部分"></a>② 反转链表的一部分</h6><p><img src="/2022/02/09/leetcode-shua-ti-zhi-dan-lian-biao-pian/title.png"></p>
+<p><strong>代码：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h5 id="1-7-回文链表"><a href="#1-7-回文链表" class="headerlink" title="1.7 回文链表"></a>1.7 回文链表</h5>
                 
             </div>
             <hr/>
@@ -1048,7 +1102,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">10.8k</span>
+                        class="white-color">11.1k</span>
             
             
             
