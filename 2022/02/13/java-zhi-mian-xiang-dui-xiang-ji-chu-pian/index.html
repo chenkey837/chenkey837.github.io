@@ -433,7 +433,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="面向对象基础篇"><a href="#面向对象基础篇" class="headerlink" title="面向对象基础篇"></a>面向对象基础篇</h4><h5 id="一、类和对象"><a href="#一、类和对象" class="headerlink" title="一、类和对象"></a>一、类和对象</h5><ul>
+                <h2 id="面向对象基础篇"><a href="#面向对象基础篇" class="headerlink" title="面向对象基础篇"></a>面向对象基础篇</h2><h3 id="一、类和对象"><a href="#一、类和对象" class="headerlink" title="一、类和对象"></a>一、类和对象</h3><ul>
 <li><strong>对象</strong>：对象是类的一个实例，有状态和行为。例如，一条狗是一个对象，它的状态有：颜色、名字、品种；行为有：摇尾巴、叫、吃等</li>
 <li><strong>类</strong>：类是一个模板，它描述一类对象的行为和状态，是对现实生活中一类具有共同属性的行为的事物的抽象</li>
 </ul>
@@ -444,7 +444,7 @@
 </ul>
 <p><strong>对象的属性：</strong>对象具有的各种特征，每个对象的每个属性都拥有特定的值</p>
 <p><strong>对象的行为：</strong>对象能够执行的操作</p>
-<h6 id="①-类的定义"><a href="#①-类的定义" class="headerlink" title="① 类的定义"></a>① 类的定义</h6><p><strong>类的重要性：</strong>是Java程序的基本组成单位</p>
+<h4 id="1、-类的定义"><a href="#1、-类的定义" class="headerlink" title="1、 类的定义"></a>1、 类的定义</h4><p><strong>类的重要性：</strong>是Java程序的基本组成单位</p>
 <p><strong>类的组成：</strong>属性和行为</p>
 <ul>
 <li>属性：在类中通过<strong>成员变量</strong>来体现（类中方法外的变量）</li>
@@ -502,7 +502,7 @@
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h6 id="②-对象的使用"><a href="#②-对象的使用" class="headerlink" title="② 对象的使用"></a>② 对象的使用</h6><p>对象是根据类创建的。在Java中，使用关键字 new 来创建一个新的对象。创建对象需要以下三步：</p>
+<h4 id="2、对象的使用"><a href="#2、对象的使用" class="headerlink" title="2、对象的使用"></a>2、对象的使用</h4><p>对象是根据类创建的。在Java中，使用关键字 new 来创建一个新的对象。创建对象需要以下三步：</p>
 <ul>
 <li><strong>声明</strong>：声明一个对象，包括对象名称和对象类型。</li>
 <li><strong>实例化</strong>：使用关键字 new 来创建一个对象。</li>
@@ -518,7 +518,7 @@ d<span class="token punctuation">.</span>age
 <span class="token comment">// 使用成员方法：格式：对象名.方法名()</span>
 d<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h6 id="③-构造方法"><a href="#③-构造方法" class="headerlink" title="③ 构造方法"></a>③ 构造方法</h6><ul>
+<h4 id="3、构造方法"><a href="#3、构造方法" class="headerlink" title="3、构造方法"></a>3、构造方法</h4><ul>
 <li>每个类都有构造方法。如果没有显式地为类定义构造方法，Java 编译器将会为该类提供一个默认构造方法。</li>
 <li>在创建一个对象的时候，至少要调用一个构造方法。构造方法的名称必须与类同名，一个类可以有多个构造方法。</li>
 </ul>
@@ -537,18 +537,18 @@ d<span class="token punctuation">.</span><span class="token function">run</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="二、封装"><a href="#二、封装" class="headerlink" title="二、封装"></a>二、封装</h5><h6 id="①-封装概述："><a href="#①-封装概述：" class="headerlink" title="① 封装概述："></a>① 封装概述：</h6><ul>
+<h3 id="二、封装"><a href="#二、封装" class="headerlink" title="二、封装"></a>二、封装</h3><h4 id="1、封装概述："><a href="#1、封装概述：" class="headerlink" title="1、封装概述："></a>1、封装概述：</h4><ul>
 <li>是面向对象三大特征之一（<strong>封装、继承、多态</strong>）</li>
 <li>是面向对象编程语言对客观世界的模拟，客观世界里成员变量都是隐藏在对象内部的，外界无法直接操作</li>
 </ul>
-<h6 id="②-封装的优点："><a href="#②-封装的优点：" class="headerlink" title="② 封装的优点："></a>② 封装的优点：</h6><ul>
+<h4 id="2、封装的优点："><a href="#2、封装的优点：" class="headerlink" title="2、封装的优点："></a>2、封装的优点：</h4><ul>
 <li>良好的封装能够减少耦合</li>
 <li>类内部的结构可以自由修改</li>
 <li>可以对成员变量进行更精确的控制</li>
 <li>隐藏信息，实现细节</li>
 <li>提高代码的安全性和复用性</li>
 </ul>
-<h6 id="③-步骤："><a href="#③-步骤：" class="headerlink" title="③ 步骤："></a>③ 步骤：</h6><ul>
+<h4 id="3、步骤："><a href="#3、步骤：" class="headerlink" title="3、步骤："></a>3、步骤：</h4><ul>
 <li>修改属性的可见性来限制对属性的访问（一般限制为<code>private</code>）</li>
 <li>对每个值属性提供对外的公共方法访问，也就是创建一对赋取值方法，用于对私有属性的访问</li>
 </ul>

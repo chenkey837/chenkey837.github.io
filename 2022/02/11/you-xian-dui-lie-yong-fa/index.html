@@ -437,15 +437,15 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p><strong>在leetcode刷题过程中，接触到优先队列(priority_queue)的使用，因此作为学习加以补充</strong></p>
-<h4 id="一、什么是优先级队列"><a href="#一、什么是优先级队列" class="headerlink" title="一、什么是优先级队列"></a>一、什么是优先级队列</h4><h5 id="1、概念"><a href="#1、概念" class="headerlink" title="1、概念"></a>1、概念</h5><p>优先级队列中，<strong>数据按关键词有序排列</strong>，插入新数据的时候，会自动插入到合适的位置保证队列有序。（顺序有两种形式：升序或者是降序）</p>
+<h2 id="一、什么是优先级队列"><a href="#一、什么是优先级队列" class="headerlink" title="一、什么是优先级队列"></a>一、什么是优先级队列</h2><h3 id="1、概念"><a href="#1、概念" class="headerlink" title="1、概念"></a>1、概念</h3><p>优先级队列中，<strong>数据按关键词有序排列</strong>，插入新数据的时候，会自动插入到合适的位置保证队列有序。（顺序有两种形式：升序或者是降序）</p>
 <p><strong>标准定义：</strong></p>
 <p><code>PriorityQueue</code> 类在<code>Java1.5</code>中引入。<code>PriorityQueue</code> 是基于优先堆的一个无界队列，这个优先队列中的元素可以默认自然排序或者通过提供的<code>Comparator</code>（比较器）在队列实例化的时候排序。要求使用Java <code>Comparable</code> 和<code>Comparator</code> 接口给对象排序，并且在排序时会按照优先级处理其中的元素。</p>
-<h5 id="2、特征"><a href="#2、特征" class="headerlink" title="2、特征"></a>2、特征</h5><p>优先级队列底层的数据结构其实是一颗二叉堆</p>
+<h3 id="2、特征"><a href="#2、特征" class="headerlink" title="2、特征"></a>2、特征</h3><p>优先级队列底层的数据结构其实是一颗二叉堆</p>
 <ul>
 <li>二叉堆是一个完全二叉树</li>
 <li>根节点总是大于左右子节点（大顶堆），或者是小于左右子节点（小顶堆）</li>
 </ul>
-<h4 id="二、源码分析"><a href="#二、源码分析" class="headerlink" title="二、源码分析"></a>二、源码分析</h4><h5 id="1、属性"><a href="#1、属性" class="headerlink" title="1、属性"></a>1、属性</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 默认初始容量，11</span>
+<h2 id="二、源码分析"><a href="#二、源码分析" class="headerlink" title="二、源码分析"></a>二、源码分析</h2><h3 id="1、属性"><a href="#1、属性" class="headerlink" title="1、属性"></a>1、属性</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 默认初始容量，11</span>
 <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> DEFAULT_INITIAL_CAPACITY <span class="token operator">=</span> <span class="token number">11</span><span class="token punctuation">;</span>
 
 <span class="token comment">// 维护一个队列：因为基于二叉堆来实现优先队列，queue[i]的子节点为queue[2*i+1]/queue[2*i+2]</span>
@@ -460,7 +460,7 @@
 <span class="token comment">// 优先级队列的结构：被修改的次数</span>
 <span class="token keyword">transient</span> <span class="token keyword">int</span> modCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="2、构造方法"><a href="#2、构造方法" class="headerlink" title="2、构造方法"></a>2、构造方法</h5><ul>
+<h3 id="2、构造方法"><a href="#2、构造方法" class="headerlink" title="2、构造方法"></a>2、构造方法</h3><ul>
 <li><p>默认构造方法：<code>PriorityQueue()</code></p>
 <p>使用默认的初始容量（11）创建一个 <code>PriorityQueue</code>，并根据其自然顺序对元素进行排序。</p>
 </li>
@@ -504,13 +504,13 @@ c <span class="token operator">-</span> 有序 set，其元素将置于此优先
 <span class="token class-name">ClassCastException</span> <span class="token operator">-</span> 如果根据有序 set 的顺序无法比较该有序 set 中的各个元素
 <span class="token class-name">NullPointerException</span> <span class="token operator">-</span> 如果指定有序 set 或任何元素为 <span class="token keyword">null</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
-<h5 id="3、普通方法"><a href="#3、普通方法" class="headerlink" title="3、普通方法"></a>3、普通方法</h5><p><code>PriorityQueue</code>中常用的方法很多。来看几个常用的。</p>
-<h6 id="①-add："><a href="#①-add：" class="headerlink" title="① add："></a><strong>① add：</strong></h6><p><strong>插入一个元素，不成功会抛出异常</strong></p>
+<h3 id="3、普通方法"><a href="#3、普通方法" class="headerlink" title="3、普通方法"></a>3、普通方法</h3><p><code>PriorityQueue</code>中常用的方法很多。来看几个常用的。</p>
+<h4 id="①-add："><a href="#①-add：" class="headerlink" title="① add："></a><strong>① add：</strong></h4><p><strong>插入一个元素，不成功会抛出异常</strong></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token class-name">E</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">return</span> <span class="token function">offer</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h6 id="②-offer："><a href="#②-offer：" class="headerlink" title="② offer："></a><strong>② offer：</strong></h6><p><strong>插入一个元素，不能被立即执行的情况下会返回一个特殊的值（true 或者 false）</strong></p>
+<h4 id="②-offer："><a href="#②-offer：" class="headerlink" title="② offer："></a><strong>② offer：</strong></h4><p><strong>插入一个元素，不能被立即执行的情况下会返回一个特殊的值（true 或者 false）</strong></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">offer</span><span class="token punctuation">(</span><span class="token class-name">E</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>e <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NullPointerException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -561,7 +561,7 @@ c <span class="token operator">-</span> 有序 set，其元素将置于此优先
     es<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> x<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h6 id="③-remove："><a href="#③-remove：" class="headerlink" title="③ remove："></a>③ remove：</h6><p><strong>删除一个元素，如果不成功会返回false。</strong></p>
+<h4 id="③-remove："><a href="#③-remove：" class="headerlink" title="③ remove："></a>③ remove：</h4><p><strong>删除一个元素，如果不成功会返回false。</strong></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">remove</span><span class="token punctuation">(</span><span class="token class-name">Object</span> o<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token function">indexOf</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
@@ -638,7 +638,7 @@ c <span class="token operator">-</span> 有序 set，其元素将置于此优先
     es<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> x<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h6 id="④-poll："><a href="#④-poll：" class="headerlink" title="④ poll："></a>④ poll：</h6><p><strong>删除一个元素，并返回删除的元素</strong></p>
+<h4 id="④-poll："><a href="#④-poll：" class="headerlink" title="④ poll："></a>④ poll：</h4><p><strong>删除一个元素，并返回删除的元素</strong></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">E</span> <span class="token function">poll</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">final</span> <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span> es<span class="token punctuation">;</span>
         <span class="token keyword">final</span> <span class="token class-name">E</span> result<span class="token punctuation">;</span>
@@ -659,12 +659,12 @@ c <span class="token operator">-</span> 有序 set，其元素将置于此优先
         <span class="token keyword">return</span> result<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h6 id="⑤-peek："><a href="#⑤-peek：" class="headerlink" title="⑤ peek："></a>⑤ peek：</h6><p><strong>查询队顶元素</strong></p>
+<h4 id="⑤-peek："><a href="#⑤-peek：" class="headerlink" title="⑤ peek："></a>⑤ peek：</h4><p><strong>查询队顶元素</strong></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">E</span> <span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token class-name">E</span><span class="token punctuation">)</span> queue<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h6 id="⑥-indexOf-Object-o-："><a href="#⑥-indexOf-Object-o-：" class="headerlink" title="⑥ indexOf(Object o)："></a>⑥ indexOf(Object o)：</h6><p><strong>查询对象o的索引</strong></p>
+<h4 id="⑥-indexOf-Object-o-："><a href="#⑥-indexOf-Object-o-：" class="headerlink" title="⑥ indexOf(Object o)："></a>⑥ indexOf(Object o)：</h4><p><strong>查询对象o的索引</strong></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">int</span> <span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token class-name">Object</span> o<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>o <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
             <span class="token keyword">final</span> <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span> es <span class="token operator">=</span> queue<span class="token punctuation">;</span>
@@ -675,7 +675,7 @@ c <span class="token operator">-</span> 有序 set，其元素将置于此优先
         <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h6 id="⑦-contain-Object-o-："><a href="#⑦-contain-Object-o-：" class="headerlink" title="⑦ contain(Object o)："></a>⑦ contain(Object o)：</h6><p><strong>判断是否容纳了元素</strong></p>
+<h4 id="⑦-contain-Object-o-："><a href="#⑦-contain-Object-o-：" class="headerlink" title="⑦ contain(Object o)："></a>⑦ contain(Object o)：</h4><p><strong>判断是否容纳了元素</strong></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">contains</span><span class="token punctuation">(</span><span class="token class-name">Object</span> o<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">return</span> <span class="token function">indexOf</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>

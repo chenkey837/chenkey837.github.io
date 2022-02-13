@@ -435,9 +435,9 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="一、IDEA的使用"><a href="#一、IDEA的使用" class="headerlink" title="一、IDEA的使用"></a>一、IDEA的使用</h4><h5 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h5><p><strong>IDEA</strong>全称<strong>IntelliJ IDEA</strong>，是用于Java语言开发的集成环境</p>
+                <h2 id="一、IDEA的使用"><a href="#一、IDEA的使用" class="headerlink" title="一、IDEA的使用"></a>一、IDEA的使用</h2><h3 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h3><p><strong>IDEA</strong>全称<strong>IntelliJ IDEA</strong>，是用于Java语言开发的集成环境</p>
 <p><strong>集成环境：</strong>把代码编写，编译，执行，调试等多种功能综合到一起的开发工具</p>
-<h5 id="2、内容辅助键和快捷键"><a href="#2、内容辅助键和快捷键" class="headerlink" title="2、内容辅助键和快捷键"></a>2、内容辅助键和快捷键</h5><ul>
+<h3 id="2、内容辅助键和快捷键"><a href="#2、内容辅助键和快捷键" class="headerlink" title="2、内容辅助键和快捷键"></a>2、内容辅助键和快捷键</h3><ul>
 <li><p><strong>快速生成语句</strong></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java">快速生成<span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>方法：psvm <span class="token operator">+</span> 回车
 
@@ -452,14 +452,14 @@
 <span class="token comment">// 格式化</span>
 	<span class="token class-name">Ctrl</span> <span class="token operator">+</span> <span class="token class-name">Alt</span> <span class="token operator">+</span> <span class="token class-name">L</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
-<h4 id="二、数组"><a href="#二、数组" class="headerlink" title="二、数组"></a>二、数组</h4><h5 id="1、定义格式"><a href="#1、定义格式" class="headerlink" title="1、定义格式"></a>1、定义格式</h5><p><strong>数组是一种用于存储多个相同类型数据的存储模型</strong></p>
+<h2 id="二、数组"><a href="#二、数组" class="headerlink" title="二、数组"></a>二、数组</h2><h3 id="1、定义格式"><a href="#1、定义格式" class="headerlink" title="1、定义格式"></a>1、定义格式</h3><p><strong>数组是一种用于存储多个相同类型数据的存储模型</strong></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 格式一：数据类型[] 变量名，首选的方法</span>
 <span class="token keyword">double</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr<span class="token punctuation">;</span>			<span class="token comment">//定义一个int类型的数组，数组名是arr</span>
 
 <span class="token comment">// 格式二：数据类型 变量名[]</span>
 <span class="token keyword">double</span> cur<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>			<span class="token comment">//定义一个int类型变量，变量名是arr数组</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="2、初始化"><a href="#2、初始化" class="headerlink" title="2、初始化"></a>2、初始化</h5><p><strong>动态初始化：</strong>初始化时只指定数据长度，由系统为数组分配初始值</p>
+<h3 id="2、初始化"><a href="#2、初始化" class="headerlink" title="2、初始化"></a>2、初始化</h3><p><strong>动态初始化：</strong>初始化时只指定数据长度，由系统为数组分配初始值</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 格式：数据类型[] 变量名 = new 数据类型[数组长度]</span>
 <span class="token keyword">double</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">double</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
@@ -485,7 +485,7 @@
 */</span>
 <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> cur <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="3、内存分配"><a href="#3、内存分配" class="headerlink" title="3、内存分配"></a>3、内存分配</h5><ul>
+<h3 id="3、内存分配"><a href="#3、内存分配" class="headerlink" title="3、内存分配"></a>3、内存分配</h3><ul>
 <li><p><strong>栈内存：</strong>存储局部变量</p>
 <p>定义在方法中的变量，如上面的<code>arr</code>，使用完毕，<strong>立即消失</strong></p>
 </li>
@@ -526,7 +526,7 @@
 <p><img src="/2022/02/11/java-zhi-shu-zu-fang-fa-pian/image-20220211213350199.png"></p>
 <p><strong>多个数组指向相同内存图</strong>：当数组指向相同内存时，任何一个数组修改数据，内存数据也会被修改</p>
 <p><img src="/2022/02/11/java-zhi-shu-zu-fang-fa-pian/image-20220211213653152.png"></p>
-<h5 id="4、数组操作"><a href="#4、数组操作" class="headerlink" title="4、数组操作"></a>4、数组操作</h5><h6 id="①-常见问题："><a href="#①-常见问题：" class="headerlink" title="① 常见问题："></a><strong>① 常见问题：</strong></h6><ul>
+<h3 id="4、数组操作"><a href="#4、数组操作" class="headerlink" title="4、数组操作"></a>4、数组操作</h3><h4 id="①-常见问题："><a href="#①-常见问题：" class="headerlink" title="① 常见问题："></a><strong>① 常见问题：</strong></h4><ul>
 <li><p><strong>索引越界：</strong>访问了数组中不存在的索引对应的元素，造成索引越界问题<code>ArrayIndexOutOfBoundsException</code></p>
 </li>
 <li><p><strong>空指针异常：</strong>访问的数组已经不在指向堆内存的数据，造成空指针异常</p>
@@ -535,7 +535,7 @@
 <li><p><strong>null：</strong>空值，引用数据类型的默认值，表示不指向任何有效对象</p>
 </li>
 </ul>
-<h6 id="②-常见操作"><a href="#②-常见操作" class="headerlink" title="② 常见操作"></a>② 常见操作</h6><p><strong>遍历</strong></p>
+<h4 id="②-常见操作"><a href="#②-常见操作" class="headerlink" title="② 常见操作"></a>② 常见操作</h4><p><strong>遍历</strong></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 使用for循环</span>
 <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
@@ -564,23 +564,23 @@
 <span class="token comment">// 输出最大值</span>
 <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>max<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="三、方法"><a href="#三、方法" class="headerlink" title="三、方法"></a>三、方法</h4><h5 id="1、概述-1"><a href="#1、概述-1" class="headerlink" title="1、概述"></a>1、概述</h5><p><strong>方法</strong>是将具有独立功能的代码块组织成为一个整体，使其具有特殊功能的代码集</p>
+<h2 id="三、方法"><a href="#三、方法" class="headerlink" title="三、方法"></a>三、方法</h2><h3 id="1、概述-1"><a href="#1、概述-1" class="headerlink" title="1、概述"></a>1、概述</h3><p><strong>方法</strong>是将具有独立功能的代码块组织成为一个整体，使其具有特殊功能的代码集</p>
 <ul>
 <li>方法是解决一类问题的步骤的有序组合</li>
 <li>方法包含于类或对象中</li>
 <li>方法在程序中被创建，在其他地方被引用</li>
 </ul>
-<h6 id="优点："><a href="#优点：" class="headerlink" title="优点："></a><strong>优点：</strong></h6><ul>
+<h4 id="①-优点："><a href="#①-优点：" class="headerlink" title="① 优点："></a><strong>① 优点：</strong></h4><ul>
 <li>使程序变得更简短而清晰</li>
 <li>有利于程序维护</li>
 <li>可以提高程序开发的效率</li>
 <li>提高了代码的重用性</li>
 </ul>
-<h6 id="命名规则："><a href="#命名规则：" class="headerlink" title="命名规则："></a><strong>命名规则：</strong></h6><ul>
+<h4 id="②-命名规则："><a href="#②-命名规则：" class="headerlink" title="② 命名规则："></a>② <strong>命名规则：</strong></h4><ul>
 <li>方法的名字的第一个单词应以小写字母作为开头，后面的单词则用大写字母开头写，不使用连接符。例如：<code>addPerson</code>。</li>
 <li>下划线可能出现在 JUnit 测试方法名称中用以分隔名称的逻辑组件。一个典型的模式是：<code>test&lt;MethodUnderTest&gt;_&lt;state&gt;</code>，例如 <code>testPop_emptyStack</code>。</li>
 </ul>
-<h5 id="2、定义和调用"><a href="#2、定义和调用" class="headerlink" title="2、定义和调用"></a>2、定义和调用</h5><ul>
+<h3 id="2、定义和调用"><a href="#2、定义和调用" class="headerlink" title="2、定义和调用"></a>2、定义和调用</h3><ul>
 <li>方法必须先创建才可以使用，该过程称为<strong>方法定义</strong></li>
 <li>方法创建后并不是直接运行的，需要手动使用后才执行，该过程称为<strong>方法调用</strong></li>
 </ul>
@@ -624,24 +624,25 @@
 
 <span class="token function">max_value</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="3、形参和实参"><a href="#3、形参和实参" class="headerlink" title="3、形参和实参"></a>3、形参和实参</h5><p><strong>形参：</strong>方法定义中的参数，等同于变量定义格式</p>
+<h3 id="3、形参和实参"><a href="#3、形参和实参" class="headerlink" title="3、形参和实参"></a>3、形参和实参</h3><p><strong>形参：</strong>方法定义中的参数，等同于变量定义格式</p>
 <p><strong>实参：</strong>方法调用中的参数，等同于使用变量或常量</p>
-<h5 id="4、方法注意事项"><a href="#4、方法注意事项" class="headerlink" title="4、方法注意事项"></a>4、方法注意事项</h5><ul>
+<h3 id="4、方法注意事项"><a href="#4、方法注意事项" class="headerlink" title="4、方法注意事项"></a>4、方法注意事项</h3><ul>
 <li>方法不能嵌套定义</li>
 <li><code>void</code>表示无返回值，可以省略<code>return</code>，也可以单独书写<code>return</code>，后面不加数据</li>
 </ul>
-<h5 id="5、方法重载"><a href="#5、方法重载" class="headerlink" title="5、方法重载"></a>5、方法重载</h5><p><strong>方法重载</strong>指同一个类中定义的多个方法之间的关系，满足下列条件的多个方法相互构成重载：</p>
+<h3 id="5、方法重载"><a href="#5、方法重载" class="headerlink" title="5、方法重载"></a>5、方法重载</h3><p><strong>方法重载</strong>指同一个类中定义的多个方法之间的关系，满足下列条件的多个方法相互构成重载：</p>
 <ul>
 <li>多个方法在同一个类中</li>
 <li>多个方法具有相同的方法名</li>
 <li>多个方法的参数不相同，类型不同或者数量不同</li>
 </ul>
-<h6 id="特点："><a href="#特点：" class="headerlink" title="特点："></a><strong>特点：</strong></h6><ul>
+<p><strong>特点：</strong></p>
+<ul>
 <li>重载仅对应方法的定义，与方法的调用无关</li>
 <li>重载仅针对同一个类中方法的名称与参数进行识别，<strong>与返回值无关</strong>，换句话说不能通过返回值来判定两个方法是否相互构成重载</li>
 <li>在调用的时候，Java虚拟机会通过参数的不同来区分同名方法</li>
 </ul>
-<h5 id="6、方法的参数传递"><a href="#6、方法的参数传递" class="headerlink" title="6、方法的参数传递"></a>6、<strong>方法的参数传递</strong></h5><p>对于<strong>基本数据类型的参数</strong>，形式参数的改变，不影响实际参数的值</p>
+<h3 id="6、方法的参数传递"><a href="#6、方法的参数传递" class="headerlink" title="6、方法的参数传递"></a>6、<strong>方法的参数传递</strong></h3><p>对于<strong>基本数据类型的参数</strong>，形式参数的改变，不影响实际参数的值</p>
 <p><img src="/2022/02/11/java-zhi-shu-zu-fang-fa-pian/image-20220211224943473.png"></p>
 <p>对于<strong>引用类型的参数</strong>，形式参数的改变，影响实际参数的值</p>
 <p><img src="/2022/02/11/java-zhi-shu-zu-fang-fa-pian/image-20220211225220164.png"></p>

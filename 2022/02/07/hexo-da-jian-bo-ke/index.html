@@ -441,23 +441,23 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="一、前期准备"><a href="#一、前期准备" class="headerlink" title="一、前期准备"></a>一、前期准备</h4><h5 id="1-1-下载并安装node-js"><a href="#1-1-下载并安装node-js" class="headerlink" title="1.1 下载并安装node.js"></a>1.1 下载并安装node.js</h5><ul>
+                <h3 id="一、前期准备"><a href="#一、前期准备" class="headerlink" title="一、前期准备"></a>一、前期准备</h3><h4 id="1-1-下载并安装node-js"><a href="#1-1-下载并安装node-js" class="headerlink" title="1.1 下载并安装node.js"></a>1.1 下载并安装node.js</h4><ul>
 <li>官网下载：<a target="_blank" rel="noopener" href="https://nodejs.org/en/">https://nodejs.org/en/</a></li>
 <li>安装后验证：node -v</li>
 </ul>
-<h5 id="1-2-下载并安装git"><a href="#1-2-下载并安装git" class="headerlink" title="1.2 下载并安装git"></a>1.2 下载并安装git</h5><ul>
+<h4 id="1-2-下载并安装git"><a href="#1-2-下载并安装git" class="headerlink" title="1.2 下载并安装git"></a>1.2 下载并安装git</h4><ul>
 <li>官网下载:  <a target="_blank" rel="noopener" href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></li>
 <li>安装后验证：git -v</li>
 </ul>
-<h5 id="1-3-命令行安装cnpm"><a href="#1-3-命令行安装cnpm" class="headerlink" title="1.3  命令行安装cnpm"></a>1.3  命令行安装cnpm</h5><ul>
+<h4 id="1-3-命令行安装cnpm"><a href="#1-3-命令行安装cnpm" class="headerlink" title="1.3  命令行安装cnpm"></a>1.3  命令行安装cnpm</h4><ul>
 <li>命令：<code>npm install -g cnpm --registry==https://registry.npm.taobao.org</code></li>
 <li>安装后验证：cnpm -v</li>
 </ul>
-<h5 id="1-4-命令行安装hexo"><a href="#1-4-命令行安装hexo" class="headerlink" title="1.4 命令行安装hexo"></a>1.4 命令行安装hexo</h5><ul>
+<h4 id="1-4-命令行安装hexo"><a href="#1-4-命令行安装hexo" class="headerlink" title="1.4 命令行安装hexo"></a>1.4 命令行安装hexo</h4><ul>
 <li>命令：<code>cnpm install -g hexo-cli</code></li>
 <li>安装后验证：hexo  -v</li>
 </ul>
-<h4 id="二、配置github"><a href="#二、配置github" class="headerlink" title="二、配置github"></a>二、配置github</h4><p><strong>创建仓库：</strong></p>
+<h3 id="二、配置github"><a href="#二、配置github" class="headerlink" title="二、配置github"></a>二、配置github</h3><p><strong>创建仓库：</strong></p>
 <ul>
 <li>新建一个名为你的用户名.github.io的仓库</li>
 <li>比如说，如果你的github用户名是test，那么你就新建test.github.io的仓库（必须是你的用户名，其它名称无效），将来你的网站访问地址就是 <a target="_blank" rel="noopener" href="http://test.github.io/">http://test.github.io</a> 了。每一个github账户最多只能创建一个这样可以直接使用域名访问的仓库。</li>
@@ -467,7 +467,7 @@
 <li>注册的邮箱一定要验证，否则不会成功</li>
 <li>仓库名字必须是：username.github.io，其中username是你的用户名</li>
 </ul>
-<h4 id="三、配置SSH免密登录"><a href="#三、配置SSH免密登录" class="headerlink" title="三、配置SSH免密登录"></a>三、配置SSH免密登录</h4><p>提交代码需要拥有github权限才可以，但是直接使用用户名和密码不安全，所以使用ssh key来解决本地和服务器的连接问题。</p>
+<h3 id="三、配置SSH免密登录"><a href="#三、配置SSH免密登录" class="headerlink" title="三、配置SSH免密登录"></a>三、配置SSH免密登录</h3><p>提交代码需要拥有github权限才可以，但是直接使用用户名和密码不安全，所以使用ssh key来解决本地和服务器的连接问题。</p>
 <p><strong>操作步骤：</strong></p>
 <ol>
 <li><p>首先打开电脑文件夹，找到C:\Users\用户名\.ssh文件夹并删除</p>
@@ -488,10 +488,10 @@
 </li>
 <li><p>此时还需要配置：</p>
 <p>$ git config –global user.name “git用户名”             // 你的github用户名，非昵称</p>
-<p>$ git config –global user.email  “<a href="mailto:&#120;&#120;&#x78;&#64;&#113;&#113;&#x2e;&#x63;&#111;&#109;">&#120;&#120;&#x78;&#64;&#113;&#113;&#x2e;&#x63;&#111;&#109;</a>“      // 填写你的github注册邮箱</p>
+<p>$ git config –global user.email  “<a href="mailto:&#x78;&#120;&#x78;&#64;&#x71;&#x71;&#46;&#99;&#111;&#109;">&#x78;&#120;&#x78;&#64;&#x71;&#x71;&#46;&#99;&#111;&#109;</a>“      // 填写你的github注册邮箱</p>
 </li>
 </ol>
-<h4 id="四、使用hexo搭建博客"><a href="#四、使用hexo搭建博客" class="headerlink" title="四、使用hexo搭建博客"></a>四、使用hexo搭建博客</h4><h5 id="4-1-初始化"><a href="#4-1-初始化" class="headerlink" title="4.1 初始化"></a>4.1 初始化</h5><ol>
+<h3 id="四、使用hexo搭建博客"><a href="#四、使用hexo搭建博客" class="headerlink" title="四、使用hexo搭建博客"></a>四、使用hexo搭建博客</h3><h4 id="4-1-初始化"><a href="#4-1-初始化" class="headerlink" title="4.1 初始化"></a>4.1 初始化</h4><ol>
 <li><p>在电脑的某个地方新建一个名为hexo的文件夹（名字可以随便取），由于这个文件夹将来就作为存放代码的地方，所以最好不要随便放</p>
 </li>
 <li><p>在该文件夹下右键打开 Git Bash Here，输入hexo init 初始化</p>
@@ -506,7 +506,7 @@ $ hexo s   <span class="token comment">#启动服务</span><span aria-hidden="tr
 <p>到这里就完成了hexo的本地部分，后面进行部署到github上</p>
 </li>
 </ol>
-<h5 id="4-2-将博客部署到github"><a href="#4-2-将博客部署到github" class="headerlink" title="4.2 将博客部署到github"></a>4.2 将博客部署到github</h5><ol>
+<h4 id="4-2-将博客部署到github"><a href="#4-2-将博客部署到github" class="headerlink" title="4.2 将博客部署到github"></a>4.2 将博客部署到github</h4><ol>
 <li><p>在上述文件目录下安装 hexo-deployer-git 插件</p>
 <ul>
 <li>安装命令： npm install hexo-deployer-git –save</li>
@@ -525,7 +525,7 @@ $ hexo s   <span class="token comment">#启动服务</span><span aria-hidden="tr
 </li>
 </ol>
 <p>至此博客的初始化基本完成，后续进行主题更换，现域名为<a target="_blank" rel="noopener" href="http://chenkey837.github.io/">http://chenkey837.github.io/</a></p>
-<h4 id="五、更换主题"><a href="#五、更换主题" class="headerlink" title="五、更换主题"></a>五、更换主题</h4><h5 id="5-1-寻找主题"><a href="#5-1-寻找主题" class="headerlink" title="5.1 寻找主题"></a>5.1 寻找主题</h5><ul>
+<h3 id="五、更换主题"><a href="#五、更换主题" class="headerlink" title="五、更换主题"></a>五、更换主题</h3><h4 id="5-1-寻找主题"><a href="#5-1-寻找主题" class="headerlink" title="5.1 寻找主题"></a>5.1 寻找主题</h4><ul>
 <li><p>hexo官网：<a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a></p>
 <p>可在里面下载主题，点击主题名即可跳转到github上，也可以直接在github上搜索主题</p>
 </li>
@@ -534,21 +534,21 @@ $ hexo s   <span class="token comment">#启动服务</span><span aria-hidden="tr
 <li><p>链接：<a target="_blank" rel="noopener" href="https://github.com/blinkfox/hexo-theme-matery">https://github.com/blinkfox/hexo-theme-matery</a></p>
 </li>
 </ul>
-<h5 id="5-2-下载主题"><a href="#5-2-下载主题" class="headerlink" title="5.2 下载主题"></a>5.2 下载主题</h5><ol>
+<h4 id="5-2-下载主题"><a href="#5-2-下载主题" class="headerlink" title="5.2 下载主题"></a>5.2 下载主题</h4><ol>
 <li><p>Git Bash Here中先cd到hexo目录下</p>
 </li>
 <li><p>再输入命令 $ git clone 主题http链接  themes/主题名称，这里若http链接clone失败，按照前文操作下来可以用SSH链接clone，链接为<a href="">git@github.com:blinkfox/hexo-theme-matery.git</a></p>
 <p>注意：theme 文件夹下存放的就是博客的主题，主题是否下载成功可到该目录下查看</p>
 </li>
 </ol>
-<h5 id="5-3-使用主题"><a href="#5-3-使用主题" class="headerlink" title="5.3 使用主题"></a>5.3 使用主题</h5><ul>
+<h4 id="5-3-使用主题"><a href="#5-3-使用主题" class="headerlink" title="5.3 使用主题"></a>5.3 使用主题</h4><ul>
 <li>打开hexo目录下的_config.yml文件，在里面找到theme: landscape改为theme: blinkfox  （blinkfox为要使用的主题名）,然后重新执行hexo g来重新生成</li>
 <li>如果出现一些莫名其妙的问题，可以先执行hexo clean来清理一下public的内容，然后再执行hexo g 和 hexo s 重新生成和发布</li>
 <li>之后hexo d推送到github仓库</li>
 <li>再次在浏览器中输入对应域名, 即可发现主题已更换，若主题仍无更换，则将将根_config.yml文件中的 branch: master改为main</li>
 <li>音乐id：7264784219</li>
 </ul>
-<h5 id="5-4-修改主题内容"><a href="#5-4-修改主题内容" class="headerlink" title="5.4 修改主题内容"></a>5.4 修改主题内容</h5><p>使用的是blinkfox主题，后期相关修改参考大佬发的主题文档</p>
+<h4 id="5-4-修改主题内容"><a href="#5-4-修改主题内容" class="headerlink" title="5.4 修改主题内容"></a>5.4 修改主题内容</h4><p>使用的是blinkfox主题，后期相关修改参考大佬发的主题文档</p>
 <p>文档链接：<a target="_blank" rel="noopener" href="https://github.com/blinkfox/hexo-theme-matery/blob/develop/README_CN.md">https://github.com/blinkfox/hexo-theme-matery/blob/develop/README_CN.md</a></p>
 <ul>
 <li>注意：一些非md文件可以把他们放到source文件夹下，这里的所有文件都会原样复制（除了md文件）到public目录的</li>
@@ -559,11 +559,11 @@ $ hexo s   <span class="token comment">#启动服务</span><span aria-hidden="tr
 <ul>
 <li>返回按钮样式修改：在主题下面的 blinkfox\layout_partial 文件夹中的 back-top.esj 文件中修改</li>
 </ul>
-<p>特别注意：</p>
+<p><strong>特别注意：</strong></p>
 <ul>
 <li>修改生成的默认页面信息，要到主题下面的_config.yml文件里面去改，而不是根目录下的_config.yml文件</li>
 </ul>
-<h4 id="六、写博客"><a href="#六、写博客" class="headerlink" title="六、写博客"></a>六、写博客</h4><h5 id="6-1-写博客的步骤"><a href="#6-1-写博客的步骤" class="headerlink" title="6.1 写博客的步骤"></a>6.1 写博客的步骤</h5><ol>
+<h3 id="六、写博客"><a href="#六、写博客" class="headerlink" title="六、写博客"></a>六、写博客</h3><h4 id="6-1-写博客的步骤"><a href="#6-1-写博客的步骤" class="headerlink" title="6.1 写博客的步骤"></a>6.1 写博客的步骤</h4><ol>
 <li><p>创建.md文件，定位到我们的hexo根目录，Git Bash Here 中执行命令：</p>
 <p>  <code>hexo new &#39;my-first-blog&#39;</code>  </p>
 </li>
@@ -580,7 +580,7 @@ hexo d<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
 </ul>
 </li>
 </ol>
-<h5 id="6-2-博客插入图片（使用Typora）"><a href="#6-2-博客插入图片（使用Typora）" class="headerlink" title="6.2 博客插入图片（使用Typora）"></a>6.2 博客插入图片（使用Typora）</h5><p>在md文件中插入图片的语法为<code>![]()</code>。</p>
+<h4 id="6-2-博客插入图片（使用Typora）"><a href="#6-2-博客插入图片（使用Typora）" class="headerlink" title="6.2 博客插入图片（使用Typora）"></a>6.2 博客插入图片（使用Typora）</h4><p>在md文件中插入图片的语法为<code>![]()</code>。</p>
 <p>其中<strong>方括号</strong>是图片描述，<strong>圆括号</strong>是图片路径。</p>
 <p>一般来说有三种图片路径，分别是<strong>相对路径，绝对路径和网络路径</strong>。</p>
 <p><strong>完美步骤：</strong></p>
