@@ -4,12 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Java之数组方法篇, Patient">
-    <meta name="description" content="一、IDEA的使用1、概述IDEA全称IntelliJ IDEA，是用于Java语言开发的集成环境
-集成环境：把代码编写，编译，执行，调试等多种功能综合到一起的开发工具
-2、内容辅助键和快捷键
-快速生成语句
-快速生成main()方法：psv">
+    <meta name="keywords" content="Java之集合篇, Patient">
+    <meta name="description" content="一、集合1、概述ArrayList 类是一个可以动态修改的数组，与普通数组的区别就是它是没有固定大小的限制，可以添加或删除元素。
+ArrayList 继承了 AbstractList ，并实现了 List 接口。
+ArrayList 类位于">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -21,7 +19,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Java之数组方法篇 | Patient</title>
+    <title>Java之集合篇 | Patient</title>
     <link rel="icon" type="image/jpeg" href="/person.jpg">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -269,12 +267,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Java之数组方法篇</h1>
+                    <h1 class="description center-align post-title">Java之集合篇</h1>
                 </div>
             </div>
         </div>
@@ -406,7 +404,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-02-11
+                    2022-02-14
                 </div>
                 
 
@@ -415,7 +413,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    1k
                 </div>
                 
 
@@ -435,217 +433,274 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一、IDEA的使用"><a href="#一、IDEA的使用" class="headerlink" title="一、IDEA的使用"></a>一、IDEA的使用</h2><h3 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h3><p><strong>IDEA</strong>全称<strong>IntelliJ IDEA</strong>，是用于Java语言开发的集成环境</p>
-<p><strong>集成环境：</strong>把代码编写，编译，执行，调试等多种功能综合到一起的开发工具</p>
-<h3 id="2、内容辅助键和快捷键"><a href="#2、内容辅助键和快捷键" class="headerlink" title="2、内容辅助键和快捷键"></a>2、内容辅助键和快捷键</h3><ul>
-<li><p><strong>快速生成语句</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">快速生成<span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>方法：psvm <span class="token operator">+</span> 回车
+                <h3 id="一、集合"><a href="#一、集合" class="headerlink" title="一、集合"></a>一、集合</h3><h4 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h4><p><code>ArrayList</code> 类是一个可以动态修改的数组，与普通数组的区别就是它是没有固定大小的限制，可以添加或删除元素。</p>
+<p><code>ArrayList</code> 继承了 <code>AbstractList</code> ，并实现了 <code>List</code> 接口。</p>
+<p><code>ArrayList</code> 类位于 <code>java.util</code> 包中，使用前需要引入它，<strong>语法格式如下</strong>：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 引入 ArrayList 类</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span><span class="token punctuation">;</span> 
 
-快速生成输出语句：sout <span class="token operator">+</span> 回车<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
-<li><p><strong>内容辅助键</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Ctrl</span> <span class="token operator">+</span> <span class="token class-name">Alt</span> <span class="token operator">+</span> space（内容提示，代码补全）<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li><p><strong>快捷键</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 注释</span>
-	单行：选中代码，<span class="token class-name">Ctrl</span> <span class="token operator">+</span> <span class="token operator">/</span>
-	多行：选中代码，<span class="token class-name">Ctrl</span> <span class="token operator">+</span> <span class="token class-name">Shift</span> <span class="token operator">+</span> <span class="token operator">/</span>
-	
-<span class="token comment">// 格式化</span>
-	<span class="token class-name">Ctrl</span> <span class="token operator">+</span> <span class="token class-name">Alt</span> <span class="token operator">+</span> <span class="token class-name">L</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token comment">// 初始化</span>
+<span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">></span></span> objectName <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>　 
+<span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><strong>E</strong>： 泛型数据类型，用于设置 <code>objectName</code> 的数据类型，<strong>只能为引用数据类型</strong></li>
+<li><strong>objectName</strong>: 对象名</li>
 </ul>
-<h2 id="二、数组"><a href="#二、数组" class="headerlink" title="二、数组"></a>二、数组</h2><h3 id="1、定义格式"><a href="#1、定义格式" class="headerlink" title="1、定义格式"></a>1、定义格式</h3><p><strong>数组是一种用于存储多个相同类型数据的存储模型</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 格式一：数据类型[] 变量名，首选的方法</span>
-<span class="token keyword">double</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr<span class="token punctuation">;</span>			<span class="token comment">//定义一个int类型的数组，数组名是arr</span>
-
-<span class="token comment">// 格式二：数据类型 变量名[]</span>
-<span class="token keyword">double</span> cur<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>			<span class="token comment">//定义一个int类型变量，变量名是arr数组</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="2、初始化"><a href="#2、初始化" class="headerlink" title="2、初始化"></a>2、初始化</h3><p><strong>动态初始化：</strong>初始化时只指定数据长度，由系统为数组分配初始值</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 格式：数据类型[] 变量名 = new 数据类型[数组长度]</span>
-<span class="token keyword">double</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">double</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-<span class="token comment">/*
-	左边：
-		double：说明数组中的元素类型是double类型
-		[]：说明这是一个数组
-		arr：数组名称
-	右边：
-		new：为数组申请内存空间
-		double：说明数组中的元素类型是double类型
-		[]：说明这是一个数组
-		10：数组长度，即数组中元素个数
-*/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>静态初始化：</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/* 
-	格式：
-		数据类型[] 变量名 = new 数据类型[]&#123;数据0, 数据1.....&#125;;
-		
-	简化格式：（推荐方法）
-		数据类型[] 变量名 = &#123;数据0, 数据1.....&#125;;
-*/</span>
-<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> cur <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="3、内存分配"><a href="#3、内存分配" class="headerlink" title="3、内存分配"></a>3、内存分配</h3><ul>
-<li><p><strong>栈内存：</strong>存储局部变量</p>
-<p>定义在方法中的变量，如上面的<code>arr</code>，使用完毕，<strong>立即消失</strong></p>
-</li>
-<li><p><strong>堆内存：</strong>存储<code>new</code>出来的内容（实体，对象）</p>
-<p>数组在初始化时会为存储空间添加默认值</p>
+<p><code>ArrayList</code> 中的元素实际上是对象，除<code>String</code>类型外， 要存储其他类型，而 <code>E</code> 只能为引用数据类型，这时就需要使用到基本类型的包装类。</p>
+<p><strong>基本类型对应的包装类表</strong>如下：</p>
 <table>
 <thead>
 <tr>
-<th align="center">类型</th>
-<th align="center">默认值</th>
+<th align="left">基本类型</th>
+<th align="left">引用类型</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">整数</td>
-<td align="center">0</td>
+<td align="left">boolean</td>
+<td align="left">Boolean</td>
 </tr>
 <tr>
-<td align="center">浮点数</td>
-<td align="center">0.0</td>
+<td align="left">byte</td>
+<td align="left">Byte</td>
 </tr>
 <tr>
-<td align="center">布尔类型</td>
-<td align="center">false</td>
+<td align="left">short</td>
+<td align="left">Short</td>
 </tr>
 <tr>
-<td align="center">字符</td>
-<td align="center">空字符</td>
+<td align="left">int</td>
+<td align="left">Integer</td>
 </tr>
 <tr>
-<td align="center">引用数据类型</td>
-<td align="center">null</td>
+<td align="left">long</td>
+<td align="left">Long</td>
+</tr>
+<tr>
+<td align="left">float</td>
+<td align="left">Float</td>
+</tr>
+<tr>
+<td align="left">double</td>
+<td align="left">Double</td>
+</tr>
+<tr>
+<td align="left">char</td>
+<td align="left">Character</td>
 </tr>
 </tbody></table>
-<p>每个<code>new</code>出来的东西都有一个地址值，使用完毕，会<strong>在垃圾回收期空闲时被回收</strong></p>
-</li>
-</ul>
-<p><strong>内存分配图</strong></p>
-<p><img src="/2022/02/11/java-zhi-shu-zu-fang-fa-pian/image-20220211213350199.png"></p>
-<p><strong>多个数组指向相同内存图</strong>：当数组指向相同内存时，任何一个数组修改数据，内存数据也会被修改</p>
-<p><img src="/2022/02/11/java-zhi-shu-zu-fang-fa-pian/image-20220211213653152.png"></p>
-<h3 id="4、数组操作"><a href="#4、数组操作" class="headerlink" title="4、数组操作"></a>4、数组操作</h3><h4 id="①-常见问题："><a href="#①-常见问题：" class="headerlink" title="① 常见问题："></a><strong>① 常见问题：</strong></h4><ul>
-<li><p><strong>索引越界：</strong>访问了数组中不存在的索引对应的元素，造成索引越界问题<code>ArrayIndexOutOfBoundsException</code></p>
-</li>
-<li><p><strong>空指针异常：</strong>访问的数组已经不在指向堆内存的数据，造成空指针异常</p>
-<p><code>NullPointerException</code></p>
-</li>
-<li><p><strong>null：</strong>空值，引用数据类型的默认值，表示不指向任何有效对象</p>
-</li>
-</ul>
-<h4 id="②-常见操作"><a href="#②-常见操作" class="headerlink" title="② 常见操作"></a>② 常见操作</h4><p><strong>遍历</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 使用for循环</span>
-<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">// 其他操作</span>
-<span class="token punctuation">&#125;</span>
+<p>此外，<code>BigInteger</code>、<code>BigDecimal</code> 用于高精度的运算，<code>BigInteger</code> 支持任意精度的整数，也是引用类型，但它们没有相对应的基本类型。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 存放整数元素</span>
+<span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> li<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Arraylist</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token comment">//  For-Each 循环或者加强型循环，它能在不使用下标的情况下遍历数组，更推荐的方法</span>
-<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> element <span class="token operator">:</span> arr<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">// 其他操作</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">// 存放字符元素</span>
+<span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Character</span><span class="token punctuation">></span></span> li<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Arraylist</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>获取最大值</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 定义数组</span>
-<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">45</span><span class="token punctuation">,</span> <span class="token number">98</span><span class="token punctuation">,</span> <span class="token number">73</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<h4 id="2、构造方法"><a href="#2、构造方法" class="headerlink" title="2、构造方法"></a>2、构造方法</h4><table>
+<thead>
+<tr>
+<th align="left">构造器</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>ArrayList()</code></td>
+<td align="left">构造一个初始容量为10的空列表</td>
+</tr>
+<tr>
+<td align="left"><code>ArrayList(int initialCapacity)</code></td>
+<td align="left">构造具有指定初始容量的空列表</td>
+</tr>
+<tr>
+<td align="left"><code>ArrayList(Collection&lt;? extends E&gt; c)</code></td>
+<td align="left">按照集合的迭代器返回的顺序构造一个包含指定集合元素的列表</td>
+</tr>
+</tbody></table>
+<h4 id="3、常用方法"><a href="#3、常用方法" class="headerlink" title="3、常用方法"></a>3、常用方法</h4><p>常用方法列表如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong><code>add()</code></strong></td>
+<td align="left"><strong>将元素插入到指定位置的 <code>arraylist</code> 中</strong></td>
+</tr>
+<tr>
+<td align="left"><code>addAll()</code></td>
+<td align="left">添加集合中的所有元素到 <code>arraylist</code> 中</td>
+</tr>
+<tr>
+<td align="left"><code>clear()</code></td>
+<td align="left">删除 <code>arraylist</code> 中的所有元素</td>
+</tr>
+<tr>
+<td align="left"><code>clone()</code></td>
+<td align="left">复制一份 <code>arraylist</code></td>
+</tr>
+<tr>
+<td align="left"><code>contains()</code></td>
+<td align="left">判断元素是否在 <code>arraylist</code></td>
+</tr>
+<tr>
+<td align="left"><strong><code>get()</code></strong></td>
+<td align="left"><strong>通过索引值获取 <code>arraylist</code> 中的元素</strong></td>
+</tr>
+<tr>
+<td align="left"><code>indexOf()</code></td>
+<td align="left">返回 <code>arraylist</code> 中元素的索引值</td>
+</tr>
+<tr>
+<td align="left"><code>removeAll()</code></td>
+<td align="left">删除存在于指定集合中的 <code>arraylist</code> 里的所有元素</td>
+</tr>
+<tr>
+<td align="left"><strong><code>remove()</code></strong></td>
+<td align="left"><strong>删除 <code>arraylist</code> 里的单个元素</strong></td>
+</tr>
+<tr>
+<td align="left"><strong><code>size()</code></strong></td>
+<td align="left"><strong>返回 <code>arraylist</code> 里元素数量</strong></td>
+</tr>
+<tr>
+<td align="left"><code>isEmpty()</code></td>
+<td align="left">判断 <code>arraylist</code> 是否为空</td>
+</tr>
+<tr>
+<td align="left"><code>subList()</code></td>
+<td align="left">截取部分 <code>arraylist</code> 的元素</td>
+</tr>
+<tr>
+<td align="left"><strong><code>set()</code></strong></td>
+<td align="left"><strong>替换 <code>arraylist</code> 中指定索引的元素</strong></td>
+</tr>
+<tr>
+<td align="left"><code>sort()</code></td>
+<td align="left">对 <code>arraylist</code> 元素进行排序</td>
+</tr>
+<tr>
+<td align="left"><code>toArray()</code></td>
+<td align="left">将 <code>arraylist</code> 转换为数组</td>
+</tr>
+<tr>
+<td align="left"><code>toString()</code></td>
+<td align="left">将 <code>arraylist</code> 转换为字符串</td>
+</tr>
+<tr>
+<td align="left"><code>ensureCapacity()</code></td>
+<td align="left">设置指定容量大小的 <code>arraylist</code></td>
+</tr>
+<tr>
+<td align="left"><code>lastIndexOf()</code></td>
+<td align="left">返回指定元素在 <code>arraylist</code> 中最后一次出现的位置</td>
+</tr>
+<tr>
+<td align="left"><code>retainAll()</code></td>
+<td align="left">保留 <code>arraylist</code> 中在指定集合中也存在的那些元素</td>
+</tr>
+<tr>
+<td align="left"><code>containsAll()</code></td>
+<td align="left">查看 <code>arraylist</code> 是否包含指定集合中的所有元素</td>
+</tr>
+<tr>
+<td align="left"><code>trimToSize()</code></td>
+<td align="left">将 <code>arraylist</code> 中的容量调整为数组中的元素个数</td>
+</tr>
+<tr>
+<td align="left"><code>removeRange()</code></td>
+<td align="left">删除 <code>arraylist</code> 中指定索引之间存在的元素</td>
+</tr>
+<tr>
+<td align="left"><code>replaceAll()</code></td>
+<td align="left">将给定的操作内容替换掉数组中每一个元素</td>
+</tr>
+<tr>
+<td align="left"><code>removeIf()</code></td>
+<td align="left">删除所有满足特定条件的 <code>arraylist</code> 元素</td>
+</tr>
+<tr>
+<td align="left"><code>forEach()</code></td>
+<td align="left">遍历 <code>arraylist</code> 中每一个元素并执行特定操作</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 引入 ArrayList 类</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span><span class="token punctuation">;</span>
 
-<span class="token comment">// 初始化max</span>
-<span class="token keyword">int</span> max<span class="token operator">=</span>arr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">// 引入 Collections 类</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Collections</span><span class="token punctuation">;</span>  
 
-<span class="token comment">// For-Each 循环，也可使用for循环，这里来熟悉For-Each 循环如何操作</span>
-<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> element <span class="token operator">:</span> arr<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>element <span class="token operator">></span> max<span class="token punctuation">)</span> max <span class="token operator">=</span> element<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 构造方法，创建空的集合，sites:[]</span>
+        <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> sites <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 添加元素，sites:[Taobao]</span>
+        sites<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"Taobao"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 追加指定元素到集合末尾，sites:[Taobao,Weibo]</span>
+        sites<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"Weibo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 指定位置插入，sites:[Google,Taobao,Weibo]，索引不能越界</span>
+        sites<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"Google"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 访问第二个元素</span>
+        sites<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+            
+        <span class="token comment">// 修改元素，第一个参数为索引位置，第二个为要修改的值，sites[Google,Wiki,Weibo]</span>
+        sites<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"Wiki"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+        
+        <span class="token comment">// 根据索引删除。删除第三个元素</span>
+        sites<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 删除指定元素</span>
+        sites<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">"Wiki"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 集合元素数量</span>
+        sites<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 字母排序</span>
+        <span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>sites<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> i <span class="token operator">:</span> sites<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span class="token comment">// 输出最大值</span>
-<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>max<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="4、集合存储对象并遍历"><a href="#4、集合存储对象并遍历" class="headerlink" title="4、集合存储对象并遍历"></a>4、集合存储对象并遍历</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 创建集合对象</span>
+        <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Student</span><span class="token punctuation">></span></span> array <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+        <span class="token comment">// 方法调用</span>
+        <span class="token function">addStudent</span><span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">addStudent</span><span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">addStudent</span><span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<h2 id="三、方法"><a href="#三、方法" class="headerlink" title="三、方法"></a>三、方法</h2><h3 id="1、概述-1"><a href="#1、概述-1" class="headerlink" title="1、概述"></a>1、概述</h3><p><strong>方法</strong>是将具有独立功能的代码块组织成为一个整体，使其具有特殊功能的代码集</p>
-<ul>
-<li>方法是解决一类问题的步骤的有序组合</li>
-<li>方法包含于类或对象中</li>
-<li>方法在程序中被创建，在其他地方被引用</li>
-</ul>
-<h4 id="①-优点："><a href="#①-优点：" class="headerlink" title="① 优点："></a><strong>① 优点：</strong></h4><ul>
-<li>使程序变得更简短而清晰</li>
-<li>有利于程序维护</li>
-<li>可以提高程序开发的效率</li>
-<li>提高了代码的重用性</li>
-</ul>
-<h4 id="②-命名规则："><a href="#②-命名规则：" class="headerlink" title="② 命名规则："></a>② <strong>命名规则：</strong></h4><ul>
-<li>方法的名字的第一个单词应以小写字母作为开头，后面的单词则用大写字母开头写，不使用连接符。例如：<code>addPerson</code>。</li>
-<li>下划线可能出现在 JUnit 测试方法名称中用以分隔名称的逻辑组件。一个典型的模式是：<code>test&lt;MethodUnderTest&gt;_&lt;state&gt;</code>，例如 <code>testPop_emptyStack</code>。</li>
-</ul>
-<h3 id="2、定义和调用"><a href="#2、定义和调用" class="headerlink" title="2、定义和调用"></a>2、定义和调用</h3><ul>
-<li>方法必须先创建才可以使用，该过程称为<strong>方法定义</strong></li>
-<li>方法创建后并不是直接运行的，需要手动使用后才执行，该过程称为<strong>方法调用</strong></li>
-</ul>
-<p>一般情况下，<strong>定义方法</strong>包含以下语法：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/*
-	修饰符 返回值类型 方法名(参数类型 参数名)&#123;    
-		...    
-		方法体    
-		...    
-		return 返回值; 
-	&#125;
-*/</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Student</span> i <span class="token operator">:</span> array<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>i<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">","</span> <span class="token operator">+</span> i<span class="token punctuation">.</span><span class="token function">getAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">addStudent</span><span class="token punctuation">(</span><span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Student</span><span class="token punctuation">></span></span> array<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token comment">// 键盘输入</span>
+        <span class="token class-name">Scanner</span> sc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token keyword">int</span> num1 <span class="token punctuation">,</span> <span class="token keyword">int</span> num2<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token keyword">return</span> max<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入学生姓名："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> name <span class="token operator">=</span> sc<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">max_value</span><span class="token punctuation">(</span><span class="token keyword">int</span> num1 <span class="token punctuation">,</span> <span class="token keyword">int</span> num2<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入学生年龄："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> age <span class="token operator">=</span> sc<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<p>一个方法的所有部分：</p>
-<ul>
-<li><p><strong>修饰符：</strong>修饰符，这是可选的，告诉编译器如何调用该方法。定义了该方法的访问类型。</p>
-</li>
-<li><p><strong>返回值类型 ：</strong>方法可能会返回值。<code>returnValueType</code> 是方法返回值的数据类型。有些方法执行所需的操作，但没有返回值，在这种情况下，<code>returnValueType</code> 是关键字<code>void</code></p>
-</li>
-<li><p><strong>方法名：</strong>是方法的实际名称。方法名和参数表共同构成方法签名</p>
-</li>
-<li><p><strong>参数类型：</strong>参数像是一个占位符。当方法被调用时，传递值给参数。这个值被称为实参或变量。参数列表是指方法的参数类型、顺序和参数的个数。参数是可选的，方法可以不包含任何参数。</p>
-</li>
-<li><p><strong>方法体：</strong>方法体包含具体的语句，定义该方法的功能</p>
-<p><img src="/2022/02/11/java-zhi-shu-zu-fang-fa-pian/image-20220211221246368.png"></p>
-</li>
-</ul>
-<p><strong>调用方法：</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span> k <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>num1<span class="token punctuation">,</span>num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 创建对象</span>
+        <span class="token class-name">Student</span> s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Student</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        s<span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        s<span class="token punctuation">.</span><span class="token function">setAge</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token function">max_value</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+        <span class="token comment">// 集合中添加对象</span>
+        array<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="3、形参和实参"><a href="#3、形参和实参" class="headerlink" title="3、形参和实参"></a>3、形参和实参</h3><p><strong>形参：</strong>方法定义中的参数，等同于变量定义格式</p>
-<p><strong>实参：</strong>方法调用中的参数，等同于使用变量或常量</p>
-<h3 id="4、方法注意事项"><a href="#4、方法注意事项" class="headerlink" title="4、方法注意事项"></a>4、方法注意事项</h3><ul>
-<li>方法不能嵌套定义</li>
-<li><code>void</code>表示无返回值，可以省略<code>return</code>，也可以单独书写<code>return</code>，后面不加数据</li>
-</ul>
-<h3 id="5、方法重载"><a href="#5、方法重载" class="headerlink" title="5、方法重载"></a>5、方法重载</h3><p><strong>方法重载</strong>指同一个类中定义的多个方法之间的关系，满足下列条件的多个方法相互构成重载：</p>
-<ul>
-<li>多个方法在同一个类中</li>
-<li>多个方法具有相同的方法名</li>
-<li>多个方法的参数不相同，类型不同或者数量不同</li>
-</ul>
-<p><strong>特点：</strong></p>
-<ul>
-<li>重载仅对应方法的定义，与方法的调用无关</li>
-<li>重载仅针对同一个类中方法的名称与参数进行识别，<strong>与返回值无关</strong>，换句话说不能通过返回值来判定两个方法是否相互构成重载</li>
-<li>在调用的时候，Java虚拟机会通过参数的不同来区分同名方法</li>
-</ul>
-<h3 id="6、方法的参数传递"><a href="#6、方法的参数传递" class="headerlink" title="6、方法的参数传递"></a>6、<strong>方法的参数传递</strong></h3><p>对于<strong>基本数据类型的参数</strong>，形式参数的改变，不影响实际参数的值</p>
-<p><img src="/2022/02/11/java-zhi-shu-zu-fang-fa-pian/image-20220211224943473.png"></p>
-<p>对于<strong>引用类型的参数</strong>，形式参数的改变，影响实际参数的值</p>
-<p><img src="/2022/02/11/java-zhi-shu-zu-fang-fa-pian/image-20220211225220164.png"></p>
+<p><strong><code>Alt + insert</code>：快速构建构造函数</strong></p>
 
                 
             </div>
@@ -672,7 +727,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2022/02/11/java-zhi-shu-zu-fang-fa-pian/">http://example.com/2022/02/11/java-zhi-shu-zu-fang-fa-pian/</a>
+                    <a href="http://example.com/2022/02/14/java-zhi-ji-he-pian/">http://example.com/2022/02/14/java-zhi-ji-he-pian/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -759,17 +814,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/02/13/java-zhi-mian-xiang-dui-xiang-ji-chu-pian/">
+                <a href="/2022/02/14/java-zhi-ji-he-pian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Java之面向对象基础篇">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Java之集合篇">
                         
-                        <span class="card-title">Java之面向对象基础篇</span>
+                        <span class="card-title">Java之集合篇</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -779,9 +835,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-13
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -790,6 +846,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -808,13 +865,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/02/11/you-xian-dui-lie-yong-fa/">
+                <a href="/2022/02/13/java-zhi-zi-fu-chuan-pian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="优先队列用法">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Java之字符串篇">
                         
-                        <span class="card-title">优先队列用法</span>
+                        <span class="card-title">Java之字符串篇</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -825,7 +882,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-13
                             </span>
                         <span class="publish-author">
                             
@@ -840,10 +897,6 @@
                     
                     <a href="/tags/Java/">
                         <span class="chip bg-color">Java</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                        <span class="chip bg-color">数据结构</span>
                     </a>
                     
                 </div>
