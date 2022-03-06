@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="leetcode刷题之二叉树篇二, Patient">
-    <meta name="description" content="leetcode刷题之二叉树篇二一、树的递归套路三部曲
+    <meta name="description" content="leetcode刷题之二叉树篇二树的递归套路三部曲
 找终止条件
 每级递归返回的信息是什么
 一次递归做了什么
@@ -13,7 +13,7 @@
 把题目的要求细化，搞清楚根节点应该做什么，然后剩下的事情抛给前/中/后序的遍历框架就行了
 实例：
 
-public TreeNo">
+public TreeNode">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -418,7 +418,7 @@ public TreeNo">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-02
+                    2022-03-06
                 </div>
                 
 
@@ -427,7 +427,7 @@ public TreeNo">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    697
+                    826
                 </div>
                 
 
@@ -447,14 +447,14 @@ public TreeNo">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="leetcode刷题之二叉树篇二"><a href="#leetcode刷题之二叉树篇二" class="headerlink" title="leetcode刷题之二叉树篇二"></a>leetcode刷题之二叉树篇二</h2><h2 id="一、树的递归套路三部曲"><a href="#一、树的递归套路三部曲" class="headerlink" title="一、树的递归套路三部曲"></a>一、树的递归套路三部曲</h2><ol>
+                <h2 id="leetcode刷题之二叉树篇二"><a href="#leetcode刷题之二叉树篇二" class="headerlink" title="leetcode刷题之二叉树篇二"></a>leetcode刷题之二叉树篇二</h2><h2 id="树的递归套路三部曲"><a href="#树的递归套路三部曲" class="headerlink" title="树的递归套路三部曲"></a>树的递归套路三部曲</h2><ol>
 <li>找终止条件</li>
 <li>每级递归返回的信息是什么</li>
 <li>一次递归做了什么</li>
 </ol>
 <p><strong>把题目的要求细化，搞清楚根节点应该做什么，然后剩下的事情抛给前/中/后序的遍历框架就行了</strong></p>
 <p><strong>实例：</strong></p>
-<p><img src="/2022/03/02/leetcode-shua-ti-zhi-er-cha-shu-pian-er/title1.png"></p>
+<p><img src="/2022/03/06/leetcode-shua-ti-zhi-er-cha-shu-pian-er/title1.png"></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">TreeNode</span> <span class="token function">constructMaximumBinaryTree</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">return</span> <span class="token function">build</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> nums<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
@@ -482,7 +482,7 @@ public TreeNo">
     <span class="token keyword">return</span> root<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="/2022/03/02/leetcode-shua-ti-zhi-er-cha-shu-pian-er/title3.png"></p>
+<p><img src="/2022/03/06/leetcode-shua-ti-zhi-er-cha-shu-pian-er/title3.png"></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">TreeNode</span> <span class="token function">buildTree</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> preorder<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> inorder<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">return</span> <span class="token function">build</span><span class="token punctuation">(</span>preorder<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> preorder<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> inorder<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> inorder<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
@@ -512,9 +512,9 @@ public TreeNo">
     <span class="token keyword">return</span> root<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="/2022/03/02/leetcode-shua-ti-zhi-er-cha-shu-pian-er/image-20220302160711002.png"></p>
-<p><img src="/2022/03/02/leetcode-shua-ti-zhi-er-cha-shu-pian-er/image-20220302161349122.png"></p>
-<p><img src="/2022/03/02/leetcode-shua-ti-zhi-er-cha-shu-pian-er/title2.png"></p>
+<p><img src="/2022/03/06/leetcode-shua-ti-zhi-er-cha-shu-pian-er/image-20220302160711002.png"></p>
+<p><img src="/2022/03/06/leetcode-shua-ti-zhi-er-cha-shu-pian-er/image-20220302161349122.png"></p>
+<p><img src="/2022/03/06/leetcode-shua-ti-zhi-er-cha-shu-pian-er/title2.png"></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">TreeNode</span> <span class="token function">buildTree</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> inorder<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> postorder<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">return</span> <span class="token function">build</span><span class="token punctuation">(</span>inorder<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> inorder<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> postorder<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> postorder<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
@@ -542,8 +542,8 @@ public TreeNo">
     <span class="token keyword">return</span> root<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="/2022/03/02/leetcode-shua-ti-zhi-er-cha-shu-pian-er/image-20220302191728071.png"></p>
-<p><img src="/2022/03/02/leetcode-shua-ti-zhi-er-cha-shu-pian-er/image-20220302192927328.png"></p>
+<p><img src="/2022/03/06/leetcode-shua-ti-zhi-er-cha-shu-pian-er/image-20220302191728071.png"></p>
+<p><img src="/2022/03/06/leetcode-shua-ti-zhi-er-cha-shu-pian-er/image-20220302192927328.png"></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">TreeNode</span> <span class="token function">constructFromPrePost</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> preorder<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> postorder<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> <span class="token function">build</span><span class="token punctuation">(</span>preorder<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> preorder<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> postorder<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> postorder<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
@@ -587,7 +587,42 @@ public TreeNo">
     <span class="token keyword">return</span> root<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="/2022/03/02/leetcode-shua-ti-zhi-er-cha-shu-pian-er/image-20220302192949090.png"></p>
+<p><img src="/2022/03/06/leetcode-shua-ti-zhi-er-cha-shu-pian-er/image-20220302192949090.png"></p>
+<p><img src="/2022/03/06/leetcode-shua-ti-zhi-er-cha-shu-pian-er/title.png"></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 记录所有子树及其出现次数</span>
+    <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">></span></span> hm <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 记录重复的子树根节点</span>
+    <span class="token class-name">LinkedList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">TreeNode</span><span class="token punctuation">></span></span> res <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">TreeNode</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">TreeNode</span><span class="token punctuation">></span></span> <span class="token function">findDuplicateSubtrees</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">traverse</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+	<span class="token comment">// 辅助函数</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">traverse</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token comment">// 空结点返回“#”</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token string">"#"</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 左右子树序列化为字符串</span>
+        <span class="token class-name">String</span> left <span class="token operator">=</span> <span class="token function">traverse</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> right <span class="token operator">=</span> <span class="token function">traverse</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token class-name">String</span> str <span class="token operator">=</span> left <span class="token operator">+</span> <span class="token string">","</span> <span class="token operator">+</span> right <span class="token operator">+</span> <span class="token string">","</span> <span class="token operator">+</span> root<span class="token punctuation">.</span>val<span class="token punctuation">;</span>
+
+        <span class="token keyword">int</span> freq <span class="token operator">=</span> hm<span class="token punctuation">.</span><span class="token function">getOrDefault</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 存在重复，加入 res</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>freq <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            res<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        hm<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> freq <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
@@ -614,7 +649,7 @@ public TreeNo">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2022/03/02/leetcode-shua-ti-zhi-er-cha-shu-pian-er/">http://example.com/2022/03/02/leetcode-shua-ti-zhi-er-cha-shu-pian-er/</a>
+                    <a href="http://example.com/2022/03/06/leetcode-shua-ti-zhi-er-cha-shu-pian-er/">http://example.com/2022/03/06/leetcode-shua-ti-zhi-er-cha-shu-pian-er/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -709,17 +744,18 @@ public TreeNo">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/03/02/java-zhi-yi-chang-pian/">
+                <a href="/2022/03/06/leetcode-shua-ti-zhi-er-cha-shu-pian-er/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Java之异常篇">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="leetcode刷题之二叉树篇二">
                         
-                        <span class="card-title">Java之异常篇</span>
+                        <span class="card-title">leetcode刷题之二叉树篇二</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -729,9 +765,9 @@ public TreeNo">
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-02
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-06
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -740,11 +776,20 @@ public TreeNo">
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
                     <a href="/tags/Java/">
                         <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                    <a href="/tags/leetcode/">
+                        <span class="chip bg-color">leetcode</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="chip bg-color">数据结构</span>
                     </a>
                     
                 </div>
@@ -758,13 +803,13 @@ public TreeNo">
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/01/java-zhi-chang-yong-api-pian/">
+                <a href="/2022/03/04/java-zhi-io-liu-pian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Java之常用API篇">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Java之IO流篇">
                         
-                        <span class="card-title">Java之常用API篇</span>
+                        <span class="card-title">Java之IO流篇</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -775,7 +820,7 @@ public TreeNo">
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-04
                             </span>
                         <span class="publish-author">
                             
@@ -939,7 +984,7 @@ public TreeNo">
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">40.4k</span>
+                        class="white-color">40.5k</span>
             
             
             
