@@ -4,8 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Java之网络编程篇, Patient">
-    <meta name="description" content="Java之网络编程篇">
+    <meta name="keywords" content="Java之Lambda篇, Patient">
+    <meta name="description" content="Java之Lambda篇
+Lambda 表达式，也可称为闭包，它是推动 Java 8 发布的最重要新特性
+Lambda 允许把函数作为一个方法的参数（函数作为参数传递进方法中）
+使用 Lambda 表达式可以使代码变的更加简洁紧凑
+
+一、语">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +22,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Java之网络编程篇 | Patient</title>
+    <title>Java之Lambda篇 | Patient</title>
     <link rel="icon" type="image/jpeg" href="/person.jpg">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -265,12 +270,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Java之网络编程篇</h1>
+                    <h1 class="description center-align post-title">Java之Lambda篇</h1>
                 </div>
             </div>
         </div>
@@ -402,7 +407,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-08
+                    2022-03-09
                 </div>
                 
 
@@ -411,7 +416,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    7
+                    857
                 </div>
                 
 
@@ -431,7 +436,99 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Java之网络编程篇"><a href="#Java之网络编程篇" class="headerlink" title="Java之网络编程篇"></a>Java之网络编程篇</h1>
+                <h1 id="Java之Lambda篇"><a href="#Java之Lambda篇" class="headerlink" title="Java之Lambda篇"></a>Java之Lambda篇</h1><ul>
+<li><code>Lambda</code> 表达式，也可称为闭包，它是推动 <code>Java 8</code> 发布的最重要新特性</li>
+<li><code>Lambda</code> 允许把函数作为一个方法的参数（函数作为参数传递进方法中）</li>
+<li>使用 <code>Lambda</code> 表达式可以使代码变的更加简洁紧凑</li>
+</ul>
+<h2 id="一、语法"><a href="#一、语法" class="headerlink" title="一、语法"></a>一、语法</h2><p><code>lambda</code> 表达式的语法格式如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token punctuation">(</span>parameters<span class="token punctuation">)</span> <span class="token operator">-></span> expression 
+或 
+<span class="token punctuation">(</span>parameters<span class="token punctuation">)</span> <span class="token operator">-></span><span class="token punctuation">&#123;</span> statements<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>以下是<code>lambda</code>表达式的重要特征:</p>
+<ul>
+<li><strong>可选类型声明：</strong>不需要声明参数类型，编译器可以统一识别参数值</li>
+<li><strong>可选的参数圆括号：</strong>一个参数无需定义圆括号，但多个参数需要定义圆括号</li>
+<li><strong>可选的大括号：</strong>如果主体包含了一个语句，就不需要使用大括号</li>
+<li><strong>可选的返回关键字：</strong>如果主体只有一个表达式返回值则编译器会自动返回值，大括号需要指定表达式返回了一个数值</li>
+</ul>
+<hr>
+<h2 id="二、Lambda-表达式实例"><a href="#二、Lambda-表达式实例" class="headerlink" title="二、Lambda 表达式实例"></a>二、Lambda 表达式实例</h2><p><strong>Lambda 表达式的简单例子:</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 不需要参数,返回值为 5  </span>
+<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token number">5</span>  
+  
+<span class="token comment">// 接收一个参数(数字类型),返回其2倍的值  </span>
+x <span class="token operator">-></span> <span class="token number">2</span> <span class="token operator">*</span> x  
+  
+<span class="token comment">// 接受2个参数(数字),并返回他们的差值  </span>
+<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token operator">-></span> x – y  
+  
+<span class="token comment">// 4. 接收2个int型整数,返回他们的和  </span>
+<span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span> <span class="token operator">-></span> x <span class="token operator">+</span> y  
+  
+<span class="token comment">// 接受一个 string 对象,并在控制台打印,不返回任何值(看起来像是返回void)  </span>
+<span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Java8Tester</span> <span class="token punctuation">&#123;</span>   
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span> args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>      
+        <span class="token class-name">Java8Tester</span> tester <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Java8Tester</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>              
+        <span class="token comment">// 类型声明      </span>
+        <span class="token class-name">MathOperation</span> addition <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span> <span class="token operator">-></span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>              
+        <span class="token comment">// 不用类型声明      </span>
+        <span class="token class-name">MathOperation</span> subtraction <span class="token operator">=</span> <span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token operator">-></span> a <span class="token operator">-</span> b<span class="token punctuation">;</span>              
+        <span class="token comment">// 大括号中的返回语句      </span>
+        <span class="token class-name">MathOperation</span> multiplication <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token punctuation">&#123;</span> <span class="token keyword">return</span> a <span class="token operator">*</span> b<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>              
+        <span class="token comment">// 没有大括号及返回语句      </span>
+        <span class="token class-name">MathOperation</span> division <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span> <span class="token operator">-></span> a <span class="token operator">/</span> b<span class="token punctuation">;</span>              
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"10 + 5 = "</span> <span class="token operator">+</span> tester<span class="token punctuation">.</span><span class="token function">operate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> addition<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"10 - 5 = "</span> <span class="token operator">+</span> tester<span class="token punctuation">.</span><span class="token function">operate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> subtraction<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"10 x 5 = "</span> <span class="token operator">+</span> tester<span class="token punctuation">.</span><span class="token function">operate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> multiplication<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"10 / 5 = "</span> <span class="token operator">+</span> tester<span class="token punctuation">.</span><span class="token function">operate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> division<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+        
+        <span class="token comment">// 不用括号      </span>
+        <span class="token class-name">GreetingService</span> greetService1 <span class="token operator">=</span> message <span class="token operator">-></span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Hello "</span> <span class="token operator">+</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>     
+        
+        <span class="token comment">// 用括号      </span>
+        <span class="token class-name">GreetingService</span> greetService2 <span class="token operator">=</span> <span class="token punctuation">(</span>message<span class="token punctuation">)</span> <span class="token operator">-></span>      <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Hello "</span> <span class="token operator">+</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        greetService1<span class="token punctuation">.</span><span class="token function">sayMessage</span><span class="token punctuation">(</span><span class="token string">"Runoob"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      greetService2<span class="token punctuation">.</span><span class="token function">sayMessage</span><span class="token punctuation">(</span><span class="token string">"Google"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   
+    <span class="token punctuation">&#125;</span>       
+    
+    <span class="token keyword">interface</span> <span class="token class-name">MathOperation</span> <span class="token punctuation">&#123;</span>      
+        <span class="token keyword">int</span> <span class="token function">operation</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>   
+    <span class="token punctuation">&#125;</span>       
+    
+    <span class="token keyword">interface</span> <span class="token class-name">GreetingService</span> <span class="token punctuation">&#123;</span>      
+        <span class="token keyword">void</span> <span class="token function">sayMessage</span><span class="token punctuation">(</span><span class="token class-name">String</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>   
+    <span class="token punctuation">&#125;</span>       
+    
+    <span class="token keyword">private</span> <span class="token keyword">int</span> <span class="token function">operate</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">,</span> <span class="token class-name">MathOperation</span> mathOperation<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>      
+        <span class="token keyword">return</span> mathOperation<span class="token punctuation">.</span><span class="token function">operation</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>   
+    <span class="token punctuation">&#125;</span> 
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>执行以上脚本，输出结果为：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">$ javac <span class="token class-name">Java8Tester</span><span class="token punctuation">.</span>java 
+$ java <span class="token class-name">Java8Tester</span>
+<span class="token number">10</span> <span class="token operator">+</span> <span class="token number">5</span> <span class="token operator">=</span> <span class="token number">15</span>
+<span class="token number">10</span> <span class="token operator">-</span> <span class="token number">5</span> <span class="token operator">=</span> <span class="token number">5</span>
+<span class="token number">10</span> x <span class="token number">5</span> <span class="token operator">=</span> <span class="token number">50</span>
+<span class="token number">10</span> <span class="token operator">/</span> <span class="token number">5</span> <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token class-name">Hello</span> <span class="token class-name">Runoob</span>
+<span class="token class-name">Hello</span> <span class="token class-name">Google</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>使用 Lambda 表达式需要注意：</strong></p>
+<ul>
+<li><code>Lambda</code> 表达式主要用来<strong>定义行内执行的方法类型接口</strong>，例如，一个简单方法接口。在上面例子中，使用各种类型的<code>Lambda</code>表达式来定义<code>MathOperation</code>接口的方法。然后定义了<code>sayMessage</code>的执行</li>
+<li><code>Lambda</code> 表达式免去了使用匿名方法的麻烦，并且给予<code>Java</code>简单但是强大的<strong>函数化的编程能力</strong></li>
+<li>必须有上下文环境，才能推导出<code>Lambda</code>对应的接口</li>
+</ul>
+<h2 id="三、Lambda和匿名内部类的区别"><a href="#三、Lambda和匿名内部类的区别" class="headerlink" title="三、Lambda和匿名内部类的区别"></a>三、Lambda和匿名内部类的区别</h2><ul>
+<li><strong>使用限制不同：</strong>当接口只有一个抽象方法时，可以使用<code>Lambda</code>，也可以使用匿名内部类；若有多个抽象方法，只能使用匿名内部类</li>
+<li><strong>所需类型不同：</strong>匿名内部类可以是接口、抽象类和具体类；<code>Lambda表达式</code>只能是接口</li>
+<li><strong>实现原理不同：</strong>匿名内部类编译后，产生一个单独的<code>.class</code>字节码文件；<code>Lambda表达式</code>编译后，不会出现文件，对应的字节码会在运行的时候动态生成</li>
+</ul>
+
                 
             </div>
             <hr/>
@@ -457,7 +554,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2022/03/08/java-zhi-lambda-pian/">http://example.com/2022/03/08/java-zhi-lambda-pian/</a>
+                    <a href="http://example.com/2022/03/09/java-zhi-lambda-pian/">http://example.com/2022/03/09/java-zhi-lambda-pian/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -549,13 +646,13 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2022/03/08/java-zhi-lambda-pian/">
+                <a href="/2022/03/09/java-zhi-lambda-pian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Java之网络编程篇">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Java之Lambda篇">
                         
-                        <span class="card-title">Java之网络编程篇</span>
+                        <span class="card-title">Java之Lambda篇</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -566,7 +663,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-09
                             </span>
                         <span class="publish-author">
                             
@@ -776,7 +873,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">49.8k</span>
+                        class="white-color">50.6k</span>
             
             
             
