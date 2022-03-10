@@ -746,7 +746,7 @@ class Solution &amp;#123;
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>结合刚才针对满二叉树和普通二叉树的算法，上面这段代码应该不难理解，就是一个结合版，但是<strong>其中降低时间复杂度的技巧是非常微妙的</strong>。</p>
-<h3 id="二、复杂度分析"><a href="#二、复杂度分析" class="headerlink" title="二、复杂度分析"></a>二、复杂度分析</h3><p>开头说了，这个算法的时间复杂度是 <code>O(logN*logN)</code>，这是怎么算出来的呢？</p>
+<h3 id="2、复杂度分析"><a href="#2、复杂度分析" class="headerlink" title="2、复杂度分析"></a>2、复杂度分析</h3><p>开头说了，这个算法的时间复杂度是 <code>O(logN*logN)</code>，这是怎么算出来的呢？</p>
 <p>直觉感觉好像最坏情况下是 <code>O(N*logN)</code> 吧，因为之前的 <code>while</code> 需要 <code>logN</code> 的时间，最后要 <code>O(N)</code> 的时间向左右子树递归：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">return</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token function">countNodes</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">countNodes</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
