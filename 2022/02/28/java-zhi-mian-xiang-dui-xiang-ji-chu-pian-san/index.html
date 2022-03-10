@@ -421,7 +421,7 @@ Parent p = new Child();
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.1k
+                    2.2k
                 </div>
                 
 
@@ -515,19 +515,21 @@ a<span class="token punctuation">.</span><span class="token function">eat</span>
 <li><p>接口用关键字<code>interface</code>修饰</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> 接口名<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
 
+<span class="token comment">// 例子</span>
 <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Jumping</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">jump</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>类实现接口用<code>implements</code>表示</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> 类名 <span class="token keyword">implements</span> 接口名<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
 
+<span class="token comment">// 例子</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Cat</span> <span class="token keyword">implements</span> <span class="token class-name">Jumping</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     
     <span class="token annotation punctuation">@Override</span>
     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">jump</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"跳"</span><span class="token punctuation">)</span>
     <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>接口不能实例化，但可以通过类对象实例化，叫接口多态</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Jumping</span> j <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 j<span class="token punctuation">.</span><span class="token function">jump</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
@@ -542,8 +544,23 @@ j<span class="token punctuation">.</span><span class="token function">jump</span
 </ul>
 <p><strong>注</strong>：</p>
 <ul>
-<li><code>JDK 1.8</code> 以后，<strong>接口允许包含具体实现的方法</strong>，该方法称为”默认方法”，默认方法使用 <code>default</code> 关键字修饰</li>
-<li><code>JDK 1.9</code> 以后，允许将方法定义为 <code>private</code>，使得某些复用的代码不会把方法暴露出去</li>
+<li><p><code>JDK 1.8</code> 以后，<strong>接口允许包含具体实现的方法</strong>，该方法称为”默认方法”，默认方法使用 <code>default</code> 关键字修饰</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 默认方法，有方法体，不强制重写，但可以在实现类重写，不过要去掉 default</span>
+<span class="token keyword">public</span> <span class="token keyword">default</span> <span class="token keyword">void</span> 方法名<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token comment">// 方法体</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 静态方法，有方法体，只能通过接口名调用</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> 方法名<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token comment">// 方法体</span>
+<span class="token punctuation">&#125;</span>
+
+接口名<span class="token punctuation">.</span>方法名<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p><code>JDK 1.9</code> 以后，允许将方法定义为 <code>private</code>，使得某些复用的代码不会把方法暴露出去</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 括号表示可以加，加了就为私有静态方法</span>
+<span class="token keyword">private</span> <span class="token punctuation">(</span><span class="token keyword">static</span><span class="token punctuation">)</span> 返回值类型 方法名<span class="token punctuation">(</span>参数列表<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token comment">// 方法体</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 <h3 id="3、类和接口的关系"><a href="#3、类和接口的关系" class="headerlink" title="3、类和接口的关系"></a>3、类和接口的关系</h3><p>类描述对象的属性和方法，接口则包含类要实现的方法。</p>
 <ul>
@@ -1057,7 +1074,7 @@ i<span class="token punctuation">.</span><span class="token function">show</span
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">50.6k</span>
+                        class="white-color">53.9k</span>
             
             
             
