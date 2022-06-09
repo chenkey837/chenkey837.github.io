@@ -423,7 +423,7 @@ SpringBoot工程执行mvn命令package进行打包
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    3.6k
                 </div>
                 
 
@@ -535,6 +535,218 @@ taskkill -f -t -im &quot;进程名称&quot;<span aria-hidden="true" class="line-
 <li>配置文件可以修改名称，通过启动参数设定</li>
 <li>配置文件可以修改路径，通过启动参数设定</li>
 <li>微服务开发中配置文件通过配置中心进行设置</li>
+</ol>
+<h2 id="六、多环境开发（yaml多文件版）"><a href="#六、多环境开发（yaml多文件版）" class="headerlink" title="六、多环境开发（yaml多文件版）"></a>六、多环境开发（yaml多文件版）</h2><p>​        将所有的配置都放在一个配置文件中，尤其是每一个配置应用场景都不一样，这显然不合理，于是就有了将一个配置文件拆分成多个配置文件的想法。拆分后，每个配置文件中写自己的配置，主配置文件中写清楚用哪一个配置文件就好了。</p>
+<p><strong>主配置文件</strong></p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">spring</span><span class="token punctuation">:</span>
+	<span class="token key atrule">profiles</span><span class="token punctuation">:</span>
+		<span class="token key atrule">active</span><span class="token punctuation">:</span> pro		<span class="token comment"># 启动pro</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>环境配置文件</strong></p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">server</span><span class="token punctuation">:</span>
+	<span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">80</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>​        环境配置文件因为每一个都是配置自己的项，所以连名字都不用写里面了。那问题是如何区分这是哪一组配置呢？使用文件名区分。</p>
+<p><strong>application-pro.yaml</strong></p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">server</span><span class="token punctuation">:</span>
+	<span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">80</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>application-dev.yaml</strong></p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">server</span><span class="token punctuation">:</span>
+	<span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">81</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>​        文件的命名规则为：application-环境名.yml。</p>
+<p>​        在配置文件中，如果某些配置项所有环境都一样，可以将这些项写入到主配置中，只有哪些有区别的项才写入到环境配置文件中。</p>
+<ul>
+<li>主配置文件中设置公共配置（全局）</li>
+<li>环境分类配置文件中常用于设置冲突属性（局部）</li>
+</ul>
+<p><strong>总结</strong></p>
+<ol>
+<li><p>可以使用独立配置文件定义环境属性</p>
+</li>
+<li><p>独立配置文件便于线上系统维护更新并保障系统安全性</p>
+</li>
+</ol>
+<h2 id="七、多环境开发独立配置文件书写技巧"><a href="#七、多环境开发独立配置文件书写技巧" class="headerlink" title="七、多环境开发独立配置文件书写技巧"></a>七、多环境开发独立配置文件书写技巧</h2><p>​        作为程序员在搞配置的时候往往处于一种分久必合合久必分的局面。开始先写一起，后来为了方便维护就拆分。对于多环境开发也是如此，下面是如何基于多环境开发做配置独立管理。</p>
+<p><strong>准备工作</strong></p>
+<p>​        将所有的配置根据功能对配置文件中的信息进行拆分，并制作成独立的配置文件，命名规则如下</p>
+<ul>
+<li>application-devDB.yml</li>
+<li>application-devRedis.yml</li>
+<li>application-devMVC.yml</li>
+</ul>
+<p><strong>使用</strong></p>
+<p>​        使用include属性在激活指定环境的情况下，同时对多个环境进行加载使其生效，多个环境间使用逗号分隔</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">spring</span><span class="token punctuation">:</span>
+	<span class="token key atrule">profiles</span><span class="token punctuation">:</span>
+    	<span class="token key atrule">active</span><span class="token punctuation">:</span> dev
+        <span class="token key atrule">include</span><span class="token punctuation">:</span> devDB<span class="token punctuation">,</span>devRedis<span class="token punctuation">,</span>devMVC<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>​        比较一下，现在相当于加载dev配置时，再加载对应的3组配置，从结构上就很清晰，用了什么，对应的名称是什么</p>
+<p><strong>注意</strong></p>
+<p>​        当主环境dev与其他环境有相同属性时，主环境属性生效；其他环境中有相同属性时，最后加载的环境属性生效</p>
+<p><strong>改良</strong></p>
+<p>​        但上面的设置也有一个问题，比如要切换dev环境为pro时，include也要修改。因为include属性只能使用一次。SpringBoot从2.4版开始使用group属性替代include属性，降低了配置书写量。简单说就是我先写好，你爱用哪个用哪个。</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">spring</span><span class="token punctuation">:</span>
+	<span class="token key atrule">profiles</span><span class="token punctuation">:</span>
+    	<span class="token key atrule">active</span><span class="token punctuation">:</span> dev
+        <span class="token key atrule">group</span><span class="token punctuation">:</span>
+        	<span class="token key atrule">"dev"</span><span class="token punctuation">:</span> devDB<span class="token punctuation">,</span>devRedis<span class="token punctuation">,</span>devMVC
+      		<span class="token key atrule">"pro"</span><span class="token punctuation">:</span> proDB<span class="token punctuation">,</span>proRedis<span class="token punctuation">,</span>proMVC
+      		<span class="token key atrule">"test"</span><span class="token punctuation">:</span> testDB<span class="token punctuation">,</span>testRedis<span class="token punctuation">,</span>testMVC<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>​        现在再来看，如果切换dev到pro，只需要改一下。</p>
+<p><strong>总结</strong></p>
+<ol>
+<li>多环境开发使用group属性设置配置文件分组，便于线上维护管理</li>
+</ol>
+<h2 id="八、多环境开发控制"><a href="#八、多环境开发控制" class="headerlink" title="八、多环境开发控制"></a>八、多环境开发控制</h2><p>​        maven和SpringBoot同时设置多环境的话怎么搞。</p>
+<p>​        要想处理这个冲突问题，你要先理清一个关系，究竟谁在多环境开发中其主导地位。也就是说如果现在都设置了多环境，谁的应该是保留下来的，另一个应该遵从相同的设置。</p>
+<p>​        maven是做什么的？项目构建管理的，最终生成代码包的，SpringBoot是干什么的？简化开发的。简化，又不是其主导作用。最终还是要靠maven来管理整个工程，所以SpringBoot应该听maven的。整个确认后下面就好做了。大体思想如下：</p>
+<ul>
+<li>先在maven环境中设置用什么具体的环境</li>
+<li>在SpringBoot中读取maven设置的环境即可</li>
+</ul>
+<p><strong>maven中设置多环境（使用属性方式区分环境）</strong></p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profiles</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profile</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>env_dev<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profile.active</span><span class="token punctuation">></span></span>dev<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profile.active</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activation</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activeByDefault</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activeByDefault</span><span class="token punctuation">></span></span>		<span class="token comment">&lt;!--默认启动环境--></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activation</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profile</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profile</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>env_pro<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profile.active</span><span class="token punctuation">></span></span>pro<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profile.active</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profile</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profiles</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>SpringBoot中读取maven设置值</strong></p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">spring</span><span class="token punctuation">:</span>
+	<span class="token key atrule">profiles</span><span class="token punctuation">:</span>
+    	<span class="token key atrule">active</span><span class="token punctuation">:</span> @profile.active@<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>​        上面的@属性名@就是读取maven中配置的属性值的语法格式。</p>
+<p><strong>总结</strong></p>
+<ol>
+<li>当Maven与SpringBoot同时对多环境进行控制时，以Mavn为主，SpringBoot使用@..@占位符读取Maven对应的配置属性值</li>
+<li>基于SpringBoot读取Maven配置属性的前提下，如果在Idea下测试工程时pom.xml每次更新需要手动compile方可生效</li>
+</ol>
+<h2 id="九、日志"><a href="#九、日志" class="headerlink" title="九、日志"></a>九、日志</h2><p>​        日志其实就是记录程序日常运行的信息，主要作用如下：</p>
+<ul>
+<li>编程期调试代码</li>
+<li>运营期记录信息<ul>
+<li>记录日常运营重要信息（峰值流量、平均响应时长……）</li>
+<li>记录应用报错信息（错误堆栈）</li>
+<li>记录运维过程数据（扩容、宕机、报警……）</li>
+</ul>
+</li>
+</ul>
+<h3 id="1、代码中使用日志工具记录日志"><a href="#1、代码中使用日志工具记录日志" class="headerlink" title="1、代码中使用日志工具记录日志"></a>1、代码中使用日志工具记录日志</h3><p>​        日志的使用格式非常固定，直接上操作步骤：</p>
+<p><strong>步骤①</strong>：添加日志记录操作</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">@RestController
+@RequestMapping(&quot;&#x2F;books&quot;)
+public class BookController extends BaseClass&#123;
+    private static final Logger log &#x3D; LoggerFactory.getLogger(BookController.class);
+    @GetMapping
+    public String getById()&#123;
+        log.debug(&quot;debug...&quot;);
+        log.info(&quot;info...&quot;);
+        log.warn(&quot;warn...&quot;);
+        log.error(&quot;error...&quot;);
+        return &quot;springboot is running...2&quot;;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>​        上述代码中log对象就是用来记录日志的对象，下面的log.debug，log.info这些操作就是写日志的API了。</p>
+<p><strong>步骤②</strong>：设置日志输出级别</p>
+<p>​        日志设置好以后可以根据设置选择哪些参与记录。这里是根据日志的级别来设置的。日志的级别分为6种，分别是：</p>
+<ul>
+<li>TRACE：运行堆栈信息，使用率低</li>
+<li>DEBUG：程序员调试代码使用</li>
+<li>INFO：记录运维过程数据</li>
+<li>WARN：记录运维过程报警数据</li>
+<li>ERROR：记录错误堆栈信息</li>
+<li>FATAL：灾难信息，合并计入ERROR</li>
+</ul>
+<p>​        一般情况下，开发时候使用DEBUG，上线后使用INFO，运维信息记录使用WARN即可。下面就设置一下日志级别：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment"># 开启debug模式，输出调试信息，常用于检查系统运行状况</span>
+<span class="token key atrule">debug</span><span class="token punctuation">:</span> <span class="token boolean important">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>​        这么设置太简单粗暴了，日志系统通常都提供了细粒度的控制</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment"># 开启debug模式，输出调试信息，常用于检查系统运行状况</span>
+<span class="token key atrule">debug</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+
+<span class="token comment"># 设置日志级别，root表示根节点，即整体应用日志级别</span>
+<span class="token key atrule">logging</span><span class="token punctuation">:</span>
+	<span class="token key atrule">level</span><span class="token punctuation">:</span>
+    	<span class="token key atrule">root</span><span class="token punctuation">:</span> debug<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>​        还可以再设置更细粒度的控制</p>
+<p><strong>步骤③</strong>：设置日志组，控制指定包对应的日志输出级别，也可以直接控制指定包对应的日志输出级别</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">logging</span><span class="token punctuation">:</span>
+	<span class="token comment"># 设置日志组</span>
+    <span class="token key atrule">group</span><span class="token punctuation">:</span>
+    	<span class="token comment"># 自定义组名，设置当前组中所包含的包</span>
+        <span class="token key atrule">ebank</span><span class="token punctuation">:</span> com.itheima.controller
+    <span class="token key atrule">level</span><span class="token punctuation">:</span>
+    	<span class="token key atrule">root</span><span class="token punctuation">:</span> warn
+        <span class="token comment"># 为对应组设置日志级别</span>
+        <span class="token key atrule">ebank</span><span class="token punctuation">:</span> debug
+    	<span class="token comment"># 为对包设置日志级别</span>
+        <span class="token key atrule">com.itheima.controller</span><span class="token punctuation">:</span> debug<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>​        说白了就是总体设置一下，每个包设置一下，如果感觉设置的麻烦，就先把包分个组，对组设置，没了，就这些。</p>
+<p><strong>总结</strong></p>
+<ol>
+<li>日志用于记录开发调试与运维过程消息</li>
+<li>日志的级别共6种，通常使用4种即可，分别是DEBUG，INFO,WARN,ERROR</li>
+<li>可以通过日志组或代码包的形式进行日志显示级别的控制</li>
+</ol>
+<h4 id="教你一招：优化日志对象创建代码"><a href="#教你一招：优化日志对象创建代码" class="headerlink" title="教你一招：优化日志对象创建代码"></a>教你一招：优化日志对象创建代码</h4><p>​        写代码的时候每个类都要写创建日志记录对象，这个可以优化一下，使用前面用过的lombok技术提供的工具类即可。</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">@RestController
+@RequestMapping(&quot;&#x2F;books&quot;)
+public class BookController extends BaseClass&#123;
+    private static final Logger log &#x3D; LoggerFactory.getLogger(BookController.class);	&#x2F;&#x2F;这一句可以不写了
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>​        导入lombok后使用注解搞定，日志对象名为log</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">@Slf4j		&#x2F;&#x2F;这个注解替代了下面那一行
+@RestController
+@RequestMapping(&quot;&#x2F;books&quot;)
+public class BookController extends BaseClass&#123;
+    private static final Logger log &#x3D; LoggerFactory.getLogger(BookController.class);	&#x2F;&#x2F;这一句可以不写了
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>总结</strong></p>
+<ol>
+<li>基于lombok提供的@Slf4j注解为类快速添加日志对象</li>
+</ol>
+<h3 id="2、日志文件"><a href="#2、日志文件" class="headerlink" title="2、日志文件"></a>2、日志文件</h3><p>​        日志信息显示，记录已经控制住了，下面就要说一下日志的转存了。日志不能仅显示在控制台上，要把日志记录到文件中，方便后期维护查阅。</p>
+<p>​        对于日志文件的使用存在各种各样的策略，例如每日记录，分类记录，报警后记录等。这里主要研究日志文件如何记录。</p>
+<p>​        记录日志到文件中格式非常简单，设置日志文件名即可。</p>
+<pre class="line-numbers language-YAML" data-language="YAML"><code class="language-YAML">logging:
+	file:
+    	name: server.log<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>​        虽然使用上述格式可以将日志记录下来了，但是面对线上的复杂情况，一个文件记录肯定是不能够满足运维要求的，通常会每天记录日志文件，同时为了便于维护，还要限制每个日志文件的大小。下面给出日志文件的常用配置方式：</p>
+<pre class="line-numbers language-YAML" data-language="YAML"><code class="language-YAML">logging:
+	logback:
+    	rollingpolicy:
+        	max-file-size: 3KB
+            file-name-pattern: server.%d&#123;yyyy-MM-dd&#125;.%i.log<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>​        以上格式是基于logback日志技术设置每日日志文件的设置格式，要求容量到达3KB以后就转存信息到第二个文件中。文件命名规则中的%d标识日期，%i是一个递增变量，用于区分日志文件。</p>
+<p><strong>总结</strong></p>
+<ol>
+<li>日志记录到文件</li>
+<li>日志文件格式设置</li>
 </ol>
 
                 
@@ -905,7 +1117,7 @@ taskkill -f -t -im &quot;进程名称&quot;<span aria-hidden="true" class="line-
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">92.1k</span>
+                        class="white-color">94.4k</span>
             
             
             
