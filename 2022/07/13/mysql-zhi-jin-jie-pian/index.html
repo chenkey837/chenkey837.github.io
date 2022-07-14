@@ -1,0 +1,2260 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="MySQL之进阶篇, Patient">
+    <meta name="description" content="一、存储引擎1、MySQL体系结构
+连接层（Client Connectors）
+
+连接层又称为客户端连接器（Client Connectors）：提供与MySQL服务器建立的支持。目前几乎支持所有主流的服务端编程技术，主要完成一些类似于连">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>MySQL之进阶篇 | Patient</title>
+    <link rel="icon" type="image/jpeg" href="/person.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/person.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Patient</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/person.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Patient</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">MySQL之进阶篇</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/MySQL/">
+                                <span class="chip bg-color">MySQL</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-07-13
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    15.1k
+                </div>
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="一、存储引擎"><a href="#一、存储引擎" class="headerlink" title="一、存储引擎"></a>一、存储引擎</h2><h3 id="1、MySQL体系结构"><a href="#1、MySQL体系结构" class="headerlink" title="1、MySQL体系结构"></a>1、MySQL体系结构</h3><p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5LiA5Y-255-l5rGC,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center.png"></p>
+<p><strong>连接层（Client Connectors）</strong></p>
+<ul>
+<li>连接层又称为客户端连接器（Client Connectors）：提供与MySQL服务器建立的支持。<br>目前几乎支持所有主流的服务端编程技术，主要完成一些类似于<strong>连接处理、授权认证、及相关的安全方案</strong>。</li>
+<li>在该层上引入了线程池的概念，为通过认证安全接入的客户端提供线程。同样在该层上可以实现基于SSL的安全连接，并且在这里服务器也会为接入的客户验证他所具备的权限。</li>
+<li><strong>注意：</strong>连接用户权限修改后，不会立即生效，就是因为在这里将用户认证后的权限信息保存了下来，需要用户断开并重新连接，重新进行校验，修改后的权限才会生效。</li>
+</ul>
+<p><strong>服务层（MySQL Server）</strong></p>
+<ul>
+<li><p>服务层是MySQL Server的核心，主要包含系统管理和控制工具、SQL接口、解析器、查询优化器。</p>
+</li>
+<li><p>实际上，连接层中的连接认证，校验流程，也可以归属在服务层中。<br>数据库连接成功后，在服务层完成大多数核心功能，如<strong>Sql接口，查询缓存，Sql分析和优化，以及一些内置函数的执行</strong>。<br>它的主要流程是这样的：</p>
+<ul>
+<li>第一步，查看当前查询是否存在缓存，有则直接返回，没有则进行服务器解析，并生成对应的内部解析树。</li>
+<li>第二步，完成相应的优化，确定表的查询顺序，是否使用索引</li>
+<li>第三步，生成对应的操作。</li>
+</ul>
+</li>
+</ul>
+<p><strong>存储引擎层（Pluggable Storage Engines）</strong></p>
+<ul>
+<li><p>存储引擎负责MySQL中数据的存储与提取，与底层系统文件进行交互。MySQL存储引擎是<strong>插件式</strong>的，不同的存储引擎具备不同的功能，可以根据自己的需要进行选择，最常见的是<strong>MyISAM</strong>和<strong>InnoDB</strong>。</p>
+</li>
+<li><p><strong>注意：</strong>数据库的<strong>索引就是在引擎层实现的</strong></p>
+</li>
+</ul>
+<p><strong>系统文件层/存储层（File System）</strong></p>
+<ul>
+<li>文件层负责将数据库的数据和日志存储在文件系统之上，并完成与存储引擎的交互，是文件的物理存储层。主要包含日志文件（redolog,undo.log），数据文件，索引文件，二进制日志，错误日志，配置文件，pid 文件，socket 文件等。</li>
+</ul>
+<p><strong>MySQL运行机制</strong></p>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5LiA5Y-255-l5rGC,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center-16570300224542.png"></p>
+<ul>
+<li><strong>建立连接（Connectors&amp;Connection Pool）</strong>，通过客户端/服务器通信协议与MySQL建立连接。MySQL 客户端与服务端的通信方式是 “ 半双工通信 ”。</li>
+<li><strong>查询缓存（Cache&amp;Buffer）</strong>，存在则直接返回，不存在则进行查询，不过需要注意的是，它默认是关闭的，并且，在8.0以后版本，不再支持查询缓存，因为它需要SQL完全相同才能匹配缓存，命中率极低，如果表进行DDL或者DML操作，缓存就会被清空。</li>
+<li><strong>解析器（Parser）</strong>，将客户端发送的SQL进行语法解析，生成”解析树”。预处理器根据一些MySQL规则进一步检查“解析树”是否合法，例如这里将检查数据表和数据列是否存在，还会解析名字和别名，看看它们是否有歧义，最后生成新的“解析树”。</li>
+<li><strong>优化器（Optimizer）</strong>，根据“解析树”生成最优的执行计划。MySQL使用很多优化策略生成最优的执行计划，分为两类：静态优化（编译时优化）、动态优化（运行时优化）。</li>
+<li><strong>查询执行引擎负责执行 SQL 语句，得到查询结果并返回给客户端</strong>。若开启用查询缓存，这时会将SQL 语句和结果完整地保存到查询缓存（Cache&amp;Buffer）中，以后如果有相同的 SQL 语句执行则直接返回结果。</li>
+</ul>
+<h3 id="2、存储引擎简介"><a href="#2、存储引擎简介" class="headerlink" title="2、存储引擎简介"></a>2、存储引擎简介</h3><p>存储引擎就是存储数据、建立索引、更新/查询数据等技术的实现方式。<strong>存储引擎是基于表的</strong>，而不是基于库的，所以<strong>存储引擎也可被称为表类型</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 创建表时，指定存储引擎(默认为innodb)
+CREATE TABLE 表名(
+	...
+) ENGINE &#x3D; INNODB [COMMENT 表注释];
+
+-- 查看当前数据库支持的存储引擎
+SHOW ENGINES;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3、存储引擎特点"><a href="#3、存储引擎特点" class="headerlink" title="3、存储引擎特点"></a>3、存储引擎特点</h3><p><strong>InnoDB</strong></p>
+<ul>
+<li>InnoDB是一种兼顾高可靠性和高性能的通用存储引擎，在MySQL5.5之后，InnoDB是默认的MySQL存储引擎</li>
+<li><strong>特点：</strong><ul>
+<li>DML操作遵循ACID模型，支持事务</li>
+<li>行级锁，提高并发访问性能</li>
+<li>支持外键约束，保证数据的完整性和正确性</li>
+</ul>
+</li>
+<li><strong>文件：</strong><ul>
+<li>xxx.ibd：xxx代表的是表名，innoDB的每张表都会对应这样的表空间文件，<strong>存储该表的表结构（frm、sdi）、数据和索引</strong></li>
+</ul>
+</li>
+<li><strong>逻辑结构：</strong>InnoDB的所有数据都被逻辑地存放在一个空间中，称之为<strong>表空间（tablespace）</strong>。表空间又由<strong>段（segment）</strong>、<strong>区（extent）</strong>、<strong>页（page）</strong>组成，页又由<strong>行（row）</strong>组成<ul>
+<li><strong>段，</strong>常见的段有<strong>数据段、索引段、回滚段</strong>等。InnoDB存储引擎表是索引组织的（index organized），因此数据即索引，索引即数据。那么<strong>数据段即为B+树的叶节点</strong>（leaf node segment），<strong>索引段即为B+树的非索引节点</strong>（non-leaf node segment）。需要注意的是，并不是每个对象都有段。因此更准确地说，<strong>表空间是由分散的页和段组成</strong>。</li>
+<li><strong>区，区是由64个连续的页组成的，每个页大小为16KB，即每个区的大小为1MB</strong>。对于大的数据段，InnoDB存储引擎最多每次可以申请<strong>4个区</strong>，以此来保证数据的顺序性能。</li>
+<li><strong>页，InnoDB有页（page）的概念（也可以称为块），页是InnoDB磁盘管理的最小单位</strong>。与Oracle类似的是，Microsoft SQL Server数据库默认每页大小为8KB，<strong>而InnoDB页的大小（16KB）</strong>，且不可以更改（也许通过更改源码可以）。</li>
+<li><strong>行，</strong>InnoDB存储引擎是面向行的（row-oriented），也就是说数据的存放按行进行存放</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6bit5qKo5bGx5aSn5ZOO,size_20,color_FFFFFF,t_70,g_se,x_16.png"></p>
+<p><strong>MyISAM</strong></p>
+<ul>
+<li>MyISAM是MySQL早期的默认存储引擎</li>
+<li><strong>特点：</strong><ul>
+<li>不支持事务，不支持外键</li>
+<li>支持表锁，不支持行锁</li>
+<li>访问速度快</li>
+</ul>
+</li>
+<li><strong>文件：</strong><ul>
+<li>xxx.sdi：存储表结构信息</li>
+<li>xxx.MYD：存储数据</li>
+<li>xxx.MYI：存储索引</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220705224010234.png"></p>
+<h3 id="4、存储引擎选择"><a href="#4、存储引擎选择" class="headerlink" title="4、存储引擎选择"></a>4、存储引擎选择</h3><p>在选择存储引擎时，应该根据应用系统的特点选择合适的存储引擎。对于复杂的应用系统，还可以根据实际情况选择多种存储引擎进行组合</p>
+<ul>
+<li><strong>InnoDB：</strong>是MySQL的默认存储引擎，支持事务、外键。如果应用对事务的完整性有比较高的要求，在并发条件下要求数据的一致性，数据操作除了插入和查询之外，还包括很多的更新、删除操作，那么InnoDB存储引擎是比较合适的选择</li>
+<li><strong>MyISAM：</strong>如果应用时以读操作和插入操作为主，只有很少的更新和删除操作，且对事务的完整性、并发性要求不是很高，那么选择它</li>
+<li><strong>MENORY：</strong>将所有数据保存在内存中，访问速度快，通常用于临时表及缓存。MENORY的缺陷就是对表的大小有限制，太大的表无法缓存在内存中，且无法保障数据的安全性</li>
+</ul>
+<h2 id="二、索引"><a href="#二、索引" class="headerlink" title="二、索引"></a>二、索引</h2><h3 id="1、索引概述"><a href="#1、索引概述" class="headerlink" title="1、索引概述"></a>1、索引概述</h3><p><strong>索引（index）是帮助MySQL高效获取数据的数据结构（有序）。</strong>在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查找算法，这种数据结构就是索引。</p>
+<ul>
+<li><strong>优点</strong><ul>
+<li>提高数据检索的效率，降低数据库的IO成本</li>
+<li>通过索引列对数据进行排序，降低数据排序的成本，降低CPU的消耗</li>
+</ul>
+</li>
+<li><strong>劣势</strong><ul>
+<li>索引列也是要占用空间的</li>
+<li>索引大大提高了查询效率，同时缺降低了更新表的速度，如对表进行增删改时，效率降低</li>
+</ul>
+</li>
+</ul>
+<h3 id="2、索引结构"><a href="#2、索引结构" class="headerlink" title="2、索引结构"></a>2、索引结构</h3><p>MySQL的索引是在存储引擎层实现的，不同的存储引擎有不同的机构，主要包含以下几种：</p>
+<ul>
+<li><strong>B+Tree索引：最常见的索引类型，大部分引擎都支持B+树索引</strong></li>
+<li><strong>Hash索引：</strong>底层数据结构是用哈希表实现的，只有精确匹配索引列的查询才有效，不支持范围查询</li>
+<li><strong>R-tree（空间索引）：</strong>空间索引是MyISAM引擎的一个特殊索引类型，主要用于地理空间数据类型，通常使用较少</li>
+<li><strong>Full-text（全文索引）：</strong>是一种通过建立倒排索引，快速匹配文档的方式，类似于Lucene，Solr，ES</li>
+</ul>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220706222334834.png"></p>
+<p><strong>结构对比</strong></p>
+<ul>
+<li><p><strong>二叉树缺点：</strong>顺序插入时，会形成一个链表，查询性能大大降低。大数据量情况下，层级较深，检索速度慢</p>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220706222847887.png"></p>
+</li>
+<li><p><strong>红黑树缺点：</strong>通过红黑树（自平衡）解决树的平衡问题，但大数据量情况下，层级较深，检索速度慢</p>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220706223207461.png"></p>
+</li>
+<li><p><strong>BTree（多路平衡查找树）</strong></p>
+<ul>
+<li><p>以一棵最大度数为5的BTree为例（最多4个key，5个指针）</p>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220706223516955.png"></p>
+</li>
+<li><p>树的度数指的是一个节点的子节点个数</p>
+</li>
+</ul>
+</li>
+<li><p><strong>B+Tree</strong></p>
+<ul>
+<li><p>以一棵最大度数为4的b+tree为例</p>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220706224153054.png"></p>
+</li>
+<li><p><strong>所有数据都会出现在叶子节点；叶子节点形成一个单向链表</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>B+Tree</strong></p>
+<p>MySQL索引数据结构对经典的B+Tree进行了优化，在原B+Tree的基础上，<strong>增加一个指向相邻叶子节点的链表指针</strong>，就形成了带有顺序指针的B+Tree，提高区间访问的性能</p>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220706224752381.png"></p>
+<p><strong>Hash</strong></p>
+<ul>
+<li>哈希索引就是采用一定的hash算法，将键值换算成新的hash值，映射到对应的槽位上，然后存储在hash表中</li>
+<li>如果两个（或多个）键值，映射到一个相同的槽位上，就产生了hash冲突（也称为hash碰撞），可以通过链表来解决</li>
+</ul>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220706225207265.png"></p>
+<ul>
+<li><strong>特点</strong><ol>
+<li>Hash索引只能用于对等比较（=，in），不支持范围查询（between，&gt;，&lt;…）</li>
+<li>无法利用索引完成排序操作</li>
+<li>查询效率高，通常只需要一次检索就可以了，效率通常要高于B+Tree索引</li>
+</ol>
+</li>
+<li>存储引擎支持，在MySQL中支持hash索引的是Memory引擎，而InnoDB中具有自适应hash功能，hash索引是存储引擎根据B+Tree索引在指定条件下自动构建的。</li>
+</ul>
+<p><strong>为什么InnoDB存储引擎选择使用B+Tree索引结构？</strong></p>
+<ul>
+<li>相对于二叉树，层级更少，搜索效率高</li>
+<li>对于B-Tree，无论是叶子节点，还是非叶子节点，都会保存数据，这样导致一页中存储的键值减少，指针跟着减少，要同样保存大量数据，只能增加树的高度，导致性能降低</li>
+<li>相对Hash索引，B+Tree支持范围匹配及排序操作</li>
+</ul>
+<h3 id="3、索引分类"><a href="#3、索引分类" class="headerlink" title="3、索引分类"></a>3、索引分类</h3><p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220706230203697.png"></p>
+<p>在InnoDB存储引擎中，根据索引的存储方式，又可以分为以下两种：</p>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220706230402611.png"></p>
+<p><strong>聚集索引选取规则：</strong></p>
+<ul>
+<li>如果存在主键，主键索引就是聚集索引</li>
+<li>如果不存在主键，将使用第一个唯一索引作为聚集索引</li>
+<li>如果表没有主键，或没有合适的唯一索引，则InnoDB会自动生成一个rowid作为隐藏的聚集索引</li>
+</ul>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220706230805141.png"></p>
+<p><strong>回表查询</strong></p>
+<p>先到二级索引找数据，再到聚集索引找数据</p>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220706231000310.png"></p>
+<h3 id="4、索引语法"><a href="#4、索引语法" class="headerlink" title="4、索引语法"></a>4、索引语法</h3><pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 创建索引
+CREATE [UNIQUE | FULLTEXT] INDEX index_name ON table_name (index_col_name,...);
+
+-- 查看索引
+SHOW INDEX FROM table_name;
+
+-- 删除索引
+DROP INDEX index_name ON table_name;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="5、SQL性能分析"><a href="#5、SQL性能分析" class="headerlink" title="5、SQL性能分析"></a>5、SQL性能分析</h3><p><strong>SQL执行频率</strong></p>
+<p>MySQL客户端连接成功后，可以通过命令提供服务器状态信息。通过如下指令，可以查看当前数据库增删查改的访问频次</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW GLOBAL STATUS LIKE &#39;Com_______&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>慢查询日志</strong></p>
+<p>慢查询日志记录了所有执行时间超过指定参数（long_query_time，单位：秒，默认10秒）的所有SQL语句的日志</p>
+<p>MySQL的<strong>慢查询日志默认没有开启</strong>，需要在MySQL的<strong>配置文件（/etc/my.cnf）</strong>配置信息：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql"># 开启慢查询日志开关
+slow_query_log &#x3D; 1
+# 设置慢查询日志的时间为2秒，SQL语句执行时间超过2秒，就会视为慢查询，记录慢查询日志
+long_query_time &#x3D; 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>更改后，记得重启MySQL，Linux中慢查询日志文件在**/var/lib/mysql/localhost-slow.log**</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql"># 查看慢查询日志开关状态：
+show variables like &#39;slow_query_log&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>profile详情</strong></p>
+<p>show profiles 能在做SQL优化时帮我们了解时间都耗费在哪里。通过 have_profiling 参数，能看到当前 MySQL 是否支持 profile 操作：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT @@have_profiling;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>profiling 默认关闭，可以通过set语句在session/global级别开启 profiling：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SET profiling &#x3D; 1;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>执行一系列的SQL操作后，可以通过如下指令查看指令的执行耗时</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql"># 查看所有语句的耗时
+show profiles;
+
+# 查看指定query_id的SQL语句各个阶段的耗时
+show profile for query query_id;
+
+# 查看指定query_id的SQL语句CPU的使用情况
+show profile cpu for query query_id;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>explain执行计划</strong></p>
+<p>EXPLAIN 或者 DESC 命令获取 MySQL 如何执行 SELECT 语句的信息，包括在 SELECT 语句执行过程中表如何连接和连接的顺序。</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql"># 直接在select语句之前加上关键字 explain &#x2F; desc
+EXPLAIN SELECT 字段列表 FROM 表名 WHERE 条件;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220707095601380.png"></p>
+<p><strong>EXPLAIN 各字段含义：</strong></p>
+<ul>
+<li>id：select 查询的序列号，表示查询中执行 select 子句或者操作表的顺序（<strong>id相同，执行顺序从上到下；id不同，值越大越先执行</strong>）</li>
+<li>select_type：表示 SELECT 的类型，常见取值有 SIMPLE（简单表，即不适用表连接或者子查询）、PRIMARY（主查询，即外层的查询）、UNION（UNION中的第二个或者后面的查询语句）、SUBQUERY（SELECT/WHERE之后包含了子查询）等</li>
+<li>type：表示连接类型，性能由好到差的连接类型为 NULL、system、const（用主键和唯一索引）、eq_ref、ref、range、index、all</li>
+<li>possible_key：可能应用在这张表上的索引，一个或多个</li>
+<li>Key：实际使用的索引，如果为 NULL，则没有使用索引</li>
+<li>Key_len：表示索引中使用的字节数，该值为索引字段最大可能长度，并非实际使用长度，在不损失精确性的前提下，长度越短越好</li>
+<li>rows：MySQL认为必须要执行的行数，在InnoDB引擎的表中，是一个估计值，可能并不总是准确的</li>
+<li>filtered：表示返回结果的行数占需读取行数的百分比，filtered的值越大越好</li>
+</ul>
+<h3 id="6、索引使用"><a href="#6、索引使用" class="headerlink" title="6、索引使用"></a>6、索引使用</h3><p><strong>最左前缀法则</strong></p>
+<ul>
+<li>如果索引关联了多列（<strong>联合索引</strong>），要<strong>遵守最左前缀法则</strong>，最左前缀法则指的是查询从索引的最左列开始，并且不跳过索引中的列。</li>
+<li><strong>如果跳跃某一列，索引将部分失效（后面的字段索引失效）</strong>。</li>
+<li>语句中有就可以，没有特别强调顺序</li>
+</ul>
+<p><strong>范围查询</strong></p>
+<ul>
+<li>联合索引中，出现范围查询（&lt;, &gt;），<strong>范围查询右侧的列索引失效</strong>。可以<strong>用&gt;=或者&lt;=来规避索引失效问题</strong>。</li>
+</ul>
+<p><strong>索引失效情况</strong></p>
+<ol>
+<li><p>在索引列上进行运算操作，索引将失效。</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">explain select * from tb_user where substring(phone, 10, 2) &#x3D; &#39;15&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>字符串类型字段使用时，不加引号，索引将失效。如：phone的值没有加引号</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">explain select * from tb_user where phone &#x3D; 17799990015;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>模糊查询中，如果仅仅是尾部模糊匹配，索引不会是失效；如果是头部模糊匹配，索引失效。如：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">explain select * from tb_user where profession like &#39;%工程&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>前后都有 % 也会失效</strong></p>
+</li>
+<li><p>用 or 分割开的条件，如果 <strong>or 其中一个条件的列没有索引</strong>，那么涉及的索引都不会被用到。</p>
+</li>
+<li><p>如果 MySQL 评估使用索引比全表更慢，则不使用索引。</p>
+</li>
+</ol>
+<p><strong>SQL提示</strong></p>
+<p>SQL提示是优化数据库的一个重要手段，简单来说，就是<strong>在SQL语句中加入一些人为的提示来达到优化操作的目的</strong>。如：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql"># 使用索引
+explain select * from tb_user use index(idx_user_pro) where profession&#x3D;&quot;软件工程&quot;;
+
+# 不使用哪个索引
+explain select * from tb_user ignore index(idx_user_pro) where profession&#x3D;&quot;软件工程&quot;;
+
+# 必须使用哪个索引
+explain select * from tb_user force index(idx_user_pro) where profession&#x3D;&quot;软件工程&quot;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>use 是建议</strong>，实际使用哪个索引 MySQL 还会自己权衡运行速度去更改，<strong>force就是无论如何都强制使用该索引</strong>。</p>
+<p><strong>覆盖索引</strong></p>
+<p>尽量使用覆盖索引（<strong>查询使用了索引，并且需要返回的列，在该索引中已经全部能找到</strong>），减少 select *。</p>
+<p>如果在聚集索引中直接能找到对应的行，则直接返回行数据，只需要一次查询，哪怕是<code>select *</code>；如果在辅助索引中找聚集索引，如<code>select id, name from xxx where name=&#39;xxx&#39;;</code>，也只需要通过辅助索引(name)查找到对应的id，返回name和name索引对应的id即可，只需要一次查询；如果是通过辅助索引查找其他字段，则需要回表查询，如<code>select id, name, gender from xxx where name=&#39;xxx&#39;;</code></p>
+<p>所以尽量不要用<code>select *</code>，容易出现回表查询，降低效率，除非有联合索引包含了所有字段</p>
+<p><strong>PS：</strong>在EXPLAIN执行计划表中，extra中</p>
+<ul>
+<li>using index condition：查找使用了索引，但需要回表查询数据</li>
+<li>using where；using index：查找使用了索引，但需要的数据在索引列中能找到，所以不需要回表查询数据</li>
+</ul>
+<p><strong>面试题：</strong>一张表，有四个字段（id, username, password, status），由于数据量大，需要对以下SQL语句进行优化，该如何进行才是最优方案：<br><code>select id, username, password from tb_user where username=&#39;itcast&#39;;</code></p>
+<p><strong>解：</strong>给username和password字段建立联合索引，则不需要回表查询，直接覆盖索引</p>
+<p><strong>前缀索引</strong></p>
+<p>当字段类型为字符串（varchar, text等）时，有时候需要索引很长的字符串，这会让索引变得很大，查询时，浪费大量的磁盘IO，影响查询效率，此时可以只降字符串的一部分前缀，建立索引，这样可以大大节约索引空间，从而提高索引效率。</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">create index idx_xxxx on table_name(columnn(n));
+-- n为前缀长度<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>前缀长度：可以根据索引的选择性来决定，而<strong>选择性是指不重复的索引值（基数）和数据表的记录总数的比值，索引选择性越高则查询效率越高</strong>，唯一索引的选择性是1，这是最好的索引选择性，性能也是最好的。<br>求选择性公式：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">select count(distinct email) &#x2F; count(*) from tb_user;
+
+select count(distinct substring(email, 1, 5)) &#x2F; count(*) from tb_user;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>show index 里面的sub_part可以看到接取的长度</p>
+<p><strong>单列索引&amp;联合索引</strong></p>
+<p>单列索引：即一个索引只包含单个列<br>联合索引：即一个索引包含了多个列<br>在业务场景中，如果存在多个查询条件，考虑针对于查询字段建立索引时，建议建立联合索引，而非单列索引</p>
+<p><strong>注意事项</strong></p>
+<ul>
+<li>多条件联合查询时，MySQL优化器会评估哪个字段的索引效率更高，会选择该索引完成本次查询</li>
+</ul>
+<h3 id="7、索引设计原则"><a href="#7、索引设计原则" class="headerlink" title="7、索引设计原则"></a>7、索引设计原则</h3><ol>
+<li>针对于数据量较大，且查询比较频繁的表建立索引</li>
+<li>针对于常作为查询条件（where）、排序（order by）、分组（group by）操作的字段建立索引</li>
+<li>尽量选择区分度高的列作为索引，尽量建立唯一索引，区分度越高，使用索引的效率越高</li>
+<li>如果是字符串类型的字段，字段长度较长，可以针对于字段的特点，建立前缀索引</li>
+<li><strong>尽量使用联合索引，减少单列索引</strong>，查询时，联合索引很多时候可以覆盖索引，节省存储空间，避免回表，提高查询效率</li>
+<li><strong>要控制索引的数量</strong>，索引并不是多多益善，索引越多，维护索引结构的代价就越大，会影响增删改的效率</li>
+<li>如果索引列不能存储NULL值，请在创建表时使用NOT NULL约束它。当优化器知道每列是否包含NULL值时，它可以更好地确定哪个索引最有效地用于查询</li>
+</ol>
+<h2 id="三、SQL优化"><a href="#三、SQL优化" class="headerlink" title="三、SQL优化"></a>三、SQL优化</h2><h3 id="1、插入数据"><a href="#1、插入数据" class="headerlink" title="1、插入数据"></a>1、插入数据</h3><p><strong>普通插入优化：</strong></p>
+<ol>
+<li><p>采用批量插入（一次插入的数据不建议超过1000条）</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">insert into 表名 values (数据),(数据),(数据)..;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>手动提交事务</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">start transaction;
+insert into 表名 values (数据),(数据),(数据)..;
+insert into 表名 values (数据),(数据),(数据)..;
+commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>主键顺序插入</p>
+</li>
+</ol>
+<p><strong>大批量插入：</strong><br>如果一次性需要插入大批量数据，使用insert语句插入性能较低，此时可以使用MySQL数据库提供的<strong>load指令插入</strong>。</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql"># 客户端连接服务端时，加上参数 --local-infile（这一行在bash&#x2F;cmd界面输入）
+mysql --local-infile -u root -p
+
+# 设置全局参数local_infile为1，开启从本地加载文件导入数据的开关
+set global local_infile &#x3D; 1;
+
+# 执行load指令将准备好的数据，加载到表结构中
+load data local infile &#39;&#x2F;root&#x2F;sql1.log&#39; into table &#39;tb_user&#39; fields terminated by &#39;,&#39; lines terminated by &#39;\n&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2、主键优化"><a href="#2、主键优化" class="headerlink" title="2、主键优化"></a>2、主键优化</h3><p>数据组织方式：在InnoDB存储引擎中，表数据都是根据主键顺序组织存放的，这种存储方式的表称为<strong>索引组织表</strong>（Index organized table, IOT）</p>
+<p><strong>页分裂</strong>：页可以为空，也可以填充一般，也可以填充100%，每个页包含了2-N行数据（如果一行数据过大，会行溢出），<strong>根据主键排列</strong>。<br><strong>页合并</strong>：当删除一行记录时，实际上<strong>记录并没有被物理删除</strong>，只是记录被标记（flaged）为删除并且它的空间变得允许被其他记录声明使用。当页中删除的记录到达 MERGE_THRESHOLD（默认为页的50%），InnoDB会开始寻找最靠近的页（前后）看看是否可以将这两个页合并以优化空间使用。</p>
+<p><strong>MERGE_THRESHOLD：</strong>合并页的阈值，可以自己设置，在创建表或创建索引时指定</p>
+<p><strong>主键设计原则：</strong></p>
+<ul>
+<li>满足业务需求的情况下，<strong>尽量降低主键的长度</strong></li>
+<li>插入数据时，尽量选择<strong>顺序插入</strong>，选择使用 <strong>AUTO_INCREMENT 自增主键</strong></li>
+<li>尽量不要使用 UUID 做主键或者是其他的自然主键，如身份证号</li>
+<li>业务操作时，<strong>避免对主键的修改</strong></li>
+</ul>
+<h3 id="3、order-by优化"><a href="#3、order-by优化" class="headerlink" title="3、order by优化"></a>3、order by优化</h3><ol>
+<li>Using filesort：通过表的索引或全表扫描，读取满足条件的数据行，然后在排序缓冲区 sort buffer 中完成排序操作，所有不是通过索引直接返回排序结果的排序都叫 FileSort 排序</li>
+<li>Using index：通过有序索引顺序扫描直接返回有序数据，这种情况即为 using index，不需要额外排序，操作效率高</li>
+</ol>
+<p>如果order by字段<strong>全部使用升序排序或者降序排序，则都会走索引</strong>，但是如果<strong>一个字段升序排序，另一个字段降序排序，则不会走索引</strong>，这时explain的extra信息显示的是<code>Using index, Using filesort</code>如果要优化掉Using filesort，则需要另外再创建一个索引，如：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 增加升降序规则
+create index idx_user_age_phone_ad on tb_user(age asc, phone desc);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>此时使用</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">select id, age, phone from tb_user order by age asc, phone desc;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>会全部走索引</p>
+<p><strong>总结：</strong></p>
+<ul>
+<li>根据排序字段建立合适的索引，多字段排序时，也遵循最左前缀法则</li>
+<li>尽量使用覆盖索引</li>
+<li>多字段排序，一个升序一个降序，此时需要注意联合索引在创建时的规则（ASC/DESC）</li>
+<li>如果不可避免出现filesort，大数据量排序时，可以<strong>适当增大排序缓冲区大小 sort_buffer_size</strong>（默认256k）</li>
+</ul>
+<h3 id="4、group-by优化"><a href="#4、group-by优化" class="headerlink" title="4、group by优化"></a>4、group by优化</h3><ul>
+<li>在分组操作时，可以通过索引来提高效率</li>
+<li>分组操作时，索引的使用也是满足最左前缀法则的</li>
+</ul>
+<p>如索引为<code>idx_user_pro_age_stat</code></p>
+<p>则句式可以是<code>select ... where profession order by age</code></p>
+<p>这样也符合最左前缀法则</p>
+<h3 id="5、limit优化"><a href="#5、limit优化" class="headerlink" title="5、limit优化"></a>5、limit优化</h3><p>常见的问题如<code>limit 2000000, 10</code>，此时需要 MySQL 排序前2000000条记录，但仅仅返回2000000 - 2000010的记录，其他记录丢弃，查询排序的代价非常大。<br><strong>优化方案：</strong>一般分页查询时，通过创建覆盖索引能够比较好地提高性能，可以通过<strong>覆盖索引加子查询形式进行优化</strong></p>
+<p>例如：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 此语句耗时很长
+select * from tb_sku limit 9000000, 10;
+
+-- 通过覆盖索引加快速度，直接通过主键索引进行排序及查询
+select id from tb_sku order by id limit 9000000, 10;
+
+-- 下面的语句是错误的，因为 MySQL 不支持 in 里面使用 limit
+-- select * from tb_sku where id in (select id from tb_sku order by id limit 9000000, 10);
+
+-- 通过连表查询即可实现第一句的效果，并且能达到第二句的速度
+select s.* from tb_sku as s, (select id from tb_sku order by id limit 9000000, 10) as a where s.id &#x3D; a.id;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="6、count优化"><a href="#6、count优化" class="headerlink" title="6、count优化"></a>6、count优化</h3><p>MyISAM 引擎把一个表的总行数存在了磁盘上，因此执行 count(*) 的时候会直接返回这个数，效率很高（前提是不适用where）；<br>InnoDB 在执行 count(*) 时，需要把数据一行一行地从引擎里面读出来，然后累计计数。<br><strong>优化方案：</strong>自己计数，如创建key-value表存储在内存或硬盘，或者是用redis</p>
+<p><strong>count的几种用法：</strong></p>
+<ul>
+<li><p>如果count函数的参数（count里面写的那个字段）不是NULL（字段值不为NULL），累计值就加一，最后返回累计值</p>
+</li>
+<li><p>用法：count(*)、count(主键)、count(字段)、count(1)</p>
+<ul>
+<li><p>count(主键)跟count(*)一样，因为主键不能为空</p>
+</li>
+<li><p>count(字段)只计算字段值不为NULL的行</p>
+</li>
+<li><p>count(1)引擎会为每行添加一个1，然后就count这个1，返回结果也跟count(*)一样</p>
+</li>
+<li><p>count(null)返回0</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>各种用法的性能：</strong></p>
+<ul>
+<li>count(主键)：InnoDB引擎会遍历整张表，把每行的主键id值都取出来，返回给服务层，服务层拿到主键后，直接按行进行累加（主键不可能为空）</li>
+<li>count(字段)：<ul>
+<li><strong>没有not null约束的话</strong>，InnoDB引擎会遍历整张表把每一行的字段值都取出来，返回给服务层，服务层判断是否为null，不为null，计数累加</li>
+<li><strong>有not null约束的话</strong>，InnoDB引擎会遍历整张表把每一行的字段值都取出来，返回给服务层，直接按行进行累加</li>
+</ul>
+</li>
+<li>count(1)：InnoDB 引擎遍历整张表，但不取值。服务层对于返回的每一层，放一个数字 1 进去，直接按行进行累加</li>
+<li>count(*)：InnoDB 引擎并不会把全部字段取出来，而是专门做了优化，不取值，服务层直接按行进行累加</li>
+</ul>
+<p><strong>按效率排序：</strong>count(字段) &lt; count(主键) &lt; count(1) &lt; count(*)，所以尽量使用 count(*)</p>
+<h3 id="7、update优化（避免行锁升级为表锁）"><a href="#7、update优化（避免行锁升级为表锁）" class="headerlink" title="7、update优化（避免行锁升级为表锁）"></a>7、update优化（避免行锁升级为表锁）</h3><p>InnoDB 的行锁是针对索引加的锁，不是针对记录加的锁，并且该索引不能失效，否则会从行锁升级为表锁。</p>
+<p>如以下两条语句：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">update student set no &#x3D; &#39;123&#39; where id &#x3D; 1;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这句由于id有主键索引，所以只会锁这一行</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">update student set no &#x3D; &#39;123&#39; where name &#x3D; &#39;test&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这句由于name没有索引，所以会把整张表都锁住进行数据更新，<strong>解决方法是给name字段添加索引</strong></p>
+<h2 id="四、视图-存储过程-触发器"><a href="#四、视图-存储过程-触发器" class="headerlink" title="四、视图/存储过程/触发器"></a>四、视图/存储过程/触发器</h2><h3 id="1、视图"><a href="#1、视图" class="headerlink" title="1、视图"></a>1、视图</h3><p>视图（View）是一种虚拟存在的表。视图中的数据并<strong>不在数据库中实际存在</strong>，行和列数据来自定义视图的查询中使用的表，并且在使用视图时动态生成的</p>
+<p>通俗的讲，视图值保存了查询的SQL逻辑，不保存查询结果，所以在创建视图时，主要工作就落在创建这条SQL查询语句上</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql"># 创建
+CREATE [OR REPLACE] VIEW 视图名称[(列名列表)] AS SELECT语句 [WITH [CASCADED | LOCAL] CHECK OPTION]
+
+# 查询
+-- 查询创建视图语句
+SHOW CREATE VIEW 视图名称;
+-- 查询视图数据
+SELECT * FROM 视图名称...;
+
+# 修改
+-- 方式一
+CREATE [OR REPLACE] VIEW 视图名称[(列名列表)] AS SELECT语句 [WITH [CASCADED | LOCAL] CHECK OPTION]
+-- 方式二
+ALTER VIEW 视图名称[(列名列表)] AS SELECT语句 [WITH [CASCADED | LOCAL] CHECK OPTION]
+
+# 删除
+DROP VIEW [IF EXISTS] 视图名称,[视图名称]...;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>视图的检查选项</strong></p>
+<p>当使用<code>WITH CHECK OPTION</code>子句创建视图时，MySQL会通过视图检查正在更改的每个行，例如增删改，以使其符合视图的定义。MySQL允许基于另一个视图创建视图，还会<strong>检查依赖视图中的规则以保持一致性</strong>。为了确定检查的范围，MySQL提供了两个选项：<code>CASCADED | LOCAL</code>，默认值为<code>CASCADED</code></p>
+<p><strong>CASCADED</strong></p>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220707232802050.png"></p>
+<p>如上图，stu_v_2是基于stu_v_1创建的，而stu_v_2使用了<code>WITH CHECK OPTION</code>子句创建，所以，最后两句都运行失败，最后一句失败的原因是，它不满足stu_v_1中的条件。</p>
+<p>统一说，v2视图是基于v1视图的，如果在v2视图创建的时候指定了检查选项为 cascaded，<strong>但是v1视图创建时未指定检查选项</strong>。 则在执行检查时，不仅会检查v2，<strong>还会级联检查v2的关联视图v1</strong></p>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220707233235094.png"></p>
+<p><strong>LOCAL</strong></p>
+<p>v2视图是基于v1视图的，如果在v2视图创建的时候指定了检查选项为 local ，<strong>但是v1视图创建时未指定检查选项</strong>。 则在执行检查时，<strong>只会检查v2</strong>，不会检查v2的关联视图v1</p>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220707233658366.png"></p>
+<p><strong>视图的更新</strong></p>
+<p>要使视图可更新，<strong>视图中的行与基础表中的行之间必须存在一对一的关系</strong>。如果视图包含以下任何一项，则该视图不可更新：</p>
+<ol>
+<li>聚合函数或窗口函数（SUM()、MIN()、MAX()、COUNT()等）</li>
+<li>DISTINCT</li>
+<li>GROUP BY</li>
+<li>HAVING</li>
+<li>UNION或者UNION ALL</li>
+</ol>
+<p><strong>作用</strong></p>
+<ul>
+<li><strong>简单</strong>：视图不仅可以简化用户对数据的理解，也可以简化操作。被经常使用的查询可以被定义为视图，从而使得用户不必为以后的操作每次指定全部条件</li>
+<li><strong>安全</strong>：数据库可以授权，但不能授权到数据库特定行和特定的列上。通过视图用户只能查询和修改他们所能见到的数据</li>
+<li><strong>数据独立</strong>：视图可帮助用户屏蔽真实表结构变化带来的影响</li>
+</ul>
+<h3 id="2、存储过程"><a href="#2、存储过程" class="headerlink" title="2、存储过程"></a>2、存储过程</h3><p> 存储过程是实现经过编译并存储在数据库中的一段SQL语句的集合，调用存储过程可以简化应用开发人员的很多工作，减少数据在数据库和应用服务器之间的传输，对于提高数据处理的效率是有好处的。</p>
+<p>存储过程思想上很简单，就是数据库SQL语言层面的代码封装与重用</p>
+<p><strong>特点</strong></p>
+<ul>
+<li>封装，复用</li>
+<li>可以接受参数，也可以返回数据</li>
+<li>减少网络交互，效率提升</li>
+</ul>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 创建
+CREATE PROCEDURE 存储过程名称([参数列表])
+BEGIN
+	SQL语句
+END;
+
+-- 调用
+CALL 名称([参数]);
+
+-- 查看
+# 查询指定数据库的存储过程及状态
+SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_SCHEMA&#x3D;&#39;xxx&#39;;
+# 查询某个存储过程的定义
+SHOW CREATE PROCEDURE 存储过程名称;
+
+-- 删除
+DROP PROCEDURE [IF EXISTS] 存储过程名称<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>注意：在命令行中</strong>，执行创建存储过程的SQL时，需要通过关键字<code>delimiter</code>指定SQL语句的结束符</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 标准格式
+# 指定结束符
+delimiter $$
+# 创建存储过程
+create procedure p1()
+begin
+	select count(*) from student;
+end$$<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>变量</strong></p>
+<ul>
+<li><p><strong>系统变量：</strong>是MySQL服务器提供，不是用户定义的，属于服务器层面。分为全局变量（GLOBAL）、会话变量（SESSION）</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 查看系统变量（没有指定。默认session级别）
+# 查看全部变量
+show [session|global] variables;
+# 模糊查看
+show [session|global] variables like &#39;auto%&#39;;
+# 准确查看(autocommit是变量名)
+select @@[session|global]autocommit;
+
+-- 设置系统变量
+set [session|global] 系统变量名 &#x3D; 值;
+set [session|global]系统变量名 &#x3D; 值;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p><strong>用户定义变量：</strong>是用户根据需要自己定义的变量，用户变量不用提前声明，在用的时候直接用<code>&quot;@变量名&quot;</code>使用就可以。其作用域为当前连接</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 赋值(推荐使用:&#x3D;)
+set @var_name &#x3D; expr[, @var_name &#x3D; expr]..;
+set @var_name :&#x3D; expr[, @var_name :&#x3D; expr]..;
+select @var_name :&#x3D; expr[, @var_name :&#x3D; expr]..;
+select 字段名 into @var_name from 表名;
+
+-- 使用
+select @var_name;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p><strong>局部变量：</strong>是根据需要定义的在局部生效的变量，访问之前，需要<code>DECLARE</code>声明。可用作存储过程内的局部变量和输入参数，局部变量的范围是在其内声明的<code>BEGIN...END</code>块</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 声明
+declare 变量名 变量类型[default...];
+# 变量类型就是数据库字段类型：int、bigint、char、date、time等
+
+-- 赋值
+set 变量名 &#x3D; 值;
+set 变量名 :&#x3D; 值;
+select 字段名 into 变量名 from 表名...;
+
+-- 例子
+create procedure p2()
+begin
+	declare stu_count int default 0;
+	select count(*) into stu_count from student;
+	select stu_count;
+end;
+
+call p2();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<p><strong>if</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">if 条件1 then
+	...
+elseif 条件2 then	# 可选
+	...
+else				 # 可选
+	...
+end if;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>参数</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">含义</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">in</td>
+<td align="center">该类参数作为输入，也就是需要调用时传入值</td>
+<td align="center">默认</td>
+</tr>
+<tr>
+<td align="center">out</td>
+<td align="center">该类参数作为输出，也就是该参数可以作为返回值</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">inout</td>
+<td align="center">既可以作为输入参数，也可以作为输出参数</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE PROCEDURE 存储过程名称([in&#x2F;out&#x2F;inout 参数名 参数类型])
+BEGIN
+	SQL语句
+END;
+
+-- 例子
+create procedure p3(in score int, out result varchar(10));
+begin
+	if score &gt;&#x3D; 85 then
+		set result :&#x3D; &#39;优秀&#39;;
+	elseif score &gt;&#x3D; 60 then
+		set result :&#x3D; &#39;及格&#39;;
+	else 
+		set result :&#x3D; &#39;不及格&#39;;
+	end if;
+end;
+
+call p3(68, @result);
+
+select @result;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>case</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 语法一
+case case_value
+	when when_value1 then statement_list1
+	[when when_value2 then statement_list2..]
+	[else statement_list]
+end case;
+
+-- 语法二
+case 
+	when search_contion1 then statement_list1
+	[when search_contion2 then statement_list2..]
+	[else statement_list]
+end case;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>while</strong></p>
+<p>while循环是有条件的循环控制语句。满足条件后，再执行循环体重的SQL语句</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql"># 先判定条件，如果条件为true，则执行逻辑，否则不执行逻辑
+while 条件 do
+	sql逻辑..
+end while;
+
+-- 例子
+create procedure p(in n int)
+begin
+	declare total int default 0;
+	while n&gt;0 do
+		set total :&#x3D; total+n;
+		set n :&#x3D; n-1;
+	end while;	
+	
+	select total;
+end;
+
+call p(10);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>repeat</strong></p>
+<p>repeat是有条件的循环控制语句，当满足条件的时候退出循环</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 先执行一次逻辑，然后判定逻辑是否满足，如果满足，则退出，如果不满足，则继续循环
+repeat
+	sql逻辑...
+	until 条件
+end repeat;
+
+-- 例子
+create procedure p(in n int)
+begin
+	declare total int default 0;
+	repeat
+		set total :&#x3D; total+n;
+		set n :&#x3D; n-1;
+		until n&lt;&#x3D;0
+	end while;	
+	
+	select total;
+end;
+
+call p(10);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>loop</strong></p>
+<p>loop实现简单的循环，如果不在SQL逻辑中增加退出循环的条件，可以用其来实现简单的死循环。loop可以配合以下两个语句使用</p>
+<ul>
+<li>leave：配合循环使用，退出循环</li>
+<li>iterate：必须用在循环中，作用是跳过当前循环剩下的语句，直接进入下次循环</li>
+</ul>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">[begin_label] loop
+	sql逻辑..
+end loop [end_label];
+
+leave label; 	# 退出指定标记的循环体
+iterate label; 	# 直接进入下一次循环
+
+-- 例子，只累加奇数
+create procedure p(in n int)
+begin
+	declare total int default 0;
+	
+	sum:loop
+		if n&lt;&#x3D;0 then
+			leave sum;
+		end if;
+		if n%2 &#x3D; 1 then
+			set n :&#x3D; n-1;
+			iterate sum;
+		end if;
+		
+		set total :&#x3D; total+n;
+		set n :&#x3D; n-1;
+	end loop sum;
+	
+	select total;
+end;
+
+call p(10);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>游标（cursor）</strong></p>
+<p>游标是用来存储查询结果集的数据类型，在存储过程和函数中可以使用游标对结果集进行循环的处理。游标的使用包括游标的声明、open、fetch和close</p>
+<p><strong>条件处理程序</strong></p>
+<p><strong>条件处理程序（Handler）</strong>可以用来定义在流程控制结构执行过程中遇到问题时相应的处理步骤</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql"># 声明游标
+declare 游标名称 cursor for 查询语句;
+
+# 打开游标
+open 游标名称;
+
+# 获取游标记录
+fetch 游标名称 into 变量[,变量];
+
+# 关闭游标
+close 游标名称;
+
+# 声明条件处理
+declare hander_action handler for condition_value[,condition_value].. statement;
+
+hander_action
+	1、continue：继续执行当前程序
+	2、exit：终止执行当前程序
+condition_value
+	1、sqlstate sqlstate_value：状态码，如02000
+	2、sqlwarning：所有以01开头的sqlstate代码的简写
+	3、not found：所有以02开头的sqlstate代码的简写
+	4、sqlexception：所有没有被2和3捕获的sqlstate代码的简写
+	
+-- 例子
+create procedure p(in uage int)
+begin
+	# 游标声明需要变量后
+	declare uname varchar(100);
+	declare upro varchar(100);
+	declare u_cursor cursor for select name,profession for tb_user where age &lt;&#x3D; uage;
+	declare exit handler for sqlstate &#39;02000&#39; close u_cursor;
+	
+	create table if not exists tb_user_pro(
+    	id int primary key auto_increment,
+        name varchar(100),
+        profession varchar(100)
+    );
+    
+    open u_cursor;
+    while true do
+    	fetch u_cursor into uname,uprol
+    	insert into tb_user_pro values(null, uname, upro);
+    end while;
+	
+	close u_cursor;
+end;
+
+call p(40);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3、存储函数"><a href="#3、存储函数" class="headerlink" title="3、存储函数"></a>3、存储函数</h3><p>存储函数是有返回值的存储过程，存储函数的参数只能是in类型</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE FUNCTION 函数([参数类型 数据类型[,….]]) RETURNS type [characteristic...]
+BEGIN
+	SQL语句.....
+  	RETURN (返回的数据)
+END;
+
+-- 1-n的累加
+create function fun(n int)
+returns int deterministic
+begin
+	declare total int default 0;
+	
+	while n&gt;0 do
+		set total :&#x3D; total+n;
+		set n :&#x3D; n-1;
+	end while;
+	
+	return total;
+	
+end;
+
+select fun(100);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>characteristic说明</strong></p>
+<ul>
+<li>deterministic：相同的输入参数总是产生相同的结果</li>
+<li>no sql：不包含sql语句</li>
+<li>reads sql data：包含读取数据的语句，但不包含写入数据的语句</li>
+</ul>
+<h3 id="4、触发器"><a href="#4、触发器" class="headerlink" title="4、触发器"></a>4、触发器</h3><p><strong>介绍</strong></p>
+<p>触发器是与表有关的数据库对象，指<strong>在insert/update/delete之前或之后</strong>，触发并执行触发器中定义的SQL语句集合。触发器的这种特性可以协助应用在数据库端确保数据的完整性，日志记录，数据校验等操作。</p>
+<p>使用别名<code>OLD</code>和<code>NEW</code>来引用触发器中发生变化的记录内容，这与其他的数据库是相似的。现在触发器还只支持行级触发，不支持语句级触发。</p>
+<table>
+<thead>
+<tr>
+<th align="center">触发器类型</th>
+<th align="center">NEW和OLD</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">INSERT型触发器</td>
+<td align="center">NEW表示将要或者已经新增的数据</td>
+</tr>
+<tr>
+<td align="center">UPDATE型触发器</td>
+<td align="center">OLD表示修改之前的数据，NEW表示将要或已经修改后的数据</td>
+</tr>
+<tr>
+<td align="center">DELETE型触发器</td>
+<td align="center">OLD表示将要或已经删除的数据</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql"># 创建
+create trigger trigger_name
+before|after insert|update|delete
+on tbl_name for each row 	-- 行级触发器
+begin
+	trigger_stmt;
+end;
+
+# 查看
+show triggers;
+
+# 删除
+drop trigger [schema_name.]trigger_name;
+-- 如果没有指定schema_name，默认为当前数据库
+
+-- 需求：通过触发器记录tb_user表的数据变更日志，将变更日志插入到日志表user_log中，包含增加、修改、删除
+# 插入触发器
+create trigger tb_user_insert_trigger
+	after insert on tb_user for each row
+begin
+	insert into user_log(id, operation, op_time, op_id, op_params) values 
+	(null, &#39;insert&#39;, now(), new.id, concat(&#39;插入：id&#x3D;&#39;, new.id, &#39;,name&#x3D;&#39;, new.name));
+end;
+
+# 更新触发器
+create trigger tb_user_update_trigger
+	after update on tb_user for each row
+begin
+	insert into user_log(id, operation, op_time, op_id, op_params) values 
+	(null, &#39;update&#39;, now(), new.id, 
+     concat(&#39;更新前：id&#x3D;&#39;, old.id, &#39;,name&#x3D;&#39;, old.name, 
+            &#39;| 更新后：id&#x3D;&#39;, new.id, &#39;,name&#x3D;&#39;, new.name));
+end;
+
+# 删除触发器
+create trigger tb_user_delete_trigger
+	after delete on tb_user for each row
+begin
+	insert into user_log(id, operation, op_time, op_id, op_params) values 
+	(null, &#39;delete&#39;, now(), old.id, concat(&#39;删除：id&#x3D;&#39;, old.id, &#39;,name&#x3D;&#39;, old.name));
+end;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="五、锁"><a href="#五、锁" class="headerlink" title="五、锁"></a>五、锁</h2><p>锁是计算机协调多个进程或线程并发访问某一资源的机制。在数据库中，除传统的计算资源（CPU、RAM、I/O）的争用以外，数据也是一种供许多用户共享的资源。如何保证数据并发访问的一致性、有效性是所有数据库必须解决一个问题，锁冲突也是影响数据库并发访问性能的一个重要因素。从这个角度来说，锁对数据库而言显得尤为重要，也更加复杂。</p>
+<h3 id="1、全局锁"><a href="#1、全局锁" class="headerlink" title="1、全局锁"></a>1、全局锁</h3><p><strong>全局锁</strong>：锁定数据库中的所有表，对整个数据库实例加锁，加锁后整个实例就处于只读状态，后续的DML的写语句，DDL语句，以及更新操作的事务提交语句都将被阻塞。</p>
+<p>典型的使用场景是做全库的逻辑备份，对所有的表进行锁定，从而获取一致性视图，保证数据的完整性</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql"># 加全局锁
+flush tables with read lock;
+
+# 数据备份(要到win的命令行写，mysql命令行会报错)
+mysqldump -h 远程电脑ip -u 用户名 -p 用户密码 原数据库名 &gt; 存储的sql文件名.sql
+
+# 解锁
+unlock tables;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>特点：</strong></p>
+<p>数据库中加全局锁，是个比较重的操作，存在以下问题：</p>
+<ol>
+<li>如果在主库上备份，那么在备份期间都不能执行更新，业务基本上就得停摆</li>
+<li>如果在从库上备份，那么在备份期间从库不能执行主库同步过来的二进制日志（binlog），会导致主从延迟</li>
+</ol>
+<p>在InnoDB引擎中，可以在备份时加上参数 <code>--single-transaction</code>参数来完成不加锁的一致性数据备份</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">mysqldump --single-transaction -h 远程电脑ip -u 用户名 -p 用户密码 原数据库名 <span class="token operator">></span> 存储的sql文件名.sql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2、表级锁"><a href="#2、表级锁" class="headerlink" title="2、表级锁"></a>2、表级锁</h3><p><strong>表级锁</strong>：每次操作锁住整张表。锁定粒度大，发生锁冲突的概率最高，并发度最低。应用在MyISAM、InnoDB、BDB等存储引擎中</p>
+<p><strong>分类</strong></p>
+<ul>
+<li>表锁</li>
+<li>元数据锁（meta data lock，MDL）</li>
+<li>意向锁</li>
+</ul>
+<p><strong>表锁</strong></p>
+<ol>
+<li>表共享读锁（read lock），加锁后，当前客户端只能读不能写，其他客户端也可以读，但不能写</li>
+<li>表独占写锁（write lock），加锁后，只允许当前客户端读写，其他客户端不能读写</li>
+</ol>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql"># 加锁
+lock tables 表名.. read|write;
+
+# 释放锁
+unlock tables;     # 或者客户端连接关闭<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>元数据锁</strong></p>
+<p>MDL加锁过程是系统自动控制，无需显式使用，在访问一张表的时候会自动加上。MDL锁主要作用是维护表元数据的数据一致性，在表上有活动事务的时候，不可以对元数据进行写入操作。<strong>为了避免DML与DDL冲突，保证读写的正确性</strong></p>
+<p>在MySQL5.5中引入了MDL，当对一张表进行增删改查的时候，加MDL读锁（共享）；当对表结构进行变更操作的时候，加MDL写锁（排他）</p>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220713104135843.png" alt="3"></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql"># 查看元数据锁
+select * from performance_schema.metadata_locks;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>意向锁</strong></p>
+<p>为了避免DML在执行时，加的行锁与表锁的冲突，在InnoDB中引入了意向锁，使得表锁不用检查每行数据是否加锁，<strong>使用意向锁来减少表锁的检查</strong></p>
+<ol>
+<li>意向共享锁（IS）：由语句<code>select ... lock in share mode</code> 添加，与表锁共享锁兼容，与表锁排它锁互斥</li>
+<li>意向排他锁（IX）：由insert、update、delete、select … for update添加，与表锁都互斥。<strong>意向锁之间不会互斥</strong></li>
+</ol>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql"># 同样也可以看意向锁
+select * from performance_schema.metadata_locks;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="3、行级锁"><a href="#3、行级锁" class="headerlink" title="3、行级锁"></a>3、行级锁</h3><p><strong>行级锁</strong>：每次操作锁住对应的行数据，锁定粒度最小，发生锁冲突的概率最低，并发度最高。应用在InnoDB存储引擎中。</p>
+<p>InnoDB的数据是基于索引组织的，<strong>行锁是通过对索引是哪个的索引项加锁实现的</strong>，而不是对记录加的锁。对于行级锁，主要分为以下三类：</p>
+<ol>
+<li>行锁（Record Lock）：锁定单个行记录的锁，防止其他事务对此行进行update和delete。在RC、RR隔离级别下都支持</li>
+<li>间隙锁（Gap Lock）：锁定索引记录间隙（不含该记录），确保索引记录间隙不变，防止其他事务在这个间隙进行insert，产生幻读。在RR隔离级别下支持</li>
+<li>临键锁（Next-Key Lock）：行锁和间隙锁组合，同时锁住数据，并锁住数据前面的间隙Gap。在RR隔离级别下支持</li>
+</ol>
+<p><strong>行锁</strong></p>
+<p>InnoDB实现两种类型的行锁</p>
+<ul>
+<li>共享锁（S）：允许一个事务去读一行，阻止其他事务获取相同数据集的排它锁</li>
+<li>排它锁（X）：允许获取排它锁的事务更新数据，阻止其他事务获得同样的数据集的共享锁和排它锁</li>
+</ul>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220713111027555.png"></p>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220713111107344.png"></p>
+<p>默认情况下，InnoDB在RR事务隔离级别运行，InnoDB使用next-key锁进行搜索和索引扫描，以防止幻读</p>
+<ol>
+<li>针对唯一索引进行检索时，对已存在的记录进行等值匹配时，将会自动优化为行锁</li>
+<li>InnoDB的行锁是针对索引加的锁，不通过索引条件检索数据，那InnoDB将对表中的所有记录加锁，此时会升级为表锁</li>
+</ol>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql"># 同样也可以看行级锁
+select * from performance_schema.metadata_locks;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>间隙锁&amp;临键锁</strong></p>
+<p>默认情况下，InnoDB在RR事务隔离级别运行，InnoDB使用next-key锁进行搜索和索引扫描，以防止幻读</p>
+<ol>
+<li>索引上的等值查询（唯一索引），给不存在的记录加锁时，优化为间隙锁</li>
+<li>索引上的等值查询（普通索引），向右遍历时最后一个值不满足查询需求时，next-key lock退化为间隙锁</li>
+<li>索引上的范围查询（唯一索引）–会访问到不满足条件的第一个值为止</li>
+</ol>
+<p><strong>注意：</strong>间隙锁唯一目的是防止其他事务插入间隙。间隙锁可以共存，一个事务采用的间隙锁不会阻止另一个事务在同一间隙上采用间隙锁</p>
+<h2 id="六、InnoDB引擎"><a href="#六、InnoDB引擎" class="headerlink" title="六、InnoDB引擎"></a>六、InnoDB引擎</h2><h3 id="1、逻辑存储结构"><a href="#1、逻辑存储结构" class="headerlink" title="1、逻辑存储结构"></a>1、逻辑存储结构</h3><p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220713164548684.png"></p>
+<p>重点讲行中的元素</p>
+<p><strong>Trx_id：</strong>每次对某条记录进行改动时，都会把对应的事务id复制给trx_id隐藏列</p>
+<p><strong>Roll_pointer：</strong>每次对某条记录进行改动时，都会把旧的版本写入undo日志红中，然后这个隐藏列就相当于一个指针，可以通过它来找到该记录修改前的信息</p>
+<h3 id="2、架构"><a href="#2、架构" class="headerlink" title="2、架构"></a>2、架构</h3><p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Vhcmx5X29yX2xhdGVy,size_16,color_FFFFFF,t_70.png"></p>
+<p><strong>内存架构</strong></p>
+<ul>
+<li><p><strong>Buffer Pool：</strong>缓冲池是主内存这种的一个区域，可以缓存磁盘中经常操作的真实数据，在执行增删改查操作时，先操作缓冲池中的数据（若缓冲池没有数据，则从磁盘中加载并缓存），然后再以一定频率刷新到磁盘，从而减少磁盘IO，加快处理速度</p>
+<p>缓冲池以Page页为单位，底层采用链表数据结构管理Page，根据状态，分三类：</p>
+<ul>
+<li>free page：空闲page，未被使用</li>
+<li>clean page：被使用page，数据没有被修改过</li>
+<li>dirty page：脏页，被使用page，数据被修改过，页中数据与磁盘的数据发生不一致</li>
+</ul>
+<blockquote>
+<p><strong>mysql的LRU算法:</strong></p>
+<p> 普通的LRU：</p>
+<p>1、新数据插入到链表头部;<br>2、每当缓存命中（即缓存数据被访问），则将数据移到链表头部；<br>3、当链表满的时候，将链表尾部的数据丢弃。<br> <strong>mysql改进的LRU：</strong></p>
+<p>  1、buffer pool 分为了young（5/8）和old（5/3）两个部分<br>  2、数据会在用户的sql用到了页中的数据，或者mysql猜测你很可能会用到的数据-预读，这两种情况加载到buffer pool<br>  3、数据优先进入old，old满了会移出队列尾部。young区呢？ 用户sql使用的页，会被移入young（且需要在old中待满配置的秒数）。而预读的数据，没被使用则会一直在old区，直到被清除<br><strong>问题： 当一次大表扫描，会导致大量数进入young？</strong> </p>
+<p><strong>解决：</strong>mysql防止一次扫描数据过大，替换了大量热数据，有参数控制 innodb_old_blocks_time(需要在old区待满多少秒，且再被用户sql调用时，才会进入young)。</p>
+</blockquote>
+</li>
+<li><p><strong>Change Buffer：</strong>更改缓冲区（针对与<strong>非唯一二级索引页</strong>），在执行DML语句时，如果这些数据page没有在Buffer Pool中，不会直接操作磁盘，而会将数据变更存在更改缓冲区中，在未来数据被读取时，再将数据合并恢复到Buffer Pool中，再将合并后的数据刷新到表盘中</p>
+</li>
+<li><p><strong>Adaptive Hash Index：</strong>自适应hash索引，用于优化对Buffer Pool数据的查询。InnoDB存储引擎会监控对表上各索引页的查询，如果观察到hash索引可以提升速度，则建立hash索引，称之谓自适应hash索引。</p>
+<p><strong>自适应哈希索引，无需人工干预，是系统根据情况自动完成</strong></p>
+</li>
+<li><p><strong>Log Buffer：</strong>日志缓冲区，用来保存要写入到磁盘中的log日志数据（redo log、undo log），默认大小为16MB，日志缓冲区的日志会定期刷新到磁盘中。如果需要更新、插入或删除多行的事务，增加日志缓冲区的大小可以节省磁盘I/O</p>
+<p><strong>参数：</strong></p>
+<ul>
+<li>innodb_log_buffer_size：缓冲区大小</li>
+<li>innodb_flush_log_at_trx_commit：日志刷新到磁盘的时机</li>
+</ul>
+</li>
+</ul>
+<p><strong>磁盘结构</strong></p>
+<ul>
+<li><p><strong>System Tablespace：</strong>系统表空间是更改缓冲区的存储区域。如果表是在系统表空间而不是每个表文件或通用表空间中创建的，它也可能包含表和索引数据。（在MySQL5.x版本中还包含InnoDB数据字典，undolog等）</p>
+<p>参数：innodb_data_file_path</p>
+</li>
+<li><p><strong>File-Per-Table Tablespaces：</strong>每个表的文件表空间包含单个InnoDB表的数据和索引，并存储在文件系统上的单个数据文件中</p>
+<p>参数：innodb_file_per_table</p>
+</li>
+<li><p><strong>General Tablespaces：</strong>通用表空间，需要通过<code>create tablespace</code>语法创建通用表空间，在创建表时，可以指定该表空间</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">create tablespace xxxx add datafile &#39;file_name&#39; engine &#x3D; engine_name;
+# 一般engine_name指定为innodb<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p><strong>Undo Tablespaces：</strong>撤销表空间，MySQL实例在初始化时会自动创建两个默认的undo表空间（初始大小16M），用于存储undo log日志</p>
+</li>
+<li><p><strong>Temporary Tablespaces：</strong>InnoDB使用会话临时表空间和全局临时表空间。存储用户创建的临时表等数据</p>
+</li>
+<li><p><strong>Doublewrite Buffer Files：</strong>双写缓冲区，innoDB引擎将数据页从Buffer Pool刷新到磁盘前，先将数据页写入双写缓冲区文件中，便于系统异常时恢复数据</p>
+</li>
+<li><p><strong>Redo Log：</strong>重做日志，是用来实现事务的持久性。该日志文件又两部分组成：重做日志缓冲（redo log buffer）以及重做日志文件（redo log），前者是在内存中，后者在磁盘中。当事务提交会把所有修改信息都存到该日志中，用于在刷新脏页到磁盘时，发生错误时，进行数据恢复使用</p>
+</li>
+</ul>
+<p><strong>后台线程</strong></p>
+<ol>
+<li><p><strong>Master Thread：</strong>核心后台线程，负责调度其他线程，还负责将缓冲池中的数据异步刷新到磁盘中，保持数据的一致性，还包括脏页的刷新、合并插入缓存、undo页的回收</p>
+</li>
+<li><p><strong>IO Thread：</strong>在InnoDB存储引擎中大量使用AIO来处理IO请求，而IO Thread主要负责这些IO请求的回调</p>
+<table>
+<thead>
+<tr>
+<th align="center">线程类型</th>
+<th align="center">默认个数</th>
+<th align="center">职责</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Read thread</td>
+<td align="center">4</td>
+<td align="center">负责读操作</td>
+</tr>
+<tr>
+<td align="center">Write thread</td>
+<td align="center">4</td>
+<td align="center">负责写操作</td>
+</tr>
+<tr>
+<td align="center">Log thread</td>
+<td align="center">1</td>
+<td align="center">负责将日志缓冲区刷新到磁盘</td>
+</tr>
+<tr>
+<td align="center">Insert buffer thread</td>
+<td align="center">1</td>
+<td align="center">负责将写缓冲区内容刷新到磁盘</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>Purge Thread：</strong>主要用于回收事务已经提交了的undo  log，在事务提交之后，undo log可能不用了，就用它来回收</p>
+</li>
+<li><p><strong>Page Cleaner Thread：</strong>协助Master Thread刷新脏页到磁盘的线程，可以减轻Master Thread的工作压力，减少阻塞 </p>
+</li>
+</ol>
+<h3 id="3、事务原理"><a href="#3、事务原理" class="headerlink" title="3、事务原理"></a>3、事务原理</h3><p>事务是一组操作的集合，是一个不可分割的工作单位，事务会把所有的操作作为一个整体一起向系统提交或撤销操作请求，即这些操作要么同时成功，要么同时失败</p>
+<p><strong>原子性、一致性、持久性由两个日志redo log（持久性）和undo log（原子性）实现</strong></p>
+<p><strong>隔离性由锁和MVCC机制来实现</strong></p>
+<p><strong>Redo Log</strong></p>
+<p>重做日志，是用来实现事务的持久性。该日志文件又两部分组成：重做日志缓冲（redo log buffer）以及重做日志文件（redo log），前者是在内存中，后者在磁盘中。当事务提交会把所有修改信息都存到该日志中，用于在刷新脏页到磁盘时，发生错误时，进行数据恢复使用</p>
+<p><strong>Undo Log</strong></p>
+<p>回滚日志，用于记录数据被修改前的信息，<strong>作用包含两个：提供回滚和MVCC(多版本并发控制)</strong></p>
+<p>undo log和redo log记录物理入职不一样，它是逻辑日志。可以认为当delete一条记录时，undo log中会记录一条对应的insert记录，反之亦然，当update一条记录时，它记录一条对应相反的update记录。当执行rollback时，就可以从undo log中的逻辑记录读取到相应的内容并进行回滚</p>
+<p><strong>Undo log销毁：</strong>undo log在事务执行时产生，事务提交时，并不会立即删除undo log，因为这些日志可能还用于MVCC</p>
+<p><strong>Undo log存储：</strong>undo log采用段的方式进行管理和记录，存放在前面介绍的rollback segment回滚段中，内部包含1024个undo log segment</p>
+<h3 id="4、MVCC"><a href="#4、MVCC" class="headerlink" title="4、MVCC"></a>4、MVCC</h3><p><strong>基本概念</strong></p>
+<ul>
+<li><strong>当前读：</strong>读取的是记录的最新版本，读取时还要保证其他并发事务不能修改当前记录，会对读取的记录进行加锁。对于日常操作，如select…lock in share mode（共享锁）、select…for update、update、insert、delete（排它锁）都是一种当前读</li>
+<li><strong>快照读：</strong>简单的select（不加锁）就是快照读。快照读，读取的是记录数据的可见版本，可能是历史数据，不加锁是非阻塞读<ul>
+<li>RC：每次select都会生成一个快照读</li>
+<li>RR：开启事务后第一个select语句才是快照读的地方</li>
+<li>Ser：快照读会退化为当前读</li>
+</ul>
+</li>
+<li><strong>MVCC：</strong>全称Multi-Version Concurrency Control，多版本并发控制。指维护一个数据的多版本，使得读写操作没有冲突，快照读为MySQL实现MVCC提供了一个非阻塞读功能。MVCC的具体实现还需要依赖于数据库记录中的<strong>三个隐式字段、undo log日志、readView</strong>。</li>
+</ul>
+<p><strong>隐藏字段</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">隐藏字段</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">DB_TRX_ID</td>
+<td align="center">最近修改事务ID，记录插入这条数据或最后一次修改该记录的事务ID</td>
+</tr>
+<tr>
+<td align="center">DB_ROLL_PTR</td>
+<td align="center">回滚指针，指向这条记录的上个版本，用于配合undo log，指向上一个版本</td>
+</tr>
+<tr>
+<td align="center">DB_ROW_ID</td>
+<td align="center">隐藏主键，如果表结构没有指定主键，会生成该隐藏字段</td>
+</tr>
+</tbody></table>
+<p><strong>Undo Log</strong></p>
+<p>回滚日志，在insert、update、delete的时候产生的便于数据回滚的日志。</p>
+<ul>
+<li><p><strong>当insert的时候</strong>，产生的undo log日志只在回滚时需要，在事务提交后可被<strong>立即删除</strong></p>
+</li>
+<li><p>而<strong>update、delete的时候</strong>，产生的undo log日志不仅在回滚时需要，<strong>在快照读时也需要</strong>，不会立即被删除 </p>
+</li>
+<li><p><strong>undo log版本链</strong></p>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220714093923083.png"></p>
+<p>不同事务或相同事务对同一条记录进行修改，会导致该记录的undo log生成一条记录版本链表，链表的头部是最新的旧记录，链表尾部是最早的旧记录</p>
+</li>
+</ul>
+<p><strong>ReadView</strong></p>
+<p>ReadView（读视图），是快照读SQL执行时MVCC提取数据额依据，记录并维护系统当前活跃的事务（未提交的）id。</p>
+<p>ReadView中包含了四个核心字段：</p>
+<table>
+<thead>
+<tr>
+<th align="center">字段</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">m_ids</td>
+<td align="center">当前活跃的事务ID集合</td>
+</tr>
+<tr>
+<td align="center">min_trx_id</td>
+<td align="center">最小活跃事务ID</td>
+</tr>
+<tr>
+<td align="center">max_trx_id</td>
+<td align="center">预分配事务ID，当前最大事务ID+1（因为事务是自增的）</td>
+</tr>
+<tr>
+<td align="center">creator_trx_id</td>
+<td align="center">ReadView创建者的事务ID</td>
+</tr>
+</tbody></table>
+<p><img src="/2022/07/13/mysql-zhi-jin-jie-pian/image-20220714095342537.png"></p>
+<p>不同隔离级别，生成的ReadView的时机不同：</p>
+<ul>
+<li>RC：在事务中每一次执行快照读时生成ReadView</li>
+<li>RR：仅在事务中第一次执行快照读时生成ReadView，后续复用该ReadView</li>
+</ul>
+<h2 id="七、MySQL管理"><a href="#七、MySQL管理" class="headerlink" title="七、MySQL管理"></a>七、MySQL管理</h2><h3 id="1、系统数据库"><a href="#1、系统数据库" class="headerlink" title="1、系统数据库"></a>1、系统数据库</h3><p>MySQL数据库安装完成后，自带了四个数据库</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据库</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">mysql</td>
+<td align="center">存储MySQL服务器正常运行所需要的各种信息（时区，主从、用户、权限等）</td>
+</tr>
+<tr>
+<td align="center">information_schema</td>
+<td align="center">提供了访问数据库元数据的各种表和视图，包含数据库、表、字段类型及访问权限等</td>
+</tr>
+<tr>
+<td align="center">performance_schema</td>
+<td align="center">为MySQL服务器运行时状态提供了一个底层监控功能，主要用于收集数据库服务性能参数</td>
+</tr>
+<tr>
+<td align="center">sys</td>
+<td align="center">包含了一系列方便DBA和开发人员利用performance_schema性能数据库进行性能调优和诊断的视图</td>
+</tr>
+</tbody></table>
+<h3 id="2、常用工具"><a href="#2、常用工具" class="headerlink" title="2、常用工具"></a>2、常用工具</h3><p><strong>mysql</strong></p>
+<p>该mysql不是指mysql服务，而是指mysql的客户端工具</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 语法</span>
+mysql <span class="token punctuation">[</span>options<span class="token punctuation">]</span> <span class="token punctuation">[</span>database<span class="token punctuation">]</span>
+
+<span class="token comment"># 参数</span>
+	-u, --user<span class="token operator">=</span>name 指定用户名
+	-p, --password<span class="token punctuation">[</span><span class="token operator">=</span>name<span class="token punctuation">]</span> 指定密码
+	-h, --host<span class="token operator">=</span>name 指定服务器IP或域名
+	-P, --port<span class="token operator">=</span><span class="token comment"># 指定连接端口</span>
+<span class="token comment"># 示例</span>
+	mysql - h <span class="token number">127</span>. <span class="token number">0</span>. <span class="token number">0</span>. <span class="token number">1</span> - P <span class="token number">3306</span> - u root - p
+	mysql - h <span class="token number">127</span>. <span class="token number">0</span>. <span class="token number">0</span>. <span class="token number">1</span> - P <span class="token number">3306</span> - uroot - p <span class="token number">2143</span>
+	
+-e, --execute<span class="token operator">=</span>name 		 <span class="token comment"># 执行SQL语句并退出</span>
+<span class="token comment"># 此选项可以在Mysql客户端执行SQL语句，而不用连接到MySQL数据库再执行，对于一些批处理脚本，这种方式尤其方便</span>
+<span class="token comment"># 示例</span>
+mysql -uroot -p <span class="token number">2143</span> db01 -e <span class="token string">"select * from tb_book"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>mysqladmin</strong></p>
+<p>mysqladmin 是一个执行管理操作的客户端程序。可以用它来检查服务器的配置和当前状态、创建并删除数据库等。</p>
+<p>可以通过 ： mysqladmin –help 指令查看帮助文档</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 示例</span>
+	mysqladmin -uroot -p <span class="token number">2143</span> create <span class="token string">'test 01 '</span><span class="token punctuation">;</span>
+	mysqladmin -uroot -p <span class="token number">2143</span> drop <span class="token string">'test 01 '</span><span class="token punctuation">;</span>
+	mysqladmin -uroot -p <span class="token number">2143</span> version<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>mysqlbinlog</strong></p>
+<p>由于服务器生成的二进制日志文件以二进制格式保存，所以如果想要检查这些文本的文本格式，就会使用到mysqlbinlog 日志管理工具</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">mysqlbinlog <span class="token punctuation">[</span>options<span class="token punctuation">]</span> log-files1 log-files2 <span class="token punctuation">..</span>.
+
+<span class="token comment"># 选项</span>
+	-d, --database<span class="token operator">=</span>name <span class="token builtin class-name">:</span> 指定数据库名称，只列出指定的数据库相关操作。
+	-o, --offset<span class="token operator">=</span><span class="token comment"># : 忽略掉日志中的前n行命令。</span>
+	-r,--result-file<span class="token operator">=</span>name <span class="token builtin class-name">:</span> 将输出的文本格式日志输出到指定文件。
+	-s, --short-form <span class="token builtin class-name">:</span> 显示简单格式， 省略掉一些信息。
+	--start-datatime<span class="token operator">=</span>date1 --stop-datetime<span class="token operator">=</span>date2 <span class="token builtin class-name">:</span> 指定日期间隔内的所有日志。
+	--start-position<span class="token operator">=</span>pos1 --stop-position<span class="token operator">=</span>pos2 <span class="token builtin class-name">:</span> 指定位置间隔内的所有日志。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>mysqldump</strong></p>
+<p>mysqldump 客户端工具用来备份数据库或在不同数据库之间进行数据迁移。备份内容包含创建表，及插入表的SQL语句。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 语法</span>
+mysqldump <span class="token punctuation">[</span>options<span class="token punctuation">]</span> db_name <span class="token punctuation">[</span>tables<span class="token punctuation">]</span>
+mysqldump <span class="token punctuation">[</span>options<span class="token punctuation">]</span> --database/-B db1 <span class="token punctuation">[</span>db2 db3<span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+mysqldump <span class="token punctuation">[</span>options<span class="token punctuation">]</span> --all-databases/-A
+
+<span class="token comment"># 连接选项</span>
+<span class="token comment"># 参数</span>
+	-u, --user<span class="token operator">=</span>name 指定用户名
+	-p, --password<span class="token punctuation">[</span><span class="token operator">=</span>name<span class="token punctuation">]</span> 指定密码
+	-h, --host<span class="token operator">=</span>name 指定服务器IP或域名
+	-P, --port<span class="token operator">=</span><span class="token comment"># 指定连接端口</span>
+
+<span class="token comment"># 输出内容选项</span>
+<span class="token comment"># 参数</span>
+	--add-drop-database 在每个数据库创建语句前加上 Drop database 语句
+	--add-drop-table 在每个表创建语句前加上 Drop table 语句 , 默认开启 <span class="token punctuation">;</span> 不开启 <span class="token punctuation">(</span>--skip-add-drop-table<span class="token punctuation">)</span>
+	
+	-n, --no-create-db 不包含数据库的创建语句
+	-t, --no-create-info 不包含数据表的创建语句
+	-d --no-data 不包含数据
+	
+	-T, --tab<span class="token operator">=</span>name 自动生成两个文件：一个.sql文件，创建表结构的语句；一个.txt文件，数据文件，相当于select into outfile
+
+<span class="token comment"># 示例</span>
+	mysqldump -uroot -p2143 db01 tb_book --add-drop-database --add-drop-table <span class="token operator">></span> a
+	
+	mysqldump -uroot -p2143 -T /tmp <span class="token builtin class-name">test</span> city<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>mysqlimport/source</strong></p>
+<p>mysqlimport 是客户端数据导入工具，用来导入mysqldump 加 -T 参数后导出的文本文件。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 语法</span>
+mysqlimport <span class="token punctuation">[</span>options<span class="token punctuation">]</span> db_name textfile1 <span class="token punctuation">[</span>textfile2<span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+
+<span class="token comment"># 示例</span>
+mysqlimport -uroot -p2143 <span class="token builtin class-name">test</span> /tmp/city.txt
+
+<span class="token comment"># 如果需要导入sql文件,可以使用mysql中的source 指令</span>
+<span class="token builtin class-name">source</span> /root/tb_book.sql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>mysqlshow</strong></p>
+<p>mysqlshow 客户端对象查找工具，用来很快地查找存在哪些数据库、数据库中的表、表中的列或者索引。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 语法</span>
+mysqlshow <span class="token punctuation">[</span>options<span class="token punctuation">]</span> <span class="token punctuation">[</span>db_name <span class="token punctuation">[</span>table_name <span class="token punctuation">[</span>col_name<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+
+<span class="token comment"># 参数</span>
+--count 显示数据库及表的统计信息（数据库，表 均可以不指定）
+-i 显示指定数据库或者指定表的状态信息
+
+<span class="token comment"># 示例</span>
+<span class="token comment">#查询每个数据库的表的数量及表中记录的数量</span>
+mysqlshow -uroot -p2143 --count
+
+<span class="token comment">#查询test库中每个表中的字段书，及行数</span>
+mysqlshow -uroot -p2143 <span class="token builtin class-name">test</span> --count
+
+<span class="token comment">#查询test库中book表的详细情况</span>
+mysqlshow -uroot -p2143 <span class="token builtin class-name">test</span> book --count<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Chen</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2022/07/13/mysql-zhi-jin-jie-pian/">http://example.com/2022/07/13/mysql-zhi-jin-jie-pian/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Chen</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/MySQL/">
+                                    <span class="chip bg-color">MySQL</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/07/13/mysql-zhi-jin-jie-pian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="MySQL之进阶篇">
+                        
+                        <span class="card-title">MySQL之进阶篇</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-13
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Chen
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/07/11/hua-wei-ji-kao-zhi-shi-dian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="华为机考刷题日常">
+                        
+                        <span class="card-title">华为机考刷题日常</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Chen
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">数据结构与算法</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022</span>
+            
+            <a href="/about" target="_blank">Chen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">126.8k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/chenkey837" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1445478790@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1445478790" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1445478790" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
