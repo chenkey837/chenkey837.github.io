@@ -1,0 +1,1490 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="SQLZOO刷题上篇, Patient">
+    <meta name="description" content="抽空刷了点sqlzoo的题，记一下
+一、第一章第一节：SELECT basics
+1.1显示德国 Germany 的人口。
+SELECT population FROM world
+  WHERE name = &#39;Germany&#39;;
+
+1.">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>SQLZOO刷题上篇 | Patient</title>
+    <link rel="icon" type="image/jpeg" href="/person.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/person.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Patient</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/person.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Patient</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">SQLZOO刷题上篇</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/MySQL/">
+                                <span class="chip bg-color">MySQL</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-08-09
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.3k
+                </div>
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>抽空刷了点sqlzoo的题，记一下</p>
+<h2 id="一、第一章"><a href="#一、第一章" class="headerlink" title="一、第一章"></a><strong>一、第一章</strong></h2><h3 id="第一节：SELECT-basics"><a href="#第一节：SELECT-basics" class="headerlink" title="第一节：SELECT basics"></a><strong>第一节：SELECT basics</strong></h3><p><img src="/2022/08/09/sqlzoo-shua-ti-shang-pian/v2-e7efb6512125b06bbdded21a2e284f70_720w.jpg"></p>
+<h4 id="1-1"><a href="#1-1" class="headerlink" title="1.1"></a>1.1</h4><p>显示德国 Germany 的人口。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> population <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> name <span class="token operator">=</span> <span class="token string">'Germany'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="1-2"><a href="#1-2" class="headerlink" title="1.2"></a>1.2</h4><p>查询显示面积为 5,000,000 以上平方公里的国家,该国家的人口密度(population/area)。人口密度并不是 WORLD 表格中的栏,但我们可用公式(population/area)计算出来。修改此例子,查询面积为 5,000,000 以上平方公里的国家,对每个国家显示她的名字和人均国内生产总值(gdp/population)。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span> gdp<span class="token operator">/</span>population <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> area <span class="token operator">></span> <span class="token number">5000000</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>SQL查出的列可以很灵活，可以是一个现成的列，也可以是一个表达式。</p>
+<h4 id="1-3"><a href="#1-3" class="headerlink" title="1.3"></a>1.3</h4><p>检查列表:单词“IN”可以让我们检查一个项目是否在列表中。</p>
+<p>此示例显示了“Luxembourg 卢森堡”,“Mauritius 毛里求斯”和“Samoa 萨摩亚”的国家名称和人口。</p>
+<p>显示“Ireland 爱尔兰”,“Iceland 冰岛”,“Denmark 丹麦”的国家名称和人口。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span> population <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> name <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token string">'Ireland'</span><span class="token punctuation">,</span> <span class="token string">'Iceland'</span><span class="token punctuation">,</span> <span class="token string">'Denmark'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>单词IN可以用来检查一个项目是否在列表里面。</p>
+<h4 id="1-4"><a href="#1-4" class="headerlink" title="1.4"></a>1.4</h4><p>哪些国家是不是太小,又不是太大?</p>
+<p>BETWEEN 允许范围检查 - 注意,这是包含性的。 此例子显示面积为 250,000 及 300,000 之间的国家名称和该国面积。</p>
+<p>修改此例子,以显示面积为 200,000 及 250,000 之间的国家名称和该国面积。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span> area <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> area <span class="token operator">BETWEEN</span> <span class="token number">200000</span> <span class="token operator">AND</span> <span class="token number">250000</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>BETWEEN代表区间，而且是闭区间。</p>
+<p>NOT BETWEEN是开区间。</p>
+<h3 id="第二节：SELECT-names"><a href="#第二节：SELECT-names" class="headerlink" title="第二节：SELECT names"></a><strong>第二节：SELECT names</strong></h3><p><img src="/2022/08/09/sqlzoo-shua-ti-shang-pian/v2-899676daa7fb0d4aefaae6e32fd8b801_720w.jpg"></p>
+<h4 id="2-1"><a href="#2-1" class="headerlink" title="2.1"></a>2.1</h4><p>可以用WHERE name LIKE ‘B%’来找出以 B 为开首的国家。</p>
+<p>%是通配符,可以用代表任何字符。</p>
+<p>找出以 Y 为开首的国家。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> name <span class="token operator">LIKE</span> <span class="token string">'Y%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>%作用是通配符，匹配0到任意长度的字符。</p>
+<h4 id="2-2"><a href="#2-2" class="headerlink" title="2.2"></a>2.2</h4><p>找出以 Y 为结尾的国家。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> name <span class="token operator">LIKE</span> <span class="token string">'%Y'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="2-3"><a href="#2-3" class="headerlink" title="2.3"></a>2.3</h4><p>“Luxembourg 卢森堡”中有一个x字母,还有一个国家的名字中有x。列出这两个国家。</p>
+<p>找出所有国家,其名字包括字母x。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> name <span class="token operator">LIKE</span> <span class="token string">'%x%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="2-4"><a href="#2-4" class="headerlink" title="2.4"></a>2.4</h4><p>“Iceland 冰岛”和“Switzerland 瑞士”的名字都是以”land”作结束的。还有其他吗?找出所有国家,其名字以 land 作结尾。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> name <span class="token operator">LIKE</span> <span class="token string">'%land'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="2-5"><a href="#2-5" class="headerlink" title="2.5"></a>2.5</h4><p>找出所有国家,其名字以 C 作开头，以 ia 作结尾。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> name <span class="token operator">LIKE</span> <span class="token string">'C%ia'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="2-6"><a href="#2-6" class="headerlink" title="2.6"></a>2.6</h4><p>“Greece 希腊”中有双 e 字。哪个国家有双 o 字呢?</p>
+<p>找出所有国家,其名字包括字母oo。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> name <span class="token operator">LIKE</span> <span class="token string">'%oo%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="2-7"><a href="#2-7" class="headerlink" title="2.7"></a>2.7</h4><p>“Bahamas 巴哈马”中有三个 a,还有吗?</p>
+<p>找出所有国家,其名字包括三个或以上的a。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> name <span class="token operator">LIKE</span> <span class="token string">'%a%a%a%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="2-8"><a href="#2-8" class="headerlink" title="2.8"></a>2.8</h4><p>“India 印度”和”Angola 安哥拉”的第二个字母都是 n。</p>
+<p>你可以用底线符_当作单一个字母的通配符。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> world
+ <span class="token keyword">WHERE</span> name <span class="token operator">LIKE</span> <span class="token string">'_n%'</span>
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>找出所有国家,其名字以t作第二个字母。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> world
+ <span class="token keyword">WHERE</span> name <span class="token operator">LIKE</span> <span class="token string">'_t%'</span>
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> name<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>%代表不定数目的任意字符，而下划线则指定了数目，有多少下划线就表示间隔了多少字符。</p>
+<h4 id="2-9"><a href="#2-9" class="headerlink" title="2.9"></a>2.9</h4><p>“Lesotho 莱索托”和”Moldova 摩尔多瓦”都有两个字母 o,被另外两个字母相隔着。</p>
+<p>找出所有国家,其名字都有两个字母 o,被另外两个字母相隔着。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> world
+ <span class="token keyword">WHERE</span> name <span class="token operator">LIKE</span> <span class="token string">'%o__o%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="2-10"><a href="#2-10" class="headerlink" title="2.10"></a>2.10</h4><p>“Cuba古巴”和”Togo 多哥”都是 4 个字母。</p>
+<p>找出所有国家,其名字都是 4 个字母的。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> world
+ <span class="token keyword">WHERE</span> name <span class="token operator">LIKE</span> <span class="token string">'____'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="2-11"><a href="#2-11" class="headerlink" title="2.11"></a>2.11</h4><p>“Luxembourg 卢森堡”的首都 capital 都同样叫“Luxembourg”。</p>
+<p>显示所有国家名字,其首都和国家名字是相同的。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name
+  <span class="token keyword">FROM</span> world
+ <span class="token keyword">WHERE</span> name <span class="token operator">LIKE</span> capital<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-12"><a href="#2-12" class="headerlink" title="2.12"></a>2.12</h4><p>“Mexico 墨西哥”的首都是”Mexico City”。</p>
+<p>显示所有国家名字,其首都是国家名字加上”City”。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name
+  <span class="token keyword">FROM</span> world
+ <span class="token keyword">WHERE</span> capital <span class="token operator">LIKE</span> concat<span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token string">' City'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>注意字符串拼接函数concat</p>
+<h4 id="2-13"><a href="#2-13" class="headerlink" title="2.13"></a>2.13</h4><p>找出所有首都和其国家名字,而首都要有国家名字中出现。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> capital<span class="token punctuation">,</span>name
+  <span class="token keyword">FROM</span> world
+ <span class="token keyword">WHERE</span> capital <span class="token operator">LIKE</span> concat<span class="token punctuation">(</span>concat<span class="token punctuation">(</span><span class="token string">'%'</span><span class="token punctuation">,</span>name<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">'%'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-14"><a href="#2-14" class="headerlink" title="2.14"></a>2.14</h4><p>找出所有首都和其国家名字,而首都是国家名字的延伸。</p>
+<p>显示 Mexico City,因它比其国家名字 Mexico 长。</p>
+<p>不显示 Luxembourg,因它的首都和国家名相是相同的。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span>capital
+  <span class="token keyword">FROM</span> world
+ <span class="token keyword">WHERE</span> capital <span class="token operator">LIKE</span> concat<span class="token punctuation">(</span>concat<span class="token punctuation">(</span><span class="token string">'%'</span><span class="token punctuation">,</span>name<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">'_%'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-15"><a href="#2-15" class="headerlink" title="2.15"></a>2.15</h4><p>“Monaco-Ville”是合并国家名字 “Monaco” 和延伸词”-Ville”.</p>
+<p>显示国家名字，及其延伸词，如首都是国家名字的延伸。</p>
+<p>可以使用SQL函数 REPLACE 或 MID.</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span><span class="token keyword">REPLACE</span><span class="token punctuation">(</span>capital<span class="token punctuation">,</span>name<span class="token punctuation">,</span><span class="token string">''</span><span class="token punctuation">)</span>
+  <span class="token keyword">FROM</span> world
+ <span class="token keyword">WHERE</span> capital <span class="token operator">LIKE</span> concat<span class="token punctuation">(</span>concat<span class="token punctuation">(</span><span class="token string">'%'</span><span class="token punctuation">,</span>name<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">'_%'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>那个MID函数，只有SQL Server里面有，MySQL里面没有。</p>
+<h2 id="二、第二章"><a href="#二、第二章" class="headerlink" title="二、第二章"></a><strong>二、第二章</strong></h2><h3 id="第一节：SELECT-from-WORLD-Tutorial"><a href="#第一节：SELECT-from-WORLD-Tutorial" class="headerlink" title="第一节：SELECT from WORLD Tutorial"></a><strong>第一节：SELECT from WORLD Tutorial</strong></h3><h4 id="1-1-1"><a href="#1-1-1" class="headerlink" title="1.1"></a>1.1</h4><p>简单查找国家名，洲名，人口</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span> continent<span class="token punctuation">,</span> population <span class="token keyword">FROM</span> world<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="1-2-1"><a href="#1-2-1" class="headerlink" title="1.2"></a>1.2</h4><p>如何使用WHERE来筛选记录。 显示具有至少2亿人口的国家名称。 2亿是200000000，有八个零。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> world
+<span class="token keyword">WHERE</span> population<span class="token operator">></span><span class="token number">200000000</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="1-3-1"><a href="#1-3-1" class="headerlink" title="1.3"></a>1.3</h4><p>找出有至少200百万(2亿)人口的国家名称，及人均国内生产总值。</p>
+<p>求助：如何人均国内生产总值计算</p>
+<p>人均国内生产总值，即是国内生产总值除以人口(GDP/population)。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span>GDP<span class="token operator">/</span>population
+<span class="token keyword">FROM</span> world
+<span class="token keyword">WHERE</span> population<span class="token operator">></span><span class="token number">200000000</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-4-1"><a href="#1-4-1" class="headerlink" title="1.4"></a>1.4</h4><p>显示’South America’南美洲大陆的国家名字和以百万为单位人口数。 将人口population 除以一百万(1000000)得可得到以百万为单位人口数。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span>population<span class="token operator">/</span><span class="token number">1000000</span>
+<span class="token keyword">FROM</span> world
+<span class="token keyword">WHERE</span> continent <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token string">'South America'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-5"><a href="#1-5" class="headerlink" title="1.5"></a>1.5</h4><p>显示法国，德国，意大利(France, Germany, Italy)的国家名称和人口。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span>population
+<span class="token keyword">FROM</span> world
+<span class="token keyword">WHERE</span> name <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token string">'France'</span><span class="token punctuation">,</span><span class="token string">'Germany'</span><span class="token punctuation">,</span><span class="token string">'Italy'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-6"><a href="#1-6" class="headerlink" title="1.6"></a>1.6</h4><p>显示包含单词“United”为名称的国家。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name
+<span class="token keyword">FROM</span> world
+<span class="token keyword">WHERE</span> name <span class="token operator">LIKE</span> <span class="token string">'%United%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-7"><a href="#1-7" class="headerlink" title="1.7"></a>1.7</h4><p>成为大国的两种方式：如果它有3百万平方公里以上的面积，或拥有250百万(2.5亿)以上人口。展示大国的名称，人口和面积。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span>population<span class="token punctuation">,</span>area
+<span class="token keyword">FROM</span> world
+<span class="token keyword">WHERE</span> area<span class="token operator">></span><span class="token number">3</span><span class="token operator">*</span><span class="token number">1000000</span> <span class="token operator">OR</span> population<span class="token operator">></span><span class="token number">250</span><span class="token operator">*</span><span class="token number">1000000</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-8"><a href="#1-8" class="headerlink" title="1.8"></a>1.8</h4><p>美国、印度和中国(USA, India, China)是人口又大，同时面积又大的国家。排除这些国家。显示以人口或面积为大国的国家，但不能同时两者。显示国家名称，人口和面积。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span>population<span class="token punctuation">,</span>area
+<span class="token keyword">FROM</span> world
+<span class="token keyword">WHERE</span> <span class="token punctuation">(</span>area<span class="token operator">></span><span class="token number">3</span><span class="token operator">*</span><span class="token number">1000000</span> <span class="token operator">OR</span> population<span class="token operator">></span><span class="token number">250</span><span class="token operator">*</span><span class="token number">1000000</span><span class="token punctuation">)</span> 
+<span class="token operator">AND</span> name <span class="token operator">NOT</span> <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> world <span class="token keyword">WHERE</span>
+area<span class="token operator">></span><span class="token number">3</span><span class="token operator">*</span><span class="token number">1000000</span> <span class="token operator">AND</span> population<span class="token operator">></span><span class="token number">250</span><span class="token operator">*</span><span class="token number">1000000</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-9"><a href="#1-9" class="headerlink" title="1.9"></a>1.9</h4><p>除以为1000000（6个零）是以百万计。除以1000000000（9个零）是以十亿计。使用 ROUND 函数来显示的数值到小数点后两位。</p>
+<p>对于南美显示以百万计人口，以十亿计2位小数GDP。</p>
+<p>除以为1000000（6个零）是以百万计。除以1000000000（9个零）是以十亿计。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span><span class="token function">ROUND</span><span class="token punctuation">(</span>population<span class="token operator">/</span><span class="token number">1000000</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">ROUND</span><span class="token punctuation">(</span>GDP<span class="token operator">/</span><span class="token number">1000000000</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token keyword">FROM</span> world
+<span class="token keyword">WHERE</span> continent <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token string">'South America'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>ROUND用法示例：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token function">ROUND</span><span class="token punctuation">(</span><span class="token number">7253.86</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>    <span class="token operator">-</span><span class="token operator">></span>  <span class="token number">7254</span>
+<span class="token function">ROUND</span><span class="token punctuation">(</span><span class="token number">7253.86</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>    <span class="token operator">-</span><span class="token operator">></span>  <span class="token number">7253.9</span>
+<span class="token function">ROUND</span><span class="token punctuation">(</span><span class="token number">7253.86</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">)</span>    <span class="token operator">-</span><span class="token operator">></span>  <span class="token number">7000</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-10"><a href="#1-10" class="headerlink" title="1.10"></a>1.10</h4><p>显示国家有至少一个万亿元国内生产总值（万亿，也就是12个零）的人均国内生产总值。四舍五入这个值到最接近1000。</p>
+<p>显示万亿元国家的人均国内生产总值，四舍五入到最近的$ 1000。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span><span class="token function">ROUND</span><span class="token punctuation">(</span>GDP<span class="token operator">/</span>population<span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token keyword">FROM</span> world
+<span class="token keyword">WHERE</span> GDP<span class="token operator">></span><span class="token number">10000</span><span class="token operator">*</span><span class="token number">10000</span><span class="token operator">*</span><span class="token number">10000</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-11"><a href="#1-11" class="headerlink" title="1.11"></a>1.11</h4><p>The CASE statement shown is used to substitute North America for Caribbean in the third column.</p>
+<p>Show the name - but substitute Australasia for Oceania - for countries beginning with N.</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span>
+       <span class="token keyword">CASE</span> <span class="token keyword">WHEN</span> continent<span class="token operator">=</span><span class="token string">'Oceania'</span> <span class="token keyword">THEN</span> <span class="token string">'Australasia'</span>
+            <span class="token keyword">ELSE</span> continent <span class="token keyword">END</span>
+<span class="token keyword">FROM</span> world
+<span class="token keyword">WHERE</span> name <span class="token operator">LIKE</span> <span class="token string">'N%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>CASE在此处把Oceania替换成了Australasia。</p>
+<h4 id="1-12"><a href="#1-12" class="headerlink" title="1.12"></a>1.12</h4><p>Show the name and the continent - but substitute Eurasia for Europe and Asia; substitute America - for each country in North America or South America or Caribbean. Show countries beginning with A or B</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span>
+       <span class="token keyword">CASE</span> <span class="token keyword">WHEN</span> <span class="token punctuation">(</span>continent<span class="token operator">=</span><span class="token string">'Europe'</span> <span class="token operator">or</span> continent<span class="token operator">=</span><span class="token string">'Asia'</span><span class="token punctuation">)</span> <span class="token keyword">THEN</span> <span class="token string">'Eurasia'</span>
+            <span class="token keyword">WHEN</span> <span class="token punctuation">(</span>continent<span class="token operator">=</span><span class="token string">'North America'</span> <span class="token operator">or</span>
+            continent<span class="token operator">=</span><span class="token string">'South America'</span> <span class="token operator">or</span>
+            continent<span class="token operator">=</span><span class="token string">'Caribbean'</span><span class="token punctuation">)</span> <span class="token keyword">THEN</span> <span class="token string">'America'</span>
+            <span class="token keyword">ELSE</span> continent <span class="token keyword">END</span>
+<span class="token keyword">FROM</span> world
+<span class="token keyword">WHERE</span> name <span class="token operator">LIKE</span> <span class="token string">'A%'</span> <span class="token operator">OR</span> name <span class="token operator">LIKE</span> <span class="token string">'B%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-13"><a href="#1-13" class="headerlink" title="1.13"></a>1.13</h4><p>Put the continents right…</p>
+<p>Oceania becomes Australasia</p>
+<p>Countries in Eurasia and Turkey go to Europe/Asia</p>
+<p>Caribbean islands starting with ‘B’ go to North America, other Caribbean islands go to South America</p>
+<p>Show the name, the original continent and the new continent of all countries.</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span> continent<span class="token punctuation">,</span> <span class="token keyword">CASE</span> 
+	<span class="token keyword">WHEN</span> continent<span class="token operator">=</span><span class="token string">'Oceania'</span> <span class="token keyword">THEN</span> <span class="token string">'Australasia'</span>
+	<span class="token keyword">WHEN</span> continent<span class="token operator">=</span><span class="token string">'Eurasia'</span> <span class="token operator">or</span> name<span class="token operator">=</span><span class="token string">'Turkey'</span> <span class="token keyword">THEN</span> <span class="token string">'Europe/Asia'</span>
+	<span class="token keyword">WHEN</span> continent<span class="token operator">=</span><span class="token string">'Caribbean'</span> <span class="token operator">AND</span> name <span class="token operator">LIKE</span> <span class="token string">'B%'</span> <span class="token keyword">THEN</span> <span class="token string">'North America'</span>
+	<span class="token keyword">WHEN</span> continent<span class="token operator">=</span><span class="token string">'Caribbean'</span> <span class="token operator">AND</span> name <span class="token operator">NOT</span> <span class="token operator">LIKE</span> <span class="token string">'B%'</span> <span class="token keyword">THEN</span> <span class="token string">'South America'</span>
+	<span class="token keyword">ELSE</span> continent <span class="token keyword">END</span>
+<span class="token keyword">FROM</span> world
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> name<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意SQLZOO里面结果较多的查询需要加个ORDER BY name;才能被判定为正确的。</p>
+<h2 id="三、第三章"><a href="#三、第三章" class="headerlink" title="三、第三章"></a><strong>三、第三章</strong></h2><h3 id="第一节：SELECT-from-Nobel-Tutorial"><a href="#第一节：SELECT-from-Nobel-Tutorial" class="headerlink" title="第一节：SELECT from Nobel Tutorial"></a><strong>第一节：SELECT from Nobel Tutorial</strong></h3><p><img src="/2022/08/09/sqlzoo-shua-ti-shang-pian/v2-e42b03ff8ed39b0457801ac4e41556bf_720w.jpg"></p>
+<p><img src="/2022/08/09/sqlzoo-shua-ti-shang-pian/v2-0d32a15220ab191c34e017f71a132be0_720w.jpg" alt="img"></p>
+<h4 id="1-1-2"><a href="#1-1-2" class="headerlink" title="1.1"></a>1.1</h4><p>查询以显示1950年诺贝尔奖的奖项资料。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> yr<span class="token punctuation">,</span> subject<span class="token punctuation">,</span> winner
+  <span class="token keyword">FROM</span> nobel
+ <span class="token keyword">WHERE</span> yr <span class="token operator">=</span> <span class="token number">1950</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-2-2"><a href="#1-2-2" class="headerlink" title="1.2"></a>1.2</h4><p>显示谁赢得了1962年文学奖(Literature)。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> winner
+  <span class="token keyword">FROM</span> nobel
+ <span class="token keyword">WHERE</span> yr <span class="token operator">=</span> <span class="token number">1962</span>
+   <span class="token operator">AND</span> subject <span class="token operator">=</span> <span class="token string">'Literature'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-3-2"><a href="#1-3-2" class="headerlink" title="1.3"></a>1.3</h4><p>显示“爱因斯坦”(‘Albert Einstein’) 的获奖年份和奖项。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> yr<span class="token punctuation">,</span>subject
+  <span class="token keyword">FROM</span> nobel
+ <span class="token keyword">WHERE</span> winner <span class="token operator">=</span> <span class="token string">'Albert Einstein'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-4-2"><a href="#1-4-2" class="headerlink" title="1.4"></a>1.4</h4><p>显示2000年及以后的和平奖(‘Peace’)得奖者。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> winner
+  <span class="token keyword">FROM</span> nobel
+ <span class="token keyword">WHERE</span> yr <span class="token operator">>=</span> <span class="token number">2000</span>
+   <span class="token operator">AND</span> subject <span class="token operator">=</span> <span class="token string">'Peace'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-5-1"><a href="#1-5-1" class="headerlink" title="1.5"></a>1.5</h4><p>显示1980年至1989年(包含首尾)的文学奖(Literature)获奖者所有细节（年，主题，获奖者）。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> yr<span class="token punctuation">,</span>subject<span class="token punctuation">,</span>winner
+  <span class="token keyword">FROM</span> nobel
+ <span class="token keyword">WHERE</span> yr <span class="token operator">BETWEEN</span> <span class="token number">1980</span> <span class="token operator">AND</span> <span class="token number">1989</span>
+   <span class="token operator">AND</span> subject <span class="token operator">=</span> <span class="token string">'Literature'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-6-1"><a href="#1-6-1" class="headerlink" title="1.6"></a>1.6</h4><p>显示总统获胜者的所有细节：</p>
+<p>西奥多•罗斯福 Theodore Roosevelt</p>
+<p>伍德罗•威尔逊 Woodrow Wilson</p>
+<p>吉米•卡特 Jimmy Carter</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> nobel
+ <span class="token keyword">WHERE</span> winner <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token string">'Theodore Roosevelt'</span><span class="token punctuation">,</span>
+                  <span class="token string">'Woodrow Wilson'</span><span class="token punctuation">,</span>
+                  <span class="token string">'Jimmy Carter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-7-1"><a href="#1-7-1" class="headerlink" title="1.7"></a>1.7</h4><p>显示名字为John 的得奖者。 (注意:外国人名字(First name)在前，姓氏(Last name)在后)</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> winner <span class="token keyword">FROM</span> nobel
+<span class="token keyword">WHERE</span> winner <span class="token operator">LIKE</span> <span class="token string">'John%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="1-8-1"><a href="#1-8-1" class="headerlink" title="1.8"></a>1.8</h4><p>显示1980年物理学(physics)获奖者，及1984年化学奖(chemistry)获得者。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> yr<span class="token punctuation">,</span>subject<span class="token punctuation">,</span>winner <span class="token keyword">FROM</span> nobel
+<span class="token keyword">WHERE</span> <span class="token punctuation">(</span>yr<span class="token operator">=</span><span class="token number">1980</span> <span class="token operator">AND</span> subject<span class="token operator">=</span><span class="token string">'physics'</span><span class="token punctuation">)</span>
+<span class="token operator">OR</span> <span class="token punctuation">(</span>yr<span class="token operator">=</span><span class="token number">1984</span> <span class="token operator">AND</span> subject<span class="token operator">=</span><span class="token string">'chemistry'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-9-1"><a href="#1-9-1" class="headerlink" title="1.9"></a>1.9</h4><p>查看1980年获奖者，但不包括化学奖(Chemistry)和医学奖(Medicine)。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> yr<span class="token punctuation">,</span>subject<span class="token punctuation">,</span>winner <span class="token keyword">FROM</span> nobel
+<span class="token keyword">WHERE</span> yr<span class="token operator">=</span><span class="token number">1980</span> <span class="token operator">AND</span> subject <span class="token operator">NOT</span> <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token string">'Chemistry'</span><span class="token punctuation">,</span><span class="token string">'Medicine'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="1-10-1"><a href="#1-10-1" class="headerlink" title="1.10"></a>1.10</h4><p>显示早期的医学奖(Medicine)得奖者（1910之前，不包括1910），及近年文学奖(Literature)得奖者（2004年以后，包括2004年）。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> nobel
+<span class="token keyword">WHERE</span> <span class="token punctuation">(</span>yr<span class="token operator">&lt;</span><span class="token number">1910</span> <span class="token operator">AND</span> subject<span class="token operator">=</span><span class="token string">'Medicine'</span><span class="token punctuation">)</span>
+<span class="token operator">OR</span> <span class="token punctuation">(</span>yr<span class="token operator">>=</span><span class="token number">2004</span> <span class="token operator">AND</span> subject<span class="token operator">=</span><span class="token string">'Literature'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-11-1"><a href="#1-11-1" class="headerlink" title="1.11"></a>1.11</h4><p>Find all details of the prize won by PETER GRÜNBERG</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> nobel
+<span class="token keyword">WHERE</span> winner <span class="token operator">LIKE</span> <span class="token string">'PETER GR%NBERG'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>模糊匹配非ASCII字符</p>
+<h4 id="1-12-1"><a href="#1-12-1" class="headerlink" title="1.12"></a>1.12</h4><p>查找尤金•奥尼尔EUGENE O’NEILL得奖的所有细节 Find all details of the prize won by EUGENE O’NEILL</p>
+<p>跳脱字符:单引号</p>
+<p>你不能把一个单引号直接的放在字符串中。但您可连续使用两个单引号在字符串中当作一个单引号。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> nobel
+<span class="token keyword">WHERE</span> winner<span class="token operator">=</span><span class="token string">'EUGENE O''NEILL'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>转义字符，两个单引号代表一个单引号。</p>
+<h4 id="1-13-1"><a href="#1-13-1" class="headerlink" title="1.13"></a>1.13</h4><p>列出爵士的获奖者、年份、奖页(爵士的名字以Sir开始)。先显示最新获奖者，然后同年再按名称顺序排列。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> winner<span class="token punctuation">,</span>yr<span class="token punctuation">,</span>subject <span class="token keyword">FROM</span> nobel
+<span class="token keyword">WHERE</span> winner <span class="token operator">LIKE</span> <span class="token string">'Sir%'</span>
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> yr <span class="token keyword">DESC</span><span class="token punctuation">,</span>winner<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>可以用逗号分隔开多个排序条件。</p>
+<h4 id="1-14"><a href="#1-14" class="headerlink" title="1.14"></a>1.14</h4><p>The expression subject IN (‘Chemistry’,’Physics’) can be used as a value - it will be 0 or 1.</p>
+<p>Show the 1984 winners and subject ordered by subject and winner name; but list Chemistry and Physics last.</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> winner<span class="token punctuation">,</span> subject
+  <span class="token keyword">FROM</span> nobel
+ <span class="token keyword">WHERE</span> yr<span class="token operator">=</span><span class="token number">1984</span>
+ <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> subject <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token string">'Physics'</span><span class="token punctuation">,</span><span class="token string">'Chemistry'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>subject<span class="token punctuation">,</span>winner<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>利用类似布尔值的0和1返还结果来排序。</p>
+<h2 id="四、第四章"><a href="#四、第四章" class="headerlink" title="四、第四章"></a><strong>四、第四章</strong></h2><h3 id="第一节：SELECT-within-SELECT-Tutorial"><a href="#第一节：SELECT-within-SELECT-Tutorial" class="headerlink" title="第一节：SELECT within SELECT Tutorial"></a><strong>第一节：SELECT within SELECT Tutorial</strong></h3><p><img src="/2022/08/09/sqlzoo-shua-ti-shang-pian/v2-7af55e9d1665e48276f03fa42ba0b3a9_720w.jpg"></p>
+<h4 id="1-1-3"><a href="#1-1-3" class="headerlink" title="1.1"></a>1.1</h4><p>列出每个国家的名字 name，当中人口 population 是高于俄罗斯’Russia’的人口。world(name, continent, area, population, gdp)</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> population <span class="token operator">></span>
+     <span class="token punctuation">(</span><span class="token keyword">SELECT</span> population <span class="token keyword">FROM</span> world
+      <span class="token keyword">WHERE</span> name<span class="token operator">=</span><span class="token string">'Russia'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-2-3"><a href="#1-2-3" class="headerlink" title="1.2"></a>1.2</h4><p>列出欧州每国家的人均GDP，当中人均GDP要高于英国’United Kingdom’的数值。</p>
+<p>人均GDP即是 gdp除以population</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> continent<span class="token operator">=</span><span class="token string">'Europe'</span> <span class="token operator">AND</span> gdp<span class="token operator">/</span>population <span class="token operator">></span>
+     <span class="token punctuation">(</span><span class="token keyword">SELECT</span> gdp<span class="token operator">/</span>population <span class="token keyword">FROM</span> world
+      <span class="token keyword">WHERE</span> name<span class="token operator">=</span><span class="token string">'United Kingdom'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-3-3"><a href="#1-3-3" class="headerlink" title="1.3"></a>1.3</h4><p>在阿根廷Argentina 及 澳大利亚 Australia所在的洲份中，列出当中的国家名字 name 及洲分 continent 。按国字名字顺序排序</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span>continent <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> continent <span class="token operator">IN</span>
+  <span class="token punctuation">(</span><span class="token keyword">SELECT</span> continent <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> name<span class="token operator">=</span><span class="token string">'Argentina'</span> <span class="token operator">OR</span> name<span class="token operator">=</span><span class="token string">'Australia'</span><span class="token punctuation">)</span>
+  <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> name<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-4-3"><a href="#1-4-3" class="headerlink" title="1.4"></a>1.4</h4><p>哪一个国家的人口比加拿大Canada的多，但比波兰Poland的少?列出国家名字name和人口population 。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span>population <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> population <span class="token operator">></span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> population <span class="token keyword">FROM</span> world <span class="token keyword">WHERE</span> name<span class="token operator">=</span><span class="token string">'Canada'</span><span class="token punctuation">)</span>
+  <span class="token operator">AND</span> population <span class="token operator">&lt;</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> population <span class="token keyword">FROM</span> world <span class="token keyword">WHERE</span> name<span class="token operator">=</span><span class="token string">'Poland'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-5-2"><a href="#1-5-2" class="headerlink" title="1.5"></a>1.5</h4><p>Germany德国（人口8000万），在Europe欧洲国家的人口最多。Austria奥地利（人口850万）拥有德国总人口的11％。</p>
+<p>显示欧洲的国家名称name和每个国家的人口population。以德国的人口的百分比作人口显示。</p>
+<p>小数位数：可以使用函数ROUND 删除小数。</p>
+<p>百分号 %：可以使用函数 CONCAT 增加的百分比符号。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span>CONCAT<span class="token punctuation">(</span><span class="token function">ROUND</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token operator">*</span><span class="token punctuation">(</span>population<span class="token operator">/</span>
+  <span class="token punctuation">(</span><span class="token keyword">SELECT</span> population <span class="token keyword">FROM</span> world <span class="token keyword">WHERE</span> name<span class="token operator">=</span><span class="token string">'Germany'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">'%'</span><span class="token punctuation">)</span> <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> continent<span class="token operator">=</span><span class="token string">'Europe'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里需要注意括号的使用，查询德国人口的那句SELECT必须用括号括起来，否则会出错。</p>
+<h4 id="1-6-2"><a href="#1-6-2" class="headerlink" title="1.6"></a>1.6</h4><p>哪些国家的GDP比Europe欧洲的全部国家都要高呢? [只需列出 name 。] (有些国家的记录中，GDP是NULL，没有填入资料的。)</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name
+  <span class="token keyword">FROM</span> world
+  <span class="token keyword">WHERE</span> gdp <span class="token operator">></span> <span class="token keyword">ALL</span><span class="token punctuation">(</span><span class="token keyword">SELECT</span> gdp <span class="token keyword">FROM</span> world
+                  <span class="token keyword">WHERE</span> gdp<span class="token operator">></span><span class="token number">0</span> <span class="token operator">AND</span> continent<span class="token operator">=</span><span class="token string">'Europe'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>有些国家的记录中，GDP是NULL，所以查找欧洲国家的GDP的时候需要加上限制条件gdp&gt;0，否则报错。</p>
+<h4 id="1-7-2"><a href="#1-7-2" class="headerlink" title="1.7"></a>1.7</h4><p>在每一个州中找出最大面积的国家，列出洲份 continent, 国家名字 name 及面积 area。 (有些国家的记录中，AREA是NULL，没有填入资料的。)</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> continent<span class="token punctuation">,</span> name<span class="token punctuation">,</span> area <span class="token keyword">FROM</span> world x
+  <span class="token keyword">WHERE</span> area <span class="token operator">>=</span> <span class="token keyword">ALL</span>
+  <span class="token punctuation">(</span><span class="token keyword">SELECT</span> area <span class="token keyword">FROM</span> world y
+    <span class="token keyword">WHERE</span> y<span class="token punctuation">.</span>continent<span class="token operator">=</span>x<span class="token punctuation">.</span>continent
+    <span class="token operator">AND</span> area<span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里的x和y都是变量名，代表从数据库里面查出的当前元素。</p>
+<p>可以这样理解x和y：</p>
+<p>从world里面找出一行的continent, name, area三个字段，视为一个元素x，这三个字段相当于x的参数值。</p>
+<p>后面那个SELECT语句，相当于在world里面找出一行的area字段，视为一个元素y，并且提供了限定条件：让y的continent字段和x的continent值相等。</p>
+<p>x和y相当于变量名，用来引用当下语句查找出的单个元素的。</p>
+<h4 id="1-8-2"><a href="#1-8-2" class="headerlink" title="1.8"></a>1.8</h4><p>列出洲份名称，和每个洲份中国家名字按子母顺序是排首位的国家名。(即每洲只有列一国)</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> continent<span class="token punctuation">,</span>name <span class="token keyword">FROM</span> world x
+  <span class="token keyword">WHERE</span> name <span class="token operator">&lt;=</span> <span class="token keyword">ALL</span>
+  <span class="token punctuation">(</span><span class="token keyword">SELECT</span> name <span class="token keyword">from</span> world y
+   <span class="token keyword">WHERE</span> x<span class="token punctuation">.</span>continent<span class="token operator">=</span>y<span class="token punctuation">.</span>continent<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&lt;=之类的符号不但能比较数字，也能按照字典顺序来比较字符串。</p>
+<h4 id="1-9-2"><a href="#1-9-2" class="headerlink" title="1.9"></a>1.9</h4><p>找出洲份，当中全部国家都有少于或等于 25000000 人口. 在这些洲份中，列出国家名字name，continent 洲份和population人口。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span>continent<span class="token punctuation">,</span>population <span class="token keyword">FROM</span> world x
+  <span class="token keyword">WHERE</span> <span class="token number">25000000</span> <span class="token operator">>=</span> <span class="token keyword">ALL</span>
+  <span class="token punctuation">(</span><span class="token keyword">SELECT</span> population <span class="token keyword">FROM</span> world y
+  <span class="token keyword">WHERE</span> x<span class="token punctuation">.</span>continent<span class="token operator">=</span>y<span class="token punctuation">.</span>continent<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-10-2"><a href="#1-10-2" class="headerlink" title="1.10"></a>1.10</h4><p>有些国家的人口是同洲份的所有其他国的3倍或以上。列出 国家名字name 和 洲份 continent。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span>continent <span class="token keyword">FROM</span> world x
+  <span class="token keyword">WHERE</span> x<span class="token punctuation">.</span>population <span class="token operator">>=</span> <span class="token keyword">ALL</span>
+  <span class="token punctuation">(</span><span class="token keyword">SELECT</span> <span class="token number">3</span><span class="token operator">*</span>population <span class="token keyword">FROM</span> world y
+  <span class="token keyword">WHERE</span> x<span class="token punctuation">.</span>continent<span class="token operator">=</span>y<span class="token punctuation">.</span>continent <span class="token operator">and</span> x<span class="token punctuation">.</span>name<span class="token operator">&lt;></span>y<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="五-第五章"><a href="#五-第五章" class="headerlink" title="五. 第五章"></a><strong>五. 第五章</strong></h2><h3 id="第一节：SUM-and-COUNT"><a href="#第一节：SUM-and-COUNT" class="headerlink" title="第一节：SUM and COUNT"></a><strong>第一节：SUM and COUNT</strong></h3><p><img src="/2022/08/09/sqlzoo-shua-ti-shang-pian/v2-7d7b1652d32365336c215e188034bb74_720w.jpg"></p>
+<h4 id="1-1-4"><a href="#1-1-4" class="headerlink" title="1.1"></a>1.1</h4><p>展示世界的总人口。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token function">SUM</span><span class="token punctuation">(</span>population<span class="token punctuation">)</span> <span class="token keyword">FROM</span> world<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="1-2-4"><a href="#1-2-4" class="headerlink" title="1.2"></a>1.2</h4><p>列出所有的洲份, 每个只有一次。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token keyword">DISTINCT</span><span class="token punctuation">(</span>continent<span class="token punctuation">)</span> <span class="token keyword">FROM</span> world<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="1-3-4"><a href="#1-3-4" class="headerlink" title="1.3"></a>1.3</h4><p>找出非洲(Africa)的GDP总和。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token function">SUM</span><span class="token punctuation">(</span>gdp<span class="token punctuation">)</span> <span class="token keyword">FROM</span> world <span class="token keyword">WHERE</span> continent<span class="token operator">=</span><span class="token string">'Africa'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="1-4-4"><a href="#1-4-4" class="headerlink" title="1.4"></a>1.4</h4><p>有多少个国家具有至少百万(1000000)的面积。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token keyword">FROM</span> world <span class="token keyword">WHERE</span> area<span class="token operator">>=</span><span class="token number">1000000</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="1-5-3"><a href="#1-5-3" class="headerlink" title="1.5"></a>1.5</h4><p>(‘France’,’Germany’,’Spain’)（“法国”，“德国”，“西班牙”）的总人口是多少？</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token function">SUM</span><span class="token punctuation">(</span>population<span class="token punctuation">)</span> <span class="token keyword">FROM</span> world <span class="token keyword">WHERE</span> name <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token string">'France'</span><span class="token punctuation">,</span><span class="token string">'Germany'</span><span class="token punctuation">,</span><span class="token string">'Spain'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="1-6-3"><a href="#1-6-3" class="headerlink" title="1.6"></a>1.6</h4><p>对于每一个洲份，显示洲份和国家的数量。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> select_list
+<span class="token punctuation">[</span> <span class="token keyword">INTO</span> new_table <span class="token punctuation">]</span> 
+<span class="token keyword">FROM</span> table_source 
+<span class="token punctuation">[</span> <span class="token keyword">WHERE</span> search_condition <span class="token punctuation">]</span>        <span class="token comment">// WHERE进行分组前过滤，过滤条件里面不能有聚合函数</span>
+                                     使用<span class="token keyword">where</span>条件显示特定的行
+<span class="token punctuation">[</span> <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> group_by_expression <span class="token punctuation">]</span>  <span class="token comment">// GROUP BY必须配合聚合函数来使用</span>
+<span class="token punctuation">[</span> <span class="token keyword">HAVING</span> search_condition <span class="token punctuation">]</span>       <span class="token comment">// HAVING进行分组后过滤，过滤条件里面可以有聚合函数</span>
+                                     使用<span class="token keyword">having</span> 条件显示特定的组<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> continent<span class="token punctuation">,</span><span class="token function">count</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token keyword">FROM</span> world
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> continent<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="1-7-3"><a href="#1-7-3" class="headerlink" title="1.7"></a>1.7</h4><p>对于每一个洲份，显示洲份和至少有1000万人(10,000,000)口国家的数目。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> continent<span class="token punctuation">,</span><span class="token function">count</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token keyword">FROM</span> world
+<span class="token keyword">WHERE</span> population <span class="token operator">>=</span> <span class="token number">10000000</span>
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> continent<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-8-3"><a href="#1-8-3" class="headerlink" title="1.8"></a>1.8</h4><p>列出有至少100百万(1亿)(100,000,000)人口的洲份。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> continent <span class="token keyword">FROM</span> world
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> continent
+<span class="token keyword">HAVING</span> <span class="token function">SUM</span><span class="token punctuation">(</span>population<span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token number">100000000</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-1-1"><a href="#2-1-1" class="headerlink" title="2.1"></a>2.1</h4><p>找出总共有多少个奖颁发了。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>winner<span class="token punctuation">)</span> <span class="token keyword">FROM</span> nobel<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="2-2-1"><a href="#2-2-1" class="headerlink" title="2.2"></a>2.2</h4><p>列出每一个奖项(subject), 只列一次</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token keyword">DISTINCT</span><span class="token punctuation">(</span>subject<span class="token punctuation">)</span> <span class="token keyword">FROM</span> nobel<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="2-3-1"><a href="#2-3-1" class="headerlink" title="2.3"></a>2.3</h4><p>找出物理奖的总颁发次数。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>winner<span class="token punctuation">)</span> <span class="token keyword">FROM</span> nobel
+<span class="token keyword">WHERE</span> subject<span class="token operator">=</span><span class="token string">'Physics'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="2-4-1"><a href="#2-4-1" class="headerlink" title="2.4"></a>2.4</h4><p>对每一个奖项(Subject),列出颁发数目。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> subject<span class="token punctuation">,</span><span class="token function">COUNT</span><span class="token punctuation">(</span>winner<span class="token punctuation">)</span> <span class="token keyword">FROM</span> nobel
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> subject<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="2-5-1"><a href="#2-5-1" class="headerlink" title="2.5"></a>2.5</h4><p>对每一个奖项(Subject),列出首次颁发的年份。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> subject<span class="token punctuation">,</span><span class="token function">MIN</span><span class="token punctuation">(</span>yr<span class="token punctuation">)</span> <span class="token keyword">FROM</span> nobel
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> subject<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="2-6-1"><a href="#2-6-1" class="headerlink" title="2.6"></a>2.6</h4><p>对每一个奖项(Subject),列出2000年颁发的数目。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> subject<span class="token punctuation">,</span><span class="token function">count</span><span class="token punctuation">(</span>winner<span class="token punctuation">)</span> <span class="token keyword">FROM</span> nobel
+<span class="token keyword">WHERE</span> yr<span class="token operator">=</span><span class="token number">2000</span>
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> subject<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-7-1"><a href="#2-7-1" class="headerlink" title="2.7"></a>2.7</h4><p>对每一个奖项(Subject),列出有多少个不同的得奖者。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> subject<span class="token punctuation">,</span><span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token keyword">DISTINCT</span> winner<span class="token punctuation">)</span> <span class="token keyword">FROM</span> nobel
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> subject<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="2-8-1"><a href="#2-8-1" class="headerlink" title="2.8"></a>2.8</h4><p>对每一个奖项(Subject),列出有多少年曾颁发过。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> subject<span class="token punctuation">,</span><span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token keyword">DISTINCT</span> yr<span class="token punctuation">)</span> <span class="token keyword">FROM</span> nobel
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> subject<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="2-9-1"><a href="#2-9-1" class="headerlink" title="2.9"></a>2.9</h4><p>列出哪年曾同年有3个物理奖Physics得奖者。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> yr <span class="token keyword">FROM</span> nobel
+<span class="token keyword">WHERE</span> subject<span class="token operator">=</span><span class="token string">'Physics'</span>
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> yr
+<span class="token keyword">HAVING</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token keyword">DISTINCT</span> winner<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-10-1"><a href="#2-10-1" class="headerlink" title="2.10"></a>2.10</h4><p>列出谁得奖多于一次。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> winner <span class="token keyword">FROM</span> nobel
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> winner
+<span class="token keyword">HAVING</span> <span class="token function">count</span><span class="token punctuation">(</span>winner<span class="token punctuation">)</span> <span class="token operator">></span><span class="token number">1</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-11-1"><a href="#2-11-1" class="headerlink" title="2.11"></a>2.11</h4><p>列出谁获得多于一个奖项(Subject)</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> winner <span class="token keyword">FROM</span> nobel
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> winner
+<span class="token keyword">HAVING</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token keyword">DISTINCT</span> subject<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-12-1"><a href="#2-12-1" class="headerlink" title="2.12"></a>2.12</h4><p>哪年哪奖项，是同一奖项(subject)颁发给3个人。只列出2000年及之后的数据。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> yr<span class="token punctuation">,</span>subject <span class="token keyword">FROM</span> nobel
+<span class="token keyword">WHERE</span> yr<span class="token operator">>=</span><span class="token number">2000</span>
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> yr<span class="token punctuation">,</span>subject
+<span class="token keyword">HAVING</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>winner<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Chen</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2022/08/09/sqlzoo-shua-ti-shang-pian/">http://example.com/2022/08/09/sqlzoo-shua-ti-shang-pian/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Chen</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/MySQL/">
+                                    <span class="chip bg-color">MySQL</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/08/09/sqlzoo-shua-ti-shang-pian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="SQLZOO刷题上篇">
+                        
+                        <span class="card-title">SQLZOO刷题上篇</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Chen
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/08/08/springcloud-zhi-nacos-pian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="SpringCloud之nacos篇">
+                        
+                        <span class="card-title">SpringCloud之nacos篇</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Chen
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
+                    </a>
+                    
+                    <a href="/tags/Springcloud/">
+                        <span class="chip bg-color">Springcloud</span>
+                    </a>
+                    
+                    <a href="/tags/nacos/">
+                        <span class="chip bg-color">nacos</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022</span>
+            
+            <a href="/about" target="_blank">Chen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">133.6k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/chenkey837" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1445478790@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1445478790" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1445478790" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
