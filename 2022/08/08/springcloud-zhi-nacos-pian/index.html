@@ -577,17 +577,17 @@ db.password<span class="token operator">=</span><span class="token number">12345
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>配置文件application.yml：</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"><span class="token key atrule">server</span><span class="token punctuation">:</span>
-  <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">8762</span>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">server:
+  port: 8762
 
-<span class="token key atrule">spring</span><span class="token punctuation">:</span>
-  <span class="token key atrule">application</span><span class="token punctuation">:</span>
-    <span class="token key atrule">name</span><span class="token punctuation">:</span> provider
+spring:
+  application:
+    name: provider
 
-  <span class="token key atrule">cloud</span><span class="token punctuation">:</span>
-    <span class="token key atrule">nacos</span><span class="token punctuation">:</span>
-      <span class="token key atrule">discovery</span><span class="token punctuation">:</span>
-        <span class="token key atrule">server-addr</span><span class="token punctuation">:</span> 127.0.0.1<span class="token punctuation">:</span><span class="token number">8848</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>写一个接口：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span>
@@ -634,17 +634,17 @@ db.password<span class="token operator">=</span><span class="token number">12345
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>配置文件application.yml：</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"><span class="token key atrule">server</span><span class="token punctuation">:</span>
-  <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">8763</span>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">server:
+  port: 8763
 
-<span class="token key atrule">spring</span><span class="token punctuation">:</span>
-  <span class="token key atrule">application</span><span class="token punctuation">:</span>
-    <span class="token key atrule">name</span><span class="token punctuation">:</span> consumer
+spring:
+  application:
+    name: consumer
 
-  <span class="token key atrule">cloud</span><span class="token punctuation">:</span>
-    <span class="token key atrule">nacos</span><span class="token punctuation">:</span>
-      <span class="token key atrule">discovery</span><span class="token punctuation">:</span>
-        <span class="token key atrule">server-addr</span><span class="token punctuation">:</span> 127.0.0.1<span class="token punctuation">:</span><span class="token number">8848</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>在工程的启动文件开启FeignClient的功能：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span>
@@ -703,17 +703,17 @@ hello feign, i&#39;m provider ,my port:8761<span aria-hidden="true" class="line-
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>在bootstrap.yml(一定是bootstrap.yml文件，不是application.yml文件)文件配置以下内容：</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"><span class="token key atrule">spring</span><span class="token punctuation">:</span>
-  <span class="token key atrule">application</span><span class="token punctuation">:</span>
-    <span class="token key atrule">name</span><span class="token punctuation">:</span> nacos<span class="token punctuation">-</span>provider
-  <span class="token key atrule">cloud</span><span class="token punctuation">:</span>
-    <span class="token key atrule">nacos</span><span class="token punctuation">:</span>
-      <span class="token key atrule">config</span><span class="token punctuation">:</span>
-        <span class="token key atrule">server-addr</span><span class="token punctuation">:</span> 127.0.0.1<span class="token punctuation">:</span><span class="token number">8848</span>
-        <span class="token key atrule">file-extension</span><span class="token punctuation">:</span> yaml
-        <span class="token key atrule">prefix</span><span class="token punctuation">:</span> nacos<span class="token punctuation">-</span>provider
-  <span class="token key atrule">profiles</span><span class="token punctuation">:</span>
-    <span class="token key atrule">active</span><span class="token punctuation">:</span> dev<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">spring:
+  application:
+    name: nacos-provider
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        prefix: nacos-provider
+  profiles:
+    active: dev<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>在上面的配置中，配置了nacos config server的地址，配置的扩展名是ymal（目前仅支持ymal和properties）。注意是没有配置server.port的，sever.port的属性在nacos中配置。上面的配置是和Nacos中的dataId 的格式是对应的，nacos的完整格式如下：</p>
 <pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">$&#123;prefix&#125;-$&#123;spring.profile.active&#125;.$&#123;file-extension&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -1095,7 +1095,7 @@ hello feign, i&#39;m provider ,my port:8761<span aria-hidden="true" class="line-
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">144.4k</span>
+                        class="white-color">145.6k</span>
             
             
             
